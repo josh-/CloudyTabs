@@ -1,0 +1,6 @@
+[submodule "CloudyTabs/DSFavIconManager"]
+	path = CloudyTabs/DSFavIconManager
+	url = https://github.com/josh-/DSFavIconManager
+[submodule "CloudyTabs/VDKQueue"]
+	path = CloudyTabs/VDKQueue
+	url = https://github.com/beatjunky99/VDKQueue.git
