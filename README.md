@@ -8,7 +8,7 @@ CloudyTabs is a simple menu bar application that lists your iCloud Tabs.
 
 ## Installation
 
-* [Download CloudyTabs]() and copy it to your Applications folder.
+* [Download CloudyTabs](https://github.com/josh-/CloudyTabs/releases/download/v1.0/CloudyTabs.zip) and copy it to your Applications folder.
 
 ## Usage
 
