@@ -351,7 +351,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CloudyTabs/CloudyTabs-Prefix.pch";
 				INFOPLIST_FILE = "CloudyTabs/CloudyTabs-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.8.2;
 				PRODUCT_NAME = CloudyTabs;
 				WRAPPER_EXTENSION = app;
 			};
@@ -366,7 +366,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CloudyTabs/CloudyTabs-Prefix.pch";
 				INFOPLIST_FILE = "CloudyTabs/CloudyTabs-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.8.2;
 				PRODUCT_NAME = CloudyTabs;
 				WRAPPER_EXTENSION = app;
 			};
