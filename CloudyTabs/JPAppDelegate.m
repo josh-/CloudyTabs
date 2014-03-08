@@ -99,7 +99,7 @@
 
 #pragma mark - Queue delegate
 
--(void) VDKQueue:(VDKQueue *)queue receivedNotification:(NSString*)noteName forPath:(NSString*)fpath;
+-(void)VDKQueue:(VDKQueue *)queue receivedNotification:(NSString*)noteName forPath:(NSString*)fpath;
 {
     [self updateMenu];
     [self updateStatusItemToolTip];
