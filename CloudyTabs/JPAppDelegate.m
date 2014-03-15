@@ -177,6 +177,7 @@
     [self.menu removeAllItems];
     
     NSMenu *devicesMenu = [[NSMenu alloc] initWithTitle:@"Devices"];
+    [devicesMenu setAutoenablesItems:NO];
     
     for (NSString *deviceID in [self deviceIDs]) {
         
@@ -193,6 +194,9 @@
         // Add device to "Open All Tabs From" submenu
         NSMenuItem *openAllTabsFromDeviceMenuItem = [[NSMenuItem alloc] initWithTitle:[self deviceNameForID:deviceID] action:@selector(deviceMenuItemClicked:) keyEquivalent:@""];
         openAllTabsFromDeviceMenuItem.representedObject = deviceID;
+        if ([[self tabsForDeviceID:deviceID] count] < 1) {
+            [openAllTabsFromDeviceMenuItem setEnabled:NO];
+        }
         [devicesMenu addItem:openAllTabsFromDeviceMenuItem];
         
         for (NSDictionary *tabDictionary in [self tabsForDeviceID:deviceID]) {
