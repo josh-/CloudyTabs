@@ -55,6 +55,16 @@
     if ([NSEvent modifierFlags] == NSCommandKeyMask) {
         [[NSWorkspace sharedWorkspace] openURLs:@[URL] withAppBundleIdentifier:nil options:NSWorkspaceLaunchWithoutActivation additionalEventParamDescriptor:nil launchIdentifiers:nil];
     }
+    else if ([NSEvent modifierFlags] == NSAlternateKeyMask) {
+        NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+        [pasteboard clearContents];
+        
+        NSURL *URL = [NSURL URLWithString:[[self.menu highlightedItem] representedObject]];
+        if (![pasteboard writeObjects:@[URL]]) {
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Unable to copy URL" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"The URL was unable to be copied to the pasteboard."];
+            [alert runModal];
+        }
+    }
     else {
         [[NSWorkspace sharedWorkspace] openURL:URL];
     }
