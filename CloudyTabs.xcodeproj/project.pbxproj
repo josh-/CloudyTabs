@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0308ABDB18D676ED00AB4C54 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0308ABD918D676ED00AB4C54 /* Localizable.strings */; };
 		03225D4818C5FC1D000778DF /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03225D4718C5FC1D000778DF /* Sparkle.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		03225D4B18C5FEE2000778DF /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03225D4718C5FC1D000778DF /* Sparkle.framework */; };
 		03225D4C18C6A40D000778DF /* JPLaunchAtLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0375994118C5F967000E8C33 /* JPLaunchAtLoginManager.m */; };
@@ -39,6 +40,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0308ABDA18D676ED00AB4C54 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0308ABDC18D67A1300AB4C54 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0319CFB118D67AF70007A9FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0319CFB218D67B080007A9FF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0319CFB318D67B110007A9FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		03225D4718C5FC1D000778DF /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = CloudyTabs/Sparkle.framework; sourceTree = "<group>"; };
 		03225D4D18C6AA5A000778DF /* DSFavIconCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSFavIconCache.h; path = DSFavIconManager/Classes/DSFavIconCache.h; sourceTree = "<group>"; };
 		03225D4E18C6AA5A000778DF /* DSFavIconCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSFavIconCache.m; path = DSFavIconManager/Classes/DSFavIconCache.m; sourceTree = "<group>"; };
@@ -61,7 +67,7 @@
 		03977FD718C3F98A00DC499C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		03977FDA18C3F98A00DC499C /* CloudyTabs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CloudyTabs-Info.plist"; sourceTree = "<group>"; };
 		03977FDC18C3F98A00DC499C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		03977FDE18C3F98A00DC499C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		03977FDE18C3F98A00DC499C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		03977FE018C3F98A00DC499C /* CloudyTabs-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CloudyTabs-Prefix.pch"; sourceTree = "<group>"; };
 		03977FEA18C3F98A00DC499C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0397800618C40A1200DC499C /* BookmarksDragImage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = BookmarksDragImage.tiff; sourceTree = "<group>"; };
@@ -172,6 +178,7 @@
 			children = (
 				03977FDA18C3F98A00DC499C /* CloudyTabs-Info.plist */,
 				03977FDB18C3F98A00DC499C /* InfoPlist.strings */,
+				0308ABD918D676ED00AB4C54 /* Localizable.strings */,
 				03977FDE18C3F98A00DC499C /* main.m */,
 				03977FE018C3F98A00DC499C /* CloudyTabs-Prefix.pch */,
 				03225D5D18C6B18A000778DF /* dsa_pub.pem */,
@@ -219,6 +226,8 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
+				de,
 			);
 			mainGroup = 03977FC618C3F98A00DC499C;
 			productRefGroup = 03977FD018C3F98A00DC499C /* Products */;
@@ -236,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03225D5E18C6B18A000778DF /* dsa_pub.pem in Resources */,
+				0308ABDB18D676ED00AB4C54 /* Localizable.strings in Resources */,
 				03977FDD18C3F98A00DC499C /* InfoPlist.strings in Resources */,
 				03977FEB18C3F98A00DC499C /* Images.xcassets in Resources */,
 				0397800918C40A1200DC499C /* ToolbarCloudTabsTemplate.pdf in Resources */,
@@ -263,10 +273,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		0308ABD918D676ED00AB4C54 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0308ABDA18D676ED00AB4C54 /* en */,
+				0308ABDC18D67A1300AB4C54 /* fr */,
+				0319CFB118D67AF70007A9FF /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		03977FDB18C3F98A00DC499C /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				03977FDC18C3F98A00DC499C /* en */,
+				0319CFB218D67B080007A9FF /* fr */,
+				0319CFB318D67B110007A9FF /* de */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

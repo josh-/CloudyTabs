@@ -219,20 +219,20 @@
     NSMenuItem *seperatorItem = [NSMenuItem separatorItem];
     [self.menu addItem:seperatorItem];
     
-    NSMenuItem *openAllTabsMenu = [[NSMenuItem alloc] initWithTitle:@"Open All Tabs From" action:nil keyEquivalent:@""];
+    NSMenuItem *openAllTabsMenu = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open All Tabs From", @"") action:nil keyEquivalent:@""];
     [self.menu addItem:openAllTabsMenu];
     [openAllTabsMenu setSubmenu:devicesMenu];
     
-    NSMenuItem *openAtLoginItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Launch %@ At Login", [self appBundleName]] action:@selector(openAtLoginToggled:) keyEquivalent:@""];
+    NSMenuItem *openAtLoginItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Launch %@ At Login", @""), [self appBundleName]] action:@selector(openAtLoginToggled:) keyEquivalent:@""];
     [self.menu addItem:openAtLoginItem];
     
-    NSMenuItem *quitMenuItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Quit %@", [self appBundleName]] action:@selector(quit:) keyEquivalent:@""];
+    NSMenuItem *quitMenuItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Quit %@", @""), [self appBundleName]] action:@selector(quit:) keyEquivalent:@""];
     [self.menu addItem:quitMenuItem];
 }
 
 - (void)updateStatusItemToolTip
 {
-    NSString *toolTip = [NSString stringWithFormat:@"%@\nChanges Last Detected: %@", [self appBundleName], [self.dateFormatter stringFromDate:[self syncedPreferenceModificationDate]]];
+    NSString *toolTip = [NSString stringWithFormat:NSLocalizedString(@"%@\nChanges Last Detected: %@", @""), [self appBundleName], [self.dateFormatter stringFromDate:[self syncedPreferenceModificationDate]]];
     [self.statusItem setToolTip:toolTip];
 }
 
