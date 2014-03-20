@@ -6,3 +6,7 @@
   Copyright (c) 2014 Josh Parnham. All rights reserved.
 */
 
+"Open All Tabs From" = "Öffne alle Tabs von";
+"Launch %@ At Login" = "%@ beim Anmelden öffnen";
+"Quit %@" = "%@ beenden";
+"%@\nChanges Last Detected: %@" = "%@\nÄnderungen zuletzt festgestellt: %@";

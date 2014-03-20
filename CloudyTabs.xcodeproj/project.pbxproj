@@ -60,6 +60,18 @@
 		0375993F18C5F967000E8C33 /* JPAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPAppDelegate.m; sourceTree = "<group>"; };
 		0375994018C5F967000E8C33 /* JPLaunchAtLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPLaunchAtLoginManager.h; sourceTree = "<group>"; };
 		0375994118C5F967000E8C33 /* JPLaunchAtLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPLaunchAtLoginManager.m; sourceTree = "<group>"; };
+		03822D4418DA61D20065F586 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		03822D4518DA61D70065F586 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		03822D4618DA62010065F586 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		03822D4718DA62050065F586 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		03822D4818DA62400065F586 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
+		03822D4918DA62440065F586 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		03822D4A18DA62880065F586 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
+		03822D4B18DA62950065F586 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		03822D4C18DA62B90065F586 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
+		03822D4D18DA62BD0065F586 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		03822D4E18DA873E0065F586 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		03822D4F18DA87420065F586 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		03977FCF18C3F98A00DC499C /* CloudyTabs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudyTabs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03977FD218C3F98A00DC499C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		03977FD518C3F98A00DC499C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -228,6 +240,12 @@
 				Base,
 				fr,
 				de,
+				nl,
+				es,
+				ca,
+				zh_CN,
+				zh_TW,
+				it,
 			);
 			mainGroup = 03977FC618C3F98A00DC499C;
 			productRefGroup = 03977FD018C3F98A00DC499C /* Products */;
@@ -279,6 +297,12 @@
 				0308ABDA18D676ED00AB4C54 /* en */,
 				0308ABDC18D67A1300AB4C54 /* fr */,
 				0319CFB118D67AF70007A9FF /* de */,
+				03822D4418DA61D20065F586 /* nl */,
+				03822D4618DA62010065F586 /* es */,
+				03822D4818DA62400065F586 /* ca */,
+				03822D4A18DA62880065F586 /* zh_CN */,
+				03822D4C18DA62B90065F586 /* zh_TW */,
+				03822D4E18DA873E0065F586 /* it */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -289,6 +313,12 @@
 				03977FDC18C3F98A00DC499C /* en */,
 				0319CFB218D67B080007A9FF /* fr */,
 				0319CFB318D67B110007A9FF /* de */,
+				03822D4518DA61D70065F586 /* nl */,
+				03822D4718DA62050065F586 /* es */,
+				03822D4918DA62440065F586 /* ca */,
+				03822D4B18DA62950065F586 /* zh_CN */,
+				03822D4D18DA62BD0065F586 /* zh_TW */,
+				03822D4F18DA87420065F586 /* it */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

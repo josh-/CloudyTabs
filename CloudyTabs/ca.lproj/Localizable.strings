@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  CloudyTabs
+
+  Created by Josh Parnham on 17/03/2014.
+  Copyright (c) 2014 Josh Parnham. All rights reserved.
+*/
+
+"Open All Tabs From" = "Obrir totes les pestanyes de";
+"Launch %@ At Login" = "Obrir %@ a l'iniciar sessió";
+"Quit %@" = "Sortir de %@";
+"%@\nChanges Last Detected: %@" = "%@\Últims canvis detectats: %@";

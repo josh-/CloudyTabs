@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  CloudyTabs
+
+  Created by Josh Parnham on 17/03/2014.
+  Copyright (c) 2014 Josh Parnham. All rights reserved.
+*/
+
+"Open All Tabs From" = "Apri tutte le schede da";
+"Launch %@ At Login" = "Apri %@ al login";
+"Quit %@" = "Chiudi %@";
+"%@\nChanges Last Detected: %@" = "%@\nModifiche rilevate: %@";
