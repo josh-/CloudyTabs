@@ -12,7 +12,7 @@ CloudyTabs is a simple menu bar application that lists your iCloud Tabs.
 
 ## Usage
 
-To use CloudyTabs, open the app and select a tab from one of your devices. The tab's URL then opens it in your default browser (useful if like me, you use Safari on iOS and Chrome on OS X), Cmd-Selecting a tab (or highlighting it and pressing Return) opens the tab in the background.
+To use CloudyTabs, open the app and select a tab from one of your devices. The tab's URL then opens it in your default browser (useful if like me, you use Safari on iOS and Chrome on OS X), Cmd(`⌘`)-Selecting a tab (or highlighting it and pressing Cmd(`⌘`)-Return(`⏎`)) opens the tab in the background. Opt(`⌥`)-Selecting a tab (or highlighting it and pressing Opt(`⌥`)-Return(`⏎`)) will copy the tab's URL.
 
 Typing the first few letters or a tab's title will jump to that particular tab.
 
