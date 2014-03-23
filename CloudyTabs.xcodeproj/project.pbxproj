@@ -211,6 +211,7 @@
 				03977FCC18C3F98A00DC499C /* Frameworks */,
 				03977FCD18C3F98A00DC499C /* Resources */,
 				03225D4A18C5FED1000778DF /* CopyFiles */,
+				035B7F9A18DF0B6F00D2D945 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -230,6 +231,11 @@
 				CLASSPREFIX = JP;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Josh Parnham";
+				TargetAttributes = {
+					03977FCE18C3F98A00DC499C = {
+						DevelopmentTeam = 3C7269R37R;
+					};
+				};
 			};
 			buildConfigurationList = 03977FCA18C3F98A00DC499C /* Build configuration list for PBXProject "CloudyTabs" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -272,6 +278,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		035B7F9A18DF0B6F00D2D945 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=\"Developer ID Application: Josh Parnham (3C7269R37R)\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$LOCATION/Sparkle.framework/Versions/A\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		03977FCB18C3F98A00DC499C /* Sources */ = {
@@ -398,6 +420,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "./**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -413,6 +436,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "./**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
