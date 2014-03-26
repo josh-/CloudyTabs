@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  CloudyTabs
+
+  Contributed by Sergio Moura
+*/
+
+"Open All Tabs From" = "Abrir Todas As Abas De";
+"Launch %@ At Login" = "Inicializar %@ Ao Logar";
+"Quit %@" = "Sair do %@";
+"%@\nChanges Last Detected: %@" = "%@\nÚltimas Alterações Detectadas: %@";
