@@ -17,6 +17,8 @@
 
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 
+@property (strong, nonatomic) NSDate *lastUpdateDate;
+
 @end
 
 @implementation JPAppDelegate
@@ -35,7 +37,7 @@
 
     // Watch the com.apple.Safari syncedpreference for changes
     VDKQueue *queue = [[VDKQueue alloc] init];
-    [queue addPath:[self syncedPreferencesPath] notifyingAbout:VDKQueueNotifyAboutWrite];
+    [queue addPath:[self syncedPreferencesPath] notifyingAbout:VDKQueueNotifyDefault];
     [queue setDelegate:self];
     
     // Set the favicon placeholder
@@ -111,11 +113,20 @@
 
 -(void)VDKQueue:(VDKQueue *)queue receivedNotification:(NSString*)noteName forPath:(NSString*)fpath;
 {
-    [self updateMenu];
-    [self updateStatusItemToolTip];
+    // Check if the modification date of the syncedPreferences file is later than the date of the last menu update
+    if ([[self syncedPreferenceModificationDate] laterDate:self.lastUpdateDate] == [self syncedPreferenceModificationDate]) {
+        [self updateUserInterface];
+    }
+    return;
 }
 
 #pragma mark - Methods
+
+- (void)updateUserInterface
+{
+    [self updateMenu];
+    [self updateStatusItemToolTip];
+}
 
 - (NSString *)syncedPreferencesPath
 {
@@ -228,6 +239,8 @@
     
     NSMenuItem *quitMenuItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Quit %@", @""), [self appBundleName]] action:@selector(quit:) keyEquivalent:@""];
     [self.menu addItem:quitMenuItem];
+    
+    self.lastUpdateDate = [NSDate date];
 }
 
 - (void)updateStatusItemToolTip
