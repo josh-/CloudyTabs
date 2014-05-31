@@ -32,6 +32,9 @@
     [self.statusItem setMenu:self.menu];
     [self.statusItem setEnabled:YES];
     
+    // Set the favicon placeholder
+    [DSFavIconManager sharedInstance].placeholder = [NSImage imageNamed:@"BookmarksDragImage"];
+
     [self updateMenu];
     [self updateStatusItemToolTip];
 
@@ -39,9 +42,6 @@
     VDKQueue *queue = [[VDKQueue alloc] init];
     [queue addPath:[self syncedPreferencesPath] notifyingAbout:VDKQueueNotifyDefault];
     [queue setDelegate:self];
-    
-    // Set the favicon placeholder
-    [DSFavIconManager sharedInstance].placeholder = [NSImage imageNamed:@"BookmarksDragImage"];
     
     // Setup Sparkle
     SUUpdater *updater = [[SUUpdater class] sharedUpdater];
