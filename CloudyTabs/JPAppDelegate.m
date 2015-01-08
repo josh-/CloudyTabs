@@ -150,7 +150,15 @@
 {
     NSDictionary *dictionary = [self syncedPreferenceDictionary];
     
-    return [dictionary[@"values"] allKeys];
+    NSMutableArray *deviceIDs = [[NSMutableArray alloc] init];
+
+    for (NSString *deviceID in [dictionary[@"values"] allKeys]) {
+        // Hide devices that haven't had activity in the last week (604800 = 7×24×60×60 = one week in seconds)
+        if ([dictionary[@"values"][deviceID][@"value"][@"LastModified"] timeIntervalSinceNow] < 604800) {
+            [deviceIDs addObject:deviceID];
+        }
+    }
+    return deviceIDs;
 }
 
 - (NSString *)deviceNameForID:(NSString *)deviceID
