@@ -74,14 +74,6 @@
 
 - (void)deviceMenuItemClicked:(id)sender
 {
-    NSArray *tabs = [self tabsForDeviceID:[(NSMenuItem *)sender representedObject]];
-    
-    NSMutableArray *tabURLs = [[NSMutableArray alloc] init];
-    
-    for (NSDictionary *tabDictionary in tabs) {
-        [tabURLs addObject:[NSURL URLWithString:tabDictionary[@"URL"]]];
-    }
-         
     NSUInteger launch;
     if ([NSEvent modifierFlags] == NSCommandKeyMask) {
         launch = NSWorkspaceLaunchWithoutActivation;
@@ -90,7 +82,17 @@
         launch = NSWorkspaceLaunchDefault;
     }
     
-    [[NSWorkspace sharedWorkspace] openURLs:tabURLs withAppBundleIdentifier:nil options:launch additionalEventParamDescriptor:nil launchIdentifiers:nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        NSArray *tabs = [self tabsForDeviceID:[(NSMenuItem *)sender representedObject]];
+
+        for (NSDictionary *tabDictionary in tabs) {
+            NSURL *url = [NSURL URLWithString:[tabDictionary[@"URL"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+
+            [[NSWorkspace sharedWorkspace] openURLs:@[url] withAppBundleIdentifier:nil options:launch additionalEventParamDescriptor:nil launchIdentifiers:nil];
+            usleep(500000);
+        }
+    });
 }
 
 - (void)openAtLoginToggled:(id)sender
