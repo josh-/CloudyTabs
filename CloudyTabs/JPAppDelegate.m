@@ -249,7 +249,7 @@
 
 - (void)updateStatusItemToolTip
 {
-    NSString *toolTip = [NSString stringWithFormat:NSLocalizedString(@"%@\nChanges Last Detected: %@", @""), [self appBundleName], [self.dateFormatter stringFromDate:[self syncedPreferenceModificationDate]]];
+    NSString *toolTip = [NSString stringWithFormat:NSLocalizedString(@"%@\niCloud Last Synced: %@", @""), [self appBundleName], [self.dateFormatter stringFromDate:[self syncedPreferenceModificationDate]]];
     [self.statusItem setToolTip:toolTip];
 }
 
