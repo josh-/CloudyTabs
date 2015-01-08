@@ -214,7 +214,9 @@
             
             NSMenuItem *tabMenuItem = [[NSMenuItem alloc] initWithTitle:tabDictionary[@"Title"] action:@selector(tabMenuItemClicked:) keyEquivalent:@""];
             
-            tabMenuItem.representedObject = [tabDictionary[@"URL"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSString *url = [tabDictionary[@"URL"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            tabMenuItem.representedObject = url;
+            tabMenuItem.toolTip = url;
             
             __block NSImage *image = [[DSFavIconManager sharedInstance] iconForURL:[NSURL URLWithString:tabMenuItem.representedObject] downloadHandler:^(NSImage *icon) {
                 icon.size = NSMakeSize(19, 19);
