@@ -202,6 +202,21 @@
     
     for (NSString *deviceID in [self deviceIDs]) {
         
+        NSArray *arrayOfTabs = [self tabsForDeviceID:deviceID];
+        
+        // hide devices that don't have any tabs
+        if (arrayOfTabs.count <= 0) {
+            continue;
+        }
+        
+        // hide tabs from Mac where CloudyTabs is currently running on
+        BOOL hideTabsOfCurrentDevice = YES; // didn't want to add a menu item for this setting until maybe there is a proper preferences window
+        if (hideTabsOfCurrentDevice) {
+            if ([[NSHost currentHost].localizedName isEqualToString:[self deviceNameForID:deviceID]]) {
+                continue;
+            }
+        }
+        
         // Add a seperator if this device isn't the first in the list
         if ([[self deviceIDs] indexOfObject:deviceID] > 0) {
             NSMenuItem *seperatorItem = [NSMenuItem separatorItem];
@@ -220,7 +235,7 @@
         }
         [devicesMenu addItem:openAllTabsFromDeviceMenuItem];
         
-        for (NSDictionary *tabDictionary in [self tabsForDeviceID:deviceID]) {
+        for (NSDictionary *tabDictionary in arrayOfTabs) {
             
             NSMenuItem *tabMenuItem = [[NSMenuItem alloc] initWithTitle:tabDictionary[@"Title"] action:@selector(tabMenuItemClicked:) keyEquivalent:@""];
             
