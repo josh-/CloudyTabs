@@ -8,6 +8,8 @@
 
 #import "JPAppDelegate.h"
 
+#import <CoreFoundation/CoreFoundation.h>
+
 #import <Sparkle/Sparkle.h>
 
 #import "JPLaunchAtLoginManager.h"
@@ -52,7 +54,7 @@
 
 - (void)tabMenuItemClicked:(id)sender
 {
-    NSURL *URL = [NSURL URLWithString:[(NSMenuItem *)sender representedObject]];
+    NSURL *URL = [(NSMenuItem *)sender representedObject];
     
     if ([NSEvent modifierFlags] == NSCommandKeyMask) {
         [[NSWorkspace sharedWorkspace] openURLs:@[URL] withAppBundleIdentifier:nil options:NSWorkspaceLaunchWithoutActivation additionalEventParamDescriptor:nil launchIdentifiers:nil];
@@ -61,7 +63,7 @@
         NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
         [pasteboard clearContents];
         
-        NSURL *URL = [NSURL URLWithString:[[self.menu highlightedItem] representedObject]];
+        NSURL *URL = [[self.menu highlightedItem] representedObject];
         if (![pasteboard writeObjects:@[URL]]) {
             NSAlert *alert = [NSAlert alertWithMessageText:@"Unable to copy URL" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"The URL was unable to be copied to the pasteboard."];
             [alert runModal];
@@ -224,11 +226,30 @@
             
             NSMenuItem *tabMenuItem = [[NSMenuItem alloc] initWithTitle:tabDictionary[@"Title"] action:@selector(tabMenuItemClicked:) keyEquivalent:@""];
             
-            NSString *url = [tabDictionary[@"URL"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            tabMenuItem.representedObject = url;
-            tabMenuItem.toolTip = url;
+            NSString *URL = tabDictionary[@"URL"];
+            NSURL *encodedURL = nil;
             
-            __block NSImage *image = [[DSFavIconManager sharedInstance] iconForURL:[NSURL URLWithString:tabMenuItem.representedObject] downloadHandler:^(NSImage *icon) {
+            // See dot point 4 under "NSURL Deprecations" in "Foundation Release Notes for OS X v10.11"
+            
+            if ([NSURL respondsToSelector:@selector(URLWithDataRepresentation:relativeToURL:)]) {
+                // Modern NSURL API available
+                encodedURL = [NSURL URLWithDataRepresentation:[URL dataUsingEncoding:NSUTF8StringEncoding] relativeToURL:nil];
+            }
+            else {
+                // Modern NSURL API not available, fall back to CoreFoundation implementation
+                NSData *urlData = [URL dataUsingEncoding:NSUTF8StringEncoding];
+                CFURLRef urlRef = CFURLCreateWithBytes(kCFAllocatorSystemDefault, (const UInt8 *)urlData.bytes, urlData.length, kCFStringEncodingUTF8, NULL);
+                if (!urlRef) {
+                    // Fallback to using ISO Latin encoding
+                    urlRef = CFURLCreateWithBytes(kCFAllocatorSystemDefault, (const UInt8 *)urlData.bytes, urlData.length, kCFStringEncodingISOLatin1, NULL);
+                }
+                encodedURL = (__bridge NSURL *)urlRef;
+            }
+            
+            tabMenuItem.representedObject = encodedURL;
+            tabMenuItem.toolTip = encodedURL.relativeString;
+            
+            __block NSImage *image = [[DSFavIconManager sharedInstance] iconForURL:tabMenuItem.representedObject downloadHandler:^(NSImage *icon) {
                 icon.size = NSMakeSize(19, 19);
                 [tabMenuItem setImage:icon];
             }];
