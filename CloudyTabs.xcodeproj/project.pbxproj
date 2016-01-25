@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0308ABDB18D676ED00AB4C54 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0308ABD918D676ED00AB4C54 /* Localizable.strings */; };
-		03225D4818C5FC1D000778DF /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03225D4718C5FC1D000778DF /* Sparkle.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		03225D4B18C5FEE2000778DF /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03225D4718C5FC1D000778DF /* Sparkle.framework */; };
 		03225D4C18C6A40D000778DF /* JPLaunchAtLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0375994118C5F967000E8C33 /* JPLaunchAtLoginManager.m */; };
 		03225D5418C6AA5A000778DF /* DSFavIconCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D4E18C6AA5A000778DF /* DSFavIconCache.m */; };
@@ -17,6 +16,7 @@
 		03225D5A18C6AB0C000778DF /* VDKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D5918C6AB0C000778DF /* VDKQueue.m */; };
 		03225D5E18C6B18A000778DF /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 03225D5D18C6B18A000778DF /* dsa_pub.pem */; };
 		0375994218C5F967000E8C33 /* JPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0375993F18C5F967000E8C33 /* JPAppDelegate.m */; };
+		039487BC1C54DA56009824E0 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03225D4718C5FC1D000778DF /* Sparkle.framework */; };
 		03977FD318C3F98A00DC499C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03977FD218C3F98A00DC499C /* Cocoa.framework */; };
 		03977FDD18C3F98A00DC499C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03977FDB18C3F98A00DC499C /* InfoPlist.strings */; };
 		03977FDF18C3F98A00DC499C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03977FDE18C3F98A00DC499C /* main.m */; };
@@ -94,8 +94,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				039487BC1C54DA56009824E0 /* Sparkle.framework in Frameworks */,
 				0397802318C590F700DC499C /* CoreServices.framework in Frameworks */,
-				03225D4818C5FC1D000778DF /* Sparkle.framework in Frameworks */,
 				03977FD318C3F98A00DC499C /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,7 +427,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "./**";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/CloudyTabs";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CloudyTabs/CloudyTabs-Prefix.pch";
 				INFOPLIST_FILE = "CloudyTabs/CloudyTabs-Info.plist";
@@ -443,7 +443,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "./**";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/CloudyTabs";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CloudyTabs/CloudyTabs-Prefix.pch";
 				INFOPLIST_FILE = "CloudyTabs/CloudyTabs-Info.plist";
