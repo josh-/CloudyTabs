@@ -244,7 +244,7 @@
         }
 
         // Add a seperator if this device isn't the first in the list
-        if ([[self deviceIDs] indexOfObject:deviceID] > 0) {
+        if (self.menu.itemArray.count > 0) {
             NSMenuItem *seperatorItem = [NSMenuItem separatorItem];
             [self.menu addItem:seperatorItem];
         }
@@ -266,16 +266,22 @@
         }
     }
 
-    [self.menu addItem:[NSMenuItem separatorItem]];
-
-    NSMenuItem *readingListTitle = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Reading List", @"") action:nil keyEquivalent:@""];
-    [self.menu addItem:readingListTitle];
-
-    for (NSDictionary *bookmarkDictionary in [self readingListBookmarks]) {
-        [self.menu addItem:[self makeMenuItemWithTitle:bookmarkDictionary[@"URIDictionary"][@"title"] URL:bookmarkDictionary[@"URLString"]]];
+    if ([self readingListBookmarks].count > 0) {
+        if (self.menu.itemArray.count > 0) {
+            [self.menu addItem:[NSMenuItem separatorItem]];
+        }
+        
+        NSMenuItem *readingListTitle = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Reading List", @"") action:nil keyEquivalent:@""];
+        [self.menu addItem:readingListTitle];
+        
+        for (NSDictionary *bookmarkDictionary in [self readingListBookmarks]) {
+            [self.menu addItem:[self makeMenuItemWithTitle:bookmarkDictionary[@"URIDictionary"][@"title"] URL:bookmarkDictionary[@"URLString"]]];
+        }
     }
 
-    [self.menu addItem:[NSMenuItem separatorItem]];
+    if (self.menu.itemArray.count > 0) {
+        [self.menu addItem:[NSMenuItem separatorItem]];
+    }
 
     NSMenuItem *openAllTabsMenu = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open All Tabs From", @"") action:nil keyEquivalent:@""];
     [self.menu addItem:openAllTabsMenu];
