@@ -33,7 +33,7 @@
     [self.statusItem setImage:[NSImage imageNamed:@"ToolbarCloudTabsTemplate"]];
     [self.statusItem setMenu:self.menu];
     [self.statusItem setEnabled:YES];
-    
+
     // Set the favicon placeholder
     [DSFavIconManager sharedInstance].placeholder = [NSImage imageNamed:@"BookmarksDragImage"];
 
@@ -45,7 +45,7 @@
     [queue addPath:[self syncedPreferencesFile] notifyingAbout:VDKQueueNotifyDefault];
     [queue addPath:[self syncedBookmarksFile] notifyingAbout:VDKQueueNotifyDefault];
     [queue setDelegate:self];
-    
+
     // Setup Sparkle
     SUUpdater *updater = [[SUUpdater class] sharedUpdater];
     [updater checkForUpdatesInBackground];
@@ -56,14 +56,14 @@
 - (void)tabMenuItemClicked:(id)sender
 {
     NSURL *URL = [(NSMenuItem *)sender representedObject];
-    
+
     if ([NSEvent modifierFlags] == NSCommandKeyMask) {
         [[NSWorkspace sharedWorkspace] openURLs:@[URL] withAppBundleIdentifier:nil options:NSWorkspaceLaunchWithoutActivation additionalEventParamDescriptor:nil launchIdentifiers:nil];
     }
     else if ([NSEvent modifierFlags] == NSAlternateKeyMask) {
         NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
         [pasteboard clearContents];
-        
+
         NSURL *URL = [[self.menu highlightedItem] representedObject];
         if (![pasteboard writeObjects:@[URL]]) {
             NSAlert *alert = [NSAlert alertWithMessageText:@"Unable to copy URL" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"The URL was unable to be copied to the pasteboard."];
@@ -84,7 +84,7 @@
     else {
         launch = NSWorkspaceLaunchDefault;
     }
-    
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         NSArray *tabs = [self tabsForDeviceID:[(NSMenuItem *)sender representedObject]];
@@ -136,7 +136,7 @@
 - (NSDictionary *)syncedPreferenceDictionary
 {
     NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:[self syncedPreferencesFile]];
-    
+
     return dictionary;
 }
 
@@ -170,7 +170,7 @@
 - (NSArray *)deviceIDs
 {
     NSDictionary *dictionary = [self syncedPreferenceDictionary];
-    
+
     NSMutableArray *deviceIDs = [[NSMutableArray alloc] init];
 
     for (NSString *deviceID in [dictionary[@"values"] allKeys]) {
@@ -185,14 +185,14 @@
 - (NSString *)deviceNameForID:(NSString *)deviceID
 {
     NSDictionary *dictionary = [self syncedPreferenceDictionary];
-    
+
     return dictionary[@"values"][deviceID][@"value"][@"DeviceName"];
 }
 
 - (NSArray *)tabsForDeviceID:(NSString *)deviceID
 {
     NSDictionary *dictionary = [self syncedPreferenceDictionary];
-    
+
     return dictionary[@"values"][deviceID][@"value"][@"Tabs"];
 }
 
@@ -202,7 +202,7 @@
     [[NSURL fileURLWithPath:[self syncedPreferencesFile]] getResourceValue:&modificationDatePreference forKey:NSURLContentModificationDateKey error:nil];
     NSDate *modificationDateBookmarks;
     [[NSURL fileURLWithPath:[self syncedBookmarksFile]] getResourceValue:&modificationDateBookmarks forKey:NSURLContentModificationDateKey error:nil];
-    
+
     if (modificationDatePreference != nil && modificationDateBookmarks != nil) {
         return [[@[modificationDatePreference,modificationDateBookmarks] sortedArrayUsingSelector:@selector(compare:)] lastObject];
     } else if (modificationDatePreference != nil) {
@@ -222,22 +222,37 @@
 - (void)updateMenu
 {
     [self.menu removeAllItems];
-    
+
     NSMenu *devicesMenu = [[NSMenu alloc] initWithTitle:@"Devices"];
     [devicesMenu setAutoenablesItems:NO];
-    
+
     for (NSString *deviceID in [self deviceIDs]) {
-        
+
+        NSArray *arrayOfTabs = [self tabsForDeviceID:deviceID];
+
+        // hide devices that don't have any tabs
+        if (arrayOfTabs.count <= 0) {
+            continue;
+        }
+
+        // hide tabs from Mac where CloudyTabs is currently running on
+        BOOL hideTabsOfCurrentDevice = YES; // didn't want to add a menu item for this setting until maybe there is a proper preferences window
+        if (hideTabsOfCurrentDevice) {
+            if ([[NSHost currentHost].localizedName isEqualToString:[self deviceNameForID:deviceID]]) {
+                continue;
+            }
+        }
+
         // Add a seperator if this device isn't the first in the list
         if ([[self deviceIDs] indexOfObject:deviceID] > 0) {
             NSMenuItem *seperatorItem = [NSMenuItem separatorItem];
             [self.menu addItem:seperatorItem];
         }
-        
+
         // Add device to main list of tabs
         NSMenuItem *deviceMenuItem = [[NSMenuItem alloc] initWithTitle:[self deviceNameForID:deviceID] action:nil keyEquivalent:@""];
         [self.menu addItem:deviceMenuItem];
-        
+
         // Add device to "Open All Tabs From" submenu
         NSMenuItem *openAllTabsFromDeviceMenuItem = [[NSMenuItem alloc] initWithTitle:[self deviceNameForID:deviceID] action:@selector(deviceMenuItemClicked:) keyEquivalent:@""];
         openAllTabsFromDeviceMenuItem.representedObject = deviceID;
@@ -245,42 +260,42 @@
             [openAllTabsFromDeviceMenuItem setEnabled:NO];
         }
         [devicesMenu addItem:openAllTabsFromDeviceMenuItem];
-        
-        for (NSDictionary *tabDictionary in [self tabsForDeviceID:deviceID]) {
+
+        for (NSDictionary *tabDictionary in arrayOfTabs) {
             [self.menu addItem:[self makeMenuItemWithTitle:tabDictionary[@"Title"] URL:tabDictionary[@"URL"]]];
         }
     }
-    
+
     [self.menu addItem:[NSMenuItem separatorItem]];
 
     NSMenuItem *readingListTitle = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Reading List", @"") action:nil keyEquivalent:@""];
     [self.menu addItem:readingListTitle];
-    
+
     for (NSDictionary *bookmarkDictionary in [self readingListBookmarks]) {
         [self.menu addItem:[self makeMenuItemWithTitle:bookmarkDictionary[@"URIDictionary"][@"title"] URL:bookmarkDictionary[@"URLString"]]];
     }
-    
+
     [self.menu addItem:[NSMenuItem separatorItem]];
-    
+
     NSMenuItem *openAllTabsMenu = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open All Tabs From", @"") action:nil keyEquivalent:@""];
     [self.menu addItem:openAllTabsMenu];
     [openAllTabsMenu setSubmenu:devicesMenu];
-    
+
     NSMenuItem *openAtLoginItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Launch %@ At Login", @""), [self appBundleName]] action:@selector(openAtLoginToggled:) keyEquivalent:@""];
     [self.menu addItem:openAtLoginItem];
-    
+
     NSMenuItem *quitMenuItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Quit %@", @""), [self appBundleName]] action:@selector(quit:) keyEquivalent:@"q"];
     [self.menu addItem:quitMenuItem];
-    
+
     self.lastUpdateDate = [NSDate date];
 }
 
 -(NSMenuItem*)makeMenuItemWithTitle:(NSString *)title URL:(NSString *)URL {
     NSMenuItem *tabMenuItem = [[NSMenuItem alloc] initWithTitle:title action:@selector(tabMenuItemClicked:) keyEquivalent:@""];
     NSURL *encodedURL = nil;
-    
+
     // See dot point 4 under "NSURL Deprecations" in "Foundation Release Notes for OS X v10.11"
-    
+
     if ([NSURL respondsToSelector:@selector(URLWithDataRepresentation:relativeToURL:)]) {
         // Modern NSURL API available
         encodedURL = [NSURL URLWithDataRepresentation:[URL dataUsingEncoding:NSUTF8StringEncoding] relativeToURL:nil];
@@ -295,10 +310,10 @@
         }
         encodedURL = (__bridge NSURL *)urlRef;
     }
-    
+
     tabMenuItem.representedObject = encodedURL;
     tabMenuItem.toolTip = encodedURL.relativeString;
-    
+
     __block NSImage *image = [[DSFavIconManager sharedInstance] iconForURL:tabMenuItem.representedObject downloadHandler:^(NSImage *icon) {
         icon.size = NSMakeSize(19, 19);
         [tabMenuItem setImage:icon];
