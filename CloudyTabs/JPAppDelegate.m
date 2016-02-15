@@ -42,7 +42,8 @@
 
     // Watch the com.apple.Safari syncedpreference for changes
     VDKQueue *queue = [[VDKQueue alloc] init];
-    [queue addPath:[self syncedPreferencesPath] notifyingAbout:VDKQueueNotifyDefault];
+    [queue addPath:[self syncedPreferencesFile] notifyingAbout:VDKQueueNotifyDefault];
+    [queue addPath:[self syncedBookmarksFile] notifyingAbout:VDKQueueNotifyDefault];
     [queue setDelegate:self];
     
     // Setup Sparkle
@@ -118,7 +119,7 @@
 -(void)VDKQueue:(VDKQueue *)queue receivedNotification:(NSString*)noteName forPath:(NSString*)fpath;
 {
     // Check if the modification date of the syncedPreferences file is later than the date of the last menu update
-    if ([[self syncedPreferenceModificationDate] laterDate:self.lastUpdateDate] == [self syncedPreferenceModificationDate]) {
+    if ([[self syncedModificationDate] laterDate:self.lastUpdateDate] == [self syncedModificationDate]) {
         [self updateUserInterface];
     }
     return;
@@ -132,20 +133,38 @@
     [self updateStatusItemToolTip];
 }
 
-- (NSString *)syncedPreferencesPath
-{
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-    
-    NSString *syncedPreferencesPath = [paths[0] stringByAppendingPathComponent:@"SyncedPreferences"];
-    
-    return syncedPreferencesPath;
-}
-
 - (NSDictionary *)syncedPreferenceDictionary
 {
-    NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:[[self syncedPreferencesPath] stringByAppendingPathComponent:@"com.apple.Safari.plist"]];
+    NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:[self syncedPreferencesFile]];
     
     return dictionary;
+}
+
+- (NSString *)syncedPreferencesFile
+{
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *syncedPreferencesPath = [paths[0] stringByAppendingPathComponent:@"SyncedPreferences"];
+    return [syncedPreferencesPath stringByAppendingPathComponent:@"com.apple.Safari.plist"];
+}
+
+- (NSDictionary *)syncedBookmarksDictionary
+{
+    return [[NSDictionary alloc] initWithContentsOfFile:[self syncedBookmarksFile]];
+}
+
+- (NSString *)syncedBookmarksFile
+{
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *syncedPreferencesPath = [paths[0] stringByAppendingPathComponent:@"Safari"];
+    return [syncedPreferencesPath stringByAppendingPathComponent:@"Bookmarks.plist"];
+}
+
+- (NSArray *)readingListBookmarks
+{
+    NSArray *bookmarks = [self syncedBookmarksDictionary][@"Children"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"Title = 'com.apple.ReadingList'"];
+    NSDictionary* readingList = [[bookmarks filteredArrayUsingPredicate:predicate] firstObject];
+    return readingList[@"Children"];
 }
 
 - (NSArray *)deviceIDs
@@ -177,15 +196,20 @@
     return dictionary[@"values"][deviceID][@"value"][@"Tabs"];
 }
 
-- (NSDate *)syncedPreferenceModificationDate
+- (NSDate *)syncedModificationDate
 {
-    NSURL *preferencesURL = [NSURL fileURLWithPath:[[self syncedPreferencesPath] stringByAppendingPathComponent:@"com.apple.Safari.plist"]];
+    NSDate *modificationDatePreference;
+    [[NSURL fileURLWithPath:[self syncedPreferencesFile]] getResourceValue:&modificationDatePreference forKey:NSURLContentModificationDateKey error:nil];
+    NSDate *modificationDateBookmarks;
+    [[NSURL fileURLWithPath:[self syncedBookmarksFile]] getResourceValue:&modificationDateBookmarks forKey:NSURLContentModificationDateKey error:nil];
     
-    NSDate *modificationDate;
-    if ([preferencesURL getResourceValue:&modificationDate forKey:NSURLContentModificationDateKey error:nil]) {
-        return modificationDate;
-    }
-    else {
+    if (modificationDatePreference != nil && modificationDateBookmarks != nil) {
+        return [[@[modificationDatePreference,modificationDateBookmarks] sortedArrayUsingSelector:@selector(compare:)] lastObject];
+    } else if (modificationDatePreference != nil) {
+        return modificationDatePreference;
+    } else if (modificationDateBookmarks != nil) {
+        return modificationDateBookmarks;
+    } else {
         return nil;
     }
 }
@@ -223,45 +247,20 @@
         [devicesMenu addItem:openAllTabsFromDeviceMenuItem];
         
         for (NSDictionary *tabDictionary in [self tabsForDeviceID:deviceID]) {
-            
-            NSMenuItem *tabMenuItem = [[NSMenuItem alloc] initWithTitle:tabDictionary[@"Title"] action:@selector(tabMenuItemClicked:) keyEquivalent:@""];
-            
-            NSString *URL = tabDictionary[@"URL"];
-            NSURL *encodedURL = nil;
-            
-            // See dot point 4 under "NSURL Deprecations" in "Foundation Release Notes for OS X v10.11"
-            
-            if ([NSURL respondsToSelector:@selector(URLWithDataRepresentation:relativeToURL:)]) {
-                // Modern NSURL API available
-                encodedURL = [NSURL URLWithDataRepresentation:[URL dataUsingEncoding:NSUTF8StringEncoding] relativeToURL:nil];
-            }
-            else {
-                // Modern NSURL API not available, fall back to CoreFoundation implementation
-                NSData *urlData = [URL dataUsingEncoding:NSUTF8StringEncoding];
-                CFURLRef urlRef = CFURLCreateWithBytes(kCFAllocatorSystemDefault, (const UInt8 *)urlData.bytes, urlData.length, kCFStringEncodingUTF8, NULL);
-                if (!urlRef) {
-                    // Fallback to using ISO Latin encoding
-                    urlRef = CFURLCreateWithBytes(kCFAllocatorSystemDefault, (const UInt8 *)urlData.bytes, urlData.length, kCFStringEncodingISOLatin1, NULL);
-                }
-                encodedURL = (__bridge NSURL *)urlRef;
-            }
-            
-            tabMenuItem.representedObject = encodedURL;
-            tabMenuItem.toolTip = encodedURL.relativeString;
-            
-            __block NSImage *image = [[DSFavIconManager sharedInstance] iconForURL:tabMenuItem.representedObject downloadHandler:^(NSImage *icon) {
-                icon.size = NSMakeSize(19, 19);
-                [tabMenuItem setImage:icon];
-            }];
-            image.size = NSMakeSize(19, 19);
-            [tabMenuItem setImage:image];
-            
-            [self.menu addItem:tabMenuItem];
+            [self.menu addItem:[self makeMenuItemWithTitle:tabDictionary[@"Title"] URL:tabDictionary[@"URL"]]];
         }
     }
     
-    NSMenuItem *seperatorItem = [NSMenuItem separatorItem];
-    [self.menu addItem:seperatorItem];
+    [self.menu addItem:[NSMenuItem separatorItem]];
+
+    NSMenuItem *readingListTitle = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Reading List", @"") action:nil keyEquivalent:@""];
+    [self.menu addItem:readingListTitle];
+    
+    for (NSDictionary *bookmarkDictionary in [self readingListBookmarks]) {
+        [self.menu addItem:[self makeMenuItemWithTitle:bookmarkDictionary[@"URIDictionary"][@"title"] URL:bookmarkDictionary[@"URLString"]]];
+    }
+    
+    [self.menu addItem:[NSMenuItem separatorItem]];
     
     NSMenuItem *openAllTabsMenu = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open All Tabs From", @"") action:nil keyEquivalent:@""];
     [self.menu addItem:openAllTabsMenu];
@@ -276,9 +275,42 @@
     self.lastUpdateDate = [NSDate date];
 }
 
+-(NSMenuItem*)makeMenuItemWithTitle:(NSString *)title URL:(NSString *)URL {
+    NSMenuItem *tabMenuItem = [[NSMenuItem alloc] initWithTitle:title action:@selector(tabMenuItemClicked:) keyEquivalent:@""];
+    NSURL *encodedURL = nil;
+    
+    // See dot point 4 under "NSURL Deprecations" in "Foundation Release Notes for OS X v10.11"
+    
+    if ([NSURL respondsToSelector:@selector(URLWithDataRepresentation:relativeToURL:)]) {
+        // Modern NSURL API available
+        encodedURL = [NSURL URLWithDataRepresentation:[URL dataUsingEncoding:NSUTF8StringEncoding] relativeToURL:nil];
+    }
+    else {
+        // Modern NSURL API not available, fall back to CoreFoundation implementation
+        NSData *urlData = [URL dataUsingEncoding:NSUTF8StringEncoding];
+        CFURLRef urlRef = CFURLCreateWithBytes(kCFAllocatorSystemDefault, (const UInt8 *)urlData.bytes, urlData.length, kCFStringEncodingUTF8, NULL);
+        if (!urlRef) {
+            // Fallback to using ISO Latin encoding
+            urlRef = CFURLCreateWithBytes(kCFAllocatorSystemDefault, (const UInt8 *)urlData.bytes, urlData.length, kCFStringEncodingISOLatin1, NULL);
+        }
+        encodedURL = (__bridge NSURL *)urlRef;
+    }
+    
+    tabMenuItem.representedObject = encodedURL;
+    tabMenuItem.toolTip = encodedURL.relativeString;
+    
+    __block NSImage *image = [[DSFavIconManager sharedInstance] iconForURL:tabMenuItem.representedObject downloadHandler:^(NSImage *icon) {
+        icon.size = NSMakeSize(19, 19);
+        [tabMenuItem setImage:icon];
+    }];
+    image.size = NSMakeSize(19, 19);
+    [tabMenuItem setImage:image];
+    return tabMenuItem;
+}
+
 - (void)updateStatusItemToolTip
 {
-    NSString *toolTip = [NSString stringWithFormat:NSLocalizedString(@"%@\niCloud Last Synced: %@", @""), [self appBundleName], [self.dateFormatter stringFromDate:[self syncedPreferenceModificationDate]]];
+    NSString *toolTip = [NSString stringWithFormat:NSLocalizedString(@"%@\niCloud Last Synced: %@", @""), [self appBundleName], [self.dateFormatter stringFromDate:[self syncedModificationDate]]];
     [self.statusItem setToolTip:toolTip];
 }
 
