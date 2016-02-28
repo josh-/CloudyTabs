@@ -212,6 +212,7 @@
         
         // Add device to main list of tabs
         NSMenuItem *deviceMenuItem = [[NSMenuItem alloc] initWithTitle:[self deviceNameForID:deviceID] action:nil keyEquivalent:@""];
+        [deviceMenuItem setEnabled:NO];
         [self.menu addItem:deviceMenuItem];
         
         // Add device to "Open All Tabs From" submenu
