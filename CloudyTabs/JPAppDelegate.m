@@ -269,6 +269,9 @@
     [openAllTabsMenu setSubmenu:devicesMenu];
     
     NSMenuItem *openAtLoginItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Launch %@ At Login", @""), [self appBundleName]] action:@selector(openAtLoginToggled:) keyEquivalent:@""];
+    if (self.startAtLogin) {
+        [openAtLoginItem setState:YES];
+    }
     [self.menu addItem:openAtLoginItem];
     
     NSMenuItem *quitMenuItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Quit %@", @""), [self appBundleName]] action:@selector(quit:) keyEquivalent:@"q"];
