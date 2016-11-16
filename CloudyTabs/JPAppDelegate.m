@@ -212,6 +212,7 @@
         
         // Add device to main list of tabs
         NSMenuItem *deviceMenuItem = [[NSMenuItem alloc] initWithTitle:[self deviceNameForID:deviceID] action:nil keyEquivalent:@""];
+        [deviceMenuItem setEnabled:NO];
         [self.menu addItem:deviceMenuItem];
         
         // Add device to "Open All Tabs From" submenu
@@ -268,6 +269,9 @@
     [openAllTabsMenu setSubmenu:devicesMenu];
     
     NSMenuItem *openAtLoginItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Launch %@ At Login", @""), [self appBundleName]] action:@selector(openAtLoginToggled:) keyEquivalent:@""];
+    if (self.startAtLogin) {
+        [openAtLoginItem setState:YES];
+    }
     [self.menu addItem:openAtLoginItem];
     
     NSMenuItem *quitMenuItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Quit %@", @""), [self appBundleName]] action:@selector(quit:) keyEquivalent:@"q"];
