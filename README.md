@@ -2,8 +2,6 @@
 
 CloudyTabs is a simple menu bar application that lists your iCloud Tabs.
 
-**Please note**: This application is currently broken on macOS 10.12 and above, please see [this issue](https://github.com/josh-/cloudytabs/issues/33) for information about the new encrypted sync format. Any help would be much appreciated!
-
 ![CloudyTabs](http://joshparnham.com/projects/cloudytabs/CloudyTabs.png)
 
 ## Installation
