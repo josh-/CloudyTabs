@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0308ABDB18D676ED00AB4C54 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0308ABD918D676ED00AB4C54 /* Localizable.strings */; };
-		03225D4B18C5FEE2000778DF /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03225D4718C5FC1D000778DF /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		031EA6BB1F97004E00B8F2FD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 031EA6BA1F97004D00B8F2FD /* Sparkle.framework */; };
+		031EA6BD1F97009D00B8F2FD /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 031EA6BA1F97004D00B8F2FD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		03225D4C18C6A40D000778DF /* JPLaunchAtLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0375994118C5F967000E8C33 /* JPLaunchAtLoginManager.m */; };
 		03225D5418C6AA5A000778DF /* DSFavIconCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D4E18C6AA5A000778DF /* DSFavIconCache.m */; };
 		03225D5518C6AA5A000778DF /* DSFavIconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D5018C6AA5A000778DF /* DSFavIconManager.m */; };
@@ -17,7 +18,6 @@
 		03702C221F792AF8009286E3 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03702C211F792AF8009286E3 /* FMDB.framework */; };
 		03702C231F792AF8009286E3 /* FMDB.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03702C211F792AF8009286E3 /* FMDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0375994218C5F967000E8C33 /* JPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0375993F18C5F967000E8C33 /* JPAppDelegate.m */; };
-		039487BC1C54DA56009824E0 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03225D4718C5FC1D000778DF /* Sparkle.framework */; };
 		03977FD318C3F98A00DC499C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03977FD218C3F98A00DC499C /* Cocoa.framework */; };
 		03977FDD18C3F98A00DC499C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03977FDB18C3F98A00DC499C /* InfoPlist.strings */; };
 		03977FDF18C3F98A00DC499C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03977FDE18C3F98A00DC499C /* main.m */; };
@@ -37,8 +37,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				03225D4B18C5FEE2000778DF /* Sparkle.framework in CopyFiles */,
 				03702C231F792AF8009286E3 /* FMDB.framework in CopyFiles */,
+				031EA6BD1F97009D00B8F2FD /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,7 +52,7 @@
 		0319CFB118D67AF70007A9FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0319CFB218D67B080007A9FF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0319CFB318D67B110007A9FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		03225D4718C5FC1D000778DF /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = CloudyTabs/Sparkle.framework; sourceTree = "<group>"; };
+		031EA6BA1F97004D00B8F2FD /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
 		03225D4D18C6AA5A000778DF /* DSFavIconCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSFavIconCache.h; path = DSFavIconManager/Classes/DSFavIconCache.h; sourceTree = "<group>"; };
 		03225D4E18C6AA5A000778DF /* DSFavIconCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSFavIconCache.m; path = DSFavIconManager/Classes/DSFavIconCache.m; sourceTree = "<group>"; };
 		03225D4F18C6AA5A000778DF /* DSFavIconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSFavIconManager.h; path = DSFavIconManager/Classes/DSFavIconManager.h; sourceTree = "<group>"; };
@@ -110,10 +110,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				039487BC1C54DA56009824E0 /* Sparkle.framework in Frameworks */,
 				0397802318C590F700DC499C /* CoreServices.framework in Frameworks */,
 				03977FD318C3F98A00DC499C /* Cocoa.framework in Frameworks */,
 				03702C221F792AF8009286E3 /* FMDB.framework in Frameworks */,
+				031EA6BB1F97004E00B8F2FD /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,7 +155,6 @@
 		03977FC618C3F98A00DC499C = {
 			isa = PBXGroup;
 			children = (
-				03702C211F792AF8009286E3 /* FMDB.framework */,
 				03977FD818C3F98A00DC499C /* CloudyTabs */,
 				03977FD118C3F98A00DC499C /* Frameworks */,
 				03977FD018C3F98A00DC499C /* Products */,
@@ -173,7 +172,8 @@
 		03977FD118C3F98A00DC499C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				03225D4718C5FC1D000778DF /* Sparkle.framework */,
+				031EA6BA1F97004D00B8F2FD /* Sparkle.framework */,
+				03702C211F792AF8009286E3 /* FMDB.framework */,
 				03977FD218C3F98A00DC499C /* Cocoa.framework */,
 				0397802218C590F700DC499C /* CoreServices.framework */,
 				03977FD418C3F98A00DC499C /* Other Frameworks */,
@@ -339,7 +339,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=\"Developer ID Application: Josh Parnham (3C7269R37R)\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$LOCATION/Sparkle.framework/Versions/A\"";
+			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=\"Developer ID Application: Josh Parnham (3C7269R37R)\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
