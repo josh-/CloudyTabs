@@ -135,6 +135,11 @@
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
 }
 
+- (NSString *)appBundleVersion
+{
+    return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+}
+
 - (void)setupSparkle
 {
     SUUpdater *updater = [[SUUpdater class] sharedUpdater];
@@ -266,7 +271,7 @@
 {
     NSDate *fileModificationDate = [self.tabContainer modificationDate];
     if (fileModificationDate != nil) {
-        NSString *toolTip = [NSString stringWithFormat:NSLocalizedString(@"%@\niCloud Last Synced: %@", @""), [self appBundleName], [self.dateFormatter stringFromDate:fileModificationDate]];
+        NSString *toolTip = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@)\niCloud Last Synced: %@", @""), [self appBundleName], [self appBundleVersion], [self.dateFormatter stringFromDate:fileModificationDate]];
         [self.statusItem setToolTip:toolTip];
     }
 }
