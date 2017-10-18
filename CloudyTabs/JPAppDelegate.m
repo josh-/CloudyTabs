@@ -15,11 +15,17 @@
 #import "JPLaunchAtLoginManager.h"
 #import "DSFavIconManager.h"
 
+#import "JPTabsContainer.h"
+#import "JPSyncedPreferencesReader.h"
+#import "JPCloudTabsDBReader.h"
+
 @interface JPAppDelegate ()
 
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 
 @property (strong, nonatomic) NSDate *lastUpdateDate;
+
+@property (strong, nonatomic) id<JPTabsContainer> tabContainer;
 
 @end
 
@@ -27,27 +33,24 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    [self.statusItem setHighlightMode:YES];
-//    [self.statusItem setTitle:@"☁︎"];
-    [self.statusItem setImage:[NSImage imageNamed:@"ToolbarCloudTabsTemplate"]];
-    [self.statusItem setMenu:self.menu];
-    [self.statusItem setEnabled:YES];
+    if ([JPCloudTabsDBReader canReadFile]) {
+        self.tabContainer = [[JPCloudTabsDBReader alloc] init];
+    } else if ([JPSyncedPreferencesReader canReadFile]) {
+        self.tabContainer = [[JPSyncedPreferencesReader alloc] init];
+    } else {
+        NSLog(@"Unable to open CloudyTabs");
+        NSLog(@"%@", [JPCloudTabsDBReader debugDescription]);
+        NSLog(@"%@", [JPSyncedPreferencesReader debugDescription]);
+        [NSApp terminate:self];
+    }
     
-    // Set the favicon placeholder
     [DSFavIconManager sharedInstance].placeholder = [NSImage imageNamed:@"BookmarksDragImage"];
-
+    
+    [self createStatusItem];
     [self updateMenu];
     [self updateStatusItemToolTip];
-
-    // Watch the com.apple.Safari syncedpreference for changes
-    VDKQueue *queue = [[VDKQueue alloc] init];
-    [queue addPath:[self syncedPreferencesPath] notifyingAbout:VDKQueueNotifyDefault];
-    [queue setDelegate:self];
-    
-    // Setup Sparkle
-    SUUpdater *updater = [[SUUpdater class] sharedUpdater];
-    [updater checkForUpdatesInBackground];
+    [self setupQueue];
+    [self setupSparkle];
 }
 
 #pragma mark - Menu actions
@@ -86,7 +89,7 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
-        NSArray *tabs = [self tabsForDeviceID:[(NSMenuItem *)sender representedObject]];
+        NSArray *tabs = [self.tabContainer tabsForDeviceID:[(NSMenuItem *)sender representedObject]];
 
         for (NSDictionary *tabDictionary in tabs) {
             NSURL *url = [NSURL URLWithString:[tabDictionary[@"URL"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -118,7 +121,8 @@
 -(void)VDKQueue:(VDKQueue *)queue receivedNotification:(NSString*)noteName forPath:(NSString*)fpath;
 {
     // Check if the modification date of the syncedPreferences file is later than the date of the last menu update
-    if ([[self syncedPreferenceModificationDate] laterDate:self.lastUpdateDate] == [self syncedPreferenceModificationDate]) {
+    NSDate *fileModificationDate = [self.tabContainer modificationDate];
+    if ([fileModificationDate laterDate:self.lastUpdateDate] == fileModificationDate) {
         [self updateUserInterface];
     }
     return;
@@ -126,73 +130,39 @@
 
 #pragma mark - Methods
 
+- (NSString *)appBundleName
+{
+    return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
+}
+
+- (void)setupSparkle
+{
+    SUUpdater *updater = [[SUUpdater class] sharedUpdater];
+    [updater checkForUpdatesInBackground];
+}
+
+- (void)setupQueue
+{
+    VDKQueue *queue = [[VDKQueue alloc] init];
+    
+    NSString *filePath = [[self.tabContainer class] filePath];
+    [queue addPath:filePath notifyingAbout:VDKQueueNotifyDefault];
+    [queue setDelegate:self];
+}
+
+- (void)createStatusItem
+{
+    self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    [self.statusItem setHighlightMode:YES];
+    [self.statusItem setImage:[NSImage imageNamed:@"ToolbarCloudTabsTemplate"]];
+    [self.statusItem setMenu:self.menu];
+    [self.statusItem setEnabled:YES];
+}
+
 - (void)updateUserInterface
 {
     [self updateMenu];
     [self updateStatusItemToolTip];
-}
-
-- (NSString *)syncedPreferencesPath
-{
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-    
-    NSString *syncedPreferencesPath = [paths[0] stringByAppendingPathComponent:@"SyncedPreferences"];
-    
-    return syncedPreferencesPath;
-}
-
-- (NSDictionary *)syncedPreferenceDictionary
-{
-    NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:[[self syncedPreferencesPath] stringByAppendingPathComponent:@"com.apple.Safari.plist"]];
-    
-    return dictionary;
-}
-
-- (NSArray *)deviceIDs
-{
-    NSDictionary *dictionary = [self syncedPreferenceDictionary];
-    
-    NSMutableArray *deviceIDs = [[NSMutableArray alloc] init];
-
-    for (NSString *deviceID in [dictionary[@"values"] allKeys]) {
-        // Hide devices that haven't had activity in the last week (604800 = 7×24×60×60 = one week in seconds)
-        if ([dictionary[@"values"][deviceID][@"value"][@"LastModified"] timeIntervalSinceNow] < 604800) {
-            [deviceIDs addObject:deviceID];
-        }
-    }
-    return deviceIDs;
-}
-
-- (NSString *)deviceNameForID:(NSString *)deviceID
-{
-    NSDictionary *dictionary = [self syncedPreferenceDictionary];
-    
-    return dictionary[@"values"][deviceID][@"value"][@"DeviceName"];
-}
-
-- (NSArray *)tabsForDeviceID:(NSString *)deviceID
-{
-    NSDictionary *dictionary = [self syncedPreferenceDictionary];
-    
-    return dictionary[@"values"][deviceID][@"value"][@"Tabs"];
-}
-
-- (NSDate *)syncedPreferenceModificationDate
-{
-    NSURL *preferencesURL = [NSURL fileURLWithPath:[[self syncedPreferencesPath] stringByAppendingPathComponent:@"com.apple.Safari.plist"]];
-    
-    NSDate *modificationDate;
-    if ([preferencesURL getResourceValue:&modificationDate forKey:NSURLContentModificationDateKey error:nil]) {
-        return modificationDate;
-    }
-    else {
-        return nil;
-    }
-}
-
-- (NSString *)appBundleName
-{
-    return [[[NSBundle mainBundle] infoDictionary]  objectForKey:@"CFBundleName"];
 }
 
 - (void)updateMenu
@@ -202,43 +172,42 @@
     NSMenu *devicesMenu = [[NSMenu alloc] initWithTitle:@"Devices"];
     [devicesMenu setAutoenablesItems:NO];
     
-    for (NSString *deviceID in [self deviceIDs]) {
+    for (NSString *deviceID in [self.tabContainer deviceIDs]) {
+        NSArray *deviceTabs = [self.tabContainer tabsForDeviceID:deviceID];
         
-        NSArray *arrayOfTabs = [self tabsForDeviceID:deviceID];
-        
-        // hide devices that don't have any tabs
-        if (arrayOfTabs.count <= 0) {
+        // Hide devices that don't have any tabs
+        if (deviceTabs.count <= 0) {
             continue;
         }
         
-        // hide tabs from Mac where CloudyTabs is currently running on
-        BOOL hideTabsOfCurrentDevice = YES; // didn't want to add a menu item for this setting until maybe there is a proper preferences window
+        // Hide tabs from Mac where CloudyTabs is currently running on
+        // TODO: Add localised menu preference for the following
+        BOOL hideTabsOfCurrentDevice = YES;
         if (hideTabsOfCurrentDevice) {
-            if ([[NSHost currentHost].localizedName isEqualToString:[self deviceNameForID:deviceID]]) {
+            if ([[NSHost currentHost].localizedName isEqualToString:[self.tabContainer deviceNameForID:deviceID]]) {
                 continue;
             }
         }
         
         // Add a seperator if this device isn't the first in the list
-        if ([[self deviceIDs] indexOfObject:deviceID] > 0) {
+        if ([[self.tabContainer deviceIDs] indexOfObject:deviceID] > 0) {
             NSMenuItem *seperatorItem = [NSMenuItem separatorItem];
             [self.menu addItem:seperatorItem];
         }
         
         // Add device to main list of tabs
-        NSMenuItem *deviceMenuItem = [[NSMenuItem alloc] initWithTitle:[self deviceNameForID:deviceID] action:nil keyEquivalent:@""];
+        NSMenuItem *deviceMenuItem = [[NSMenuItem alloc] initWithTitle:[self.tabContainer deviceNameForID:deviceID] action:nil keyEquivalent:@""];
         [self.menu addItem:deviceMenuItem];
         
         // Add device to "Open All Tabs From" submenu
-        NSMenuItem *openAllTabsFromDeviceMenuItem = [[NSMenuItem alloc] initWithTitle:[self deviceNameForID:deviceID] action:@selector(deviceMenuItemClicked:) keyEquivalent:@""];
+        NSMenuItem *openAllTabsFromDeviceMenuItem = [[NSMenuItem alloc] initWithTitle:[self.tabContainer deviceNameForID:deviceID] action:@selector(deviceMenuItemClicked:) keyEquivalent:@""];
         openAllTabsFromDeviceMenuItem.representedObject = deviceID;
-        if ([[self tabsForDeviceID:deviceID] count] < 1) {
+        if ([[self.tabContainer tabsForDeviceID:deviceID] count] < 1) {
             [openAllTabsFromDeviceMenuItem setEnabled:NO];
         }
         [devicesMenu addItem:openAllTabsFromDeviceMenuItem];
         
-        for (NSDictionary *tabDictionary in arrayOfTabs) {
-            
+        for (NSDictionary *tabDictionary in deviceTabs) {
             NSMenuItem *tabMenuItem = [[NSMenuItem alloc] initWithTitle:tabDictionary[@"Title"] action:@selector(tabMenuItemClicked:) keyEquivalent:@""];
             
             NSString *URL = tabDictionary[@"URL"];
@@ -278,9 +247,11 @@
     NSMenuItem *seperatorItem = [NSMenuItem separatorItem];
     [self.menu addItem:seperatorItem];
     
-    NSMenuItem *openAllTabsMenu = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open All Tabs From", @"") action:nil keyEquivalent:@""];
-    [self.menu addItem:openAllTabsMenu];
-    [openAllTabsMenu setSubmenu:devicesMenu];
+    if ([self.tabContainer deviceIDs].count > 1) {
+        NSMenuItem *openAllTabsMenu = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open All Tabs From", @"") action:nil keyEquivalent:@""];
+        [self.menu addItem:openAllTabsMenu];
+        [openAllTabsMenu setSubmenu:devicesMenu];
+    }
     
     NSMenuItem *openAtLoginItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Launch %@ At Login", @""), [self appBundleName]] action:@selector(openAtLoginToggled:) keyEquivalent:@""];
     [self.menu addItem:openAtLoginItem];
@@ -293,8 +264,11 @@
 
 - (void)updateStatusItemToolTip
 {
-    NSString *toolTip = [NSString stringWithFormat:NSLocalizedString(@"%@\niCloud Last Synced: %@", @""), [self appBundleName], [self.dateFormatter stringFromDate:[self syncedPreferenceModificationDate]]];
-    [self.statusItem setToolTip:toolTip];
+    NSDate *fileModificationDate = [self.tabContainer modificationDate];
+    if (fileModificationDate != nil) {
+        NSString *toolTip = [NSString stringWithFormat:NSLocalizedString(@"%@\niCloud Last Synced: %@", @""), [self appBundleName], [self.dateFormatter stringFromDate:fileModificationDate]];
+        [self.statusItem setToolTip:toolTip];
+    }
 }
 
 - (void)quit:(id)sender

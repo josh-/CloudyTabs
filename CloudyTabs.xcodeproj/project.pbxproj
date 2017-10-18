@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0308ABDB18D676ED00AB4C54 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0308ABD918D676ED00AB4C54 /* Localizable.strings */; };
-		03225D4B18C5FEE2000778DF /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03225D4718C5FC1D000778DF /* Sparkle.framework */; };
+		03225D4B18C5FEE2000778DF /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03225D4718C5FC1D000778DF /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		03225D4C18C6A40D000778DF /* JPLaunchAtLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0375994118C5F967000E8C33 /* JPLaunchAtLoginManager.m */; };
 		03225D5418C6AA5A000778DF /* DSFavIconCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D4E18C6AA5A000778DF /* DSFavIconCache.m */; };
 		03225D5518C6AA5A000778DF /* DSFavIconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D5018C6AA5A000778DF /* DSFavIconManager.m */; };
 		03225D5618C6AA5A000778DF /* DSFavIconOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D5218C6AA5A000778DF /* DSFavIconOperation.m */; };
-		03225D5A18C6AB0C000778DF /* VDKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D5918C6AB0C000778DF /* VDKQueue.m */; };
 		03225D5E18C6B18A000778DF /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 03225D5D18C6B18A000778DF /* dsa_pub.pem */; };
+		03702C221F792AF8009286E3 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03702C211F792AF8009286E3 /* FMDB.framework */; };
+		03702C231F792AF8009286E3 /* FMDB.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03702C211F792AF8009286E3 /* FMDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0375994218C5F967000E8C33 /* JPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0375993F18C5F967000E8C33 /* JPAppDelegate.m */; };
 		039487BC1C54DA56009824E0 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03225D4718C5FC1D000778DF /* Sparkle.framework */; };
 		03977FD318C3F98A00DC499C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03977FD218C3F98A00DC499C /* Cocoa.framework */; };
@@ -24,6 +25,9 @@
 		0397800818C40A1200DC499C /* BookmarksDragImage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 0397800618C40A1200DC499C /* BookmarksDragImage.tiff */; };
 		0397800918C40A1200DC499C /* ToolbarCloudTabsTemplate.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0397800718C40A1200DC499C /* ToolbarCloudTabsTemplate.pdf */; };
 		0397802318C590F700DC499C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0397802218C590F700DC499C /* CoreServices.framework */; };
+		039C6E8A1F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 039C6E891F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.m */; };
+		039C6E8D1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 039C6E8C1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m */; };
+		039C6EAC1F935D2E00C3B3E1 /* VDKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 039C6EAB1F935CE900C3B3E1 /* VDKQueue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +38,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				03225D4B18C5FEE2000778DF /* Sparkle.framework in CopyFiles */,
+				03702C231F792AF8009286E3 /* FMDB.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,9 +60,8 @@
 		03225D5118C6AA5A000778DF /* DSFavIconOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSFavIconOperation.h; path = DSFavIconManager/Classes/DSFavIconOperation.h; sourceTree = "<group>"; };
 		03225D5218C6AA5A000778DF /* DSFavIconOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSFavIconOperation.m; path = DSFavIconManager/Classes/DSFavIconOperation.m; sourceTree = "<group>"; };
 		03225D5318C6AA5A000778DF /* UINSImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UINSImage.h; path = DSFavIconManager/Classes/UINSImage.h; sourceTree = "<group>"; };
-		03225D5818C6AB0C000778DF /* VDKQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VDKQueue.h; path = VDKQueue/VDKQueue.h; sourceTree = "<group>"; };
-		03225D5918C6AB0C000778DF /* VDKQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VDKQueue.m; path = VDKQueue/VDKQueue.m; sourceTree = "<group>"; };
 		03225D5D18C6B18A000778DF /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		03702C211F792AF8009286E3 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = Carthage/Build/Mac/FMDB.framework; sourceTree = "<group>"; };
 		0375993E18C5F967000E8C33 /* JPAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPAppDelegate.h; sourceTree = "<group>"; };
 		0375993F18C5F967000E8C33 /* JPAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPAppDelegate.m; sourceTree = "<group>"; };
 		0375994018C5F967000E8C33 /* JPLaunchAtLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPLaunchAtLoginManager.h; sourceTree = "<group>"; };
@@ -87,6 +91,18 @@
 		0397800618C40A1200DC499C /* BookmarksDragImage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = BookmarksDragImage.tiff; sourceTree = "<group>"; };
 		0397800718C40A1200DC499C /* ToolbarCloudTabsTemplate.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ToolbarCloudTabsTemplate.pdf; sourceTree = "<group>"; };
 		0397802218C590F700DC499C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		039C6E881F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPSyncedPreferencesReader.h; sourceTree = "<group>"; };
+		039C6E891F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPSyncedPreferencesReader.m; sourceTree = "<group>"; };
+		039C6E8B1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPCloudTabsDBReader.h; sourceTree = "<group>"; };
+		039C6E8C1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPCloudTabsDBReader.m; sourceTree = "<group>"; };
+		039C6E8E1F8CEE5E00C3B3E1 /* JPTabsContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPTabsContainer.h; sourceTree = "<group>"; };
+		039C6E9D1F935BF900C3B3E1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		039C6E9E1F935BF900C3B3E1 /* VDKQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VDKQueue.h; sourceTree = "<group>"; };
+		039C6E9F1F935BF900C3B3E1 /* VDKQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VDKQueue.m; sourceTree = "<group>"; };
+		039C6EA21F935BFC00C3B3E1 /* VDKQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VDKQueue.h; sourceTree = "<group>"; };
+		039C6EA31F935BFC00C3B3E1 /* VDKQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VDKQueue.m; sourceTree = "<group>"; };
+		039C6EAA1F935CE900C3B3E1 /* VDKQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VDKQueue.h; sourceTree = "<group>"; };
+		039C6EAB1F935CE900C3B3E1 /* VDKQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VDKQueue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +113,7 @@
 				039487BC1C54DA56009824E0 /* Sparkle.framework in Frameworks */,
 				0397802318C590F700DC499C /* CoreServices.framework in Frameworks */,
 				03977FD318C3F98A00DC499C /* Cocoa.framework in Frameworks */,
+				03702C221F792AF8009286E3 /* FMDB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +123,7 @@
 		03225D5718C6AA7A000778DF /* DSFavIconManager */ = {
 			isa = PBXGroup;
 			children = (
+				039C6E9C1F935BF900C3B3E1 /* VDKQueue */,
 				03225D4D18C6AA5A000778DF /* DSFavIconCache.h */,
 				03225D4E18C6AA5A000778DF /* DSFavIconCache.m */,
 				03225D4F18C6AA5A000778DF /* DSFavIconManager.h */,
@@ -117,22 +135,19 @@
 			name = DSFavIconManager;
 			sourceTree = "<group>";
 		};
-		03225D5B18C6AB14000778DF /* VDKQueue */ = {
-			isa = PBXGroup;
-			children = (
-				03225D5818C6AB0C000778DF /* VDKQueue.h */,
-				03225D5918C6AB0C000778DF /* VDKQueue.m */,
-			);
-			name = VDKQueue;
-			sourceTree = "<group>";
-		};
 		03225D5C18C6AB2A000778DF /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				039C6EA01F935BFC00C3B3E1 /* VDKQueue */,
 				0375993E18C5F967000E8C33 /* JPAppDelegate.h */,
 				0375993F18C5F967000E8C33 /* JPAppDelegate.m */,
 				0375994018C5F967000E8C33 /* JPLaunchAtLoginManager.h */,
 				0375994118C5F967000E8C33 /* JPLaunchAtLoginManager.m */,
+				039C6E881F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.h */,
+				039C6E891F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.m */,
+				039C6E8B1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.h */,
+				039C6E8C1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m */,
+				039C6E8E1F8CEE5E00C3B3E1 /* JPTabsContainer.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -140,6 +155,7 @@
 		03977FC618C3F98A00DC499C = {
 			isa = PBXGroup;
 			children = (
+				03702C211F792AF8009286E3 /* FMDB.framework */,
 				03977FD818C3F98A00DC499C /* CloudyTabs */,
 				03977FD118C3F98A00DC499C /* Frameworks */,
 				03977FD018C3F98A00DC499C /* Products */,
@@ -178,8 +194,8 @@
 		03977FD818C3F98A00DC499C /* CloudyTabs */ = {
 			isa = PBXGroup;
 			children = (
+				039C6EA81F935CE900C3B3E1 /* VDKQueue */,
 				03225D5C18C6AB2A000778DF /* Classes */,
-				03225D5B18C6AB14000778DF /* VDKQueue */,
 				03225D5718C6AA7A000778DF /* DSFavIconManager */,
 				03977FEA18C3F98A00DC499C /* Images.xcassets */,
 				03977FD918C3F98A00DC499C /* Supporting Files */,
@@ -200,6 +216,34 @@
 				0397800718C40A1200DC499C /* ToolbarCloudTabsTemplate.pdf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		039C6E9C1F935BF900C3B3E1 /* VDKQueue */ = {
+			isa = PBXGroup;
+			children = (
+				039C6E9D1F935BF900C3B3E1 /* README.md */,
+				039C6E9E1F935BF900C3B3E1 /* VDKQueue.h */,
+				039C6E9F1F935BF900C3B3E1 /* VDKQueue.m */,
+			);
+			path = VDKQueue;
+			sourceTree = "<group>";
+		};
+		039C6EA01F935BFC00C3B3E1 /* VDKQueue */ = {
+			isa = PBXGroup;
+			children = (
+				039C6EA21F935BFC00C3B3E1 /* VDKQueue.h */,
+				039C6EA31F935BFC00C3B3E1 /* VDKQueue.m */,
+			);
+			path = VDKQueue;
+			sourceTree = "<group>";
+		};
+		039C6EA81F935CE900C3B3E1 /* VDKQueue */ = {
+			isa = PBXGroup;
+			children = (
+				039C6EAA1F935CE900C3B3E1 /* VDKQueue.h */,
+				039C6EAB1F935CE900C3B3E1 /* VDKQueue.m */,
+			);
+			path = VDKQueue;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,11 +275,12 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = JP;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Josh Parnham";
 				TargetAttributes = {
 					03977FCE18C3F98A00DC499C = {
 						DevelopmentTeam = 3C7269R37R;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -303,13 +348,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				039C6EAC1F935D2E00C3B3E1 /* VDKQueue.m in Sources */,
 				03225D4C18C6A40D000778DF /* JPLaunchAtLoginManager.m in Sources */,
+				039C6E8A1F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.m in Sources */,
 				03225D5518C6AA5A000778DF /* DSFavIconManager.m in Sources */,
 				0375994218C5F967000E8C33 /* JPAppDelegate.m in Sources */,
+				039C6E8D1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m in Sources */,
 				03977FDF18C3F98A00DC499C /* main.m in Sources */,
 				03225D5418C6AA5A000778DF /* DSFavIconCache.m in Sources */,
 				03225D5618C6AA5A000778DF /* DSFavIconOperation.m in Sources */,
-				03225D5A18C6AB0C000778DF /* VDKQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +416,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -425,13 +473,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/CloudyTabs";
+				DEVELOPMENT_TEAM = 3C7269R37R;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/CloudyTabs",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CloudyTabs/CloudyTabs-Prefix.pch";
 				INFOPLIST_FILE = "CloudyTabs/CloudyTabs-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8.2;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joshparnham.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = CloudyTabs;
 				WRAPPER_EXTENSION = app;
 			};
@@ -441,13 +495,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/CloudyTabs";
+				DEVELOPMENT_TEAM = 3C7269R37R;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/CloudyTabs",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CloudyTabs/CloudyTabs-Prefix.pch";
 				INFOPLIST_FILE = "CloudyTabs/CloudyTabs-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8.2;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joshparnham.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = CloudyTabs;
 				WRAPPER_EXTENSION = app;
 			};
