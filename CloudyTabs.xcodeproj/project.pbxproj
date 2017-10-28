@@ -15,6 +15,9 @@
 		03225D5518C6AA5A000778DF /* DSFavIconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D5018C6AA5A000778DF /* DSFavIconManager.m */; };
 		03225D5618C6AA5A000778DF /* DSFavIconOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D5218C6AA5A000778DF /* DSFavIconOperation.m */; };
 		03225D5E18C6B18A000778DF /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 03225D5D18C6B18A000778DF /* dsa_pub.pem */; };
+		03648D7D1FA4434B004D3078 /* NSURL+DecodeURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D7C1FA4434B004D3078 /* NSURL+DecodeURL.m */; };
+		03648D851FA445FA004D3078 /* CloudyTabsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D841FA445FA004D3078 /* CloudyTabsTests.m */; };
+		03648D8D1FA44629004D3078 /* NSURL+DecodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D8C1FA44629004D3078 /* NSURL+DecodeTests.m */; };
 		03702C221F792AF8009286E3 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03702C211F792AF8009286E3 /* FMDB.framework */; };
 		03702C231F792AF8009286E3 /* FMDB.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03702C211F792AF8009286E3 /* FMDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0375994218C5F967000E8C33 /* JPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0375993F18C5F967000E8C33 /* JPAppDelegate.m */; };
@@ -29,6 +32,16 @@
 		039C6E8D1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 039C6E8C1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m */; };
 		039C6EAC1F935D2E00C3B3E1 /* VDKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 039C6EAB1F935CE900C3B3E1 /* VDKQueue.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		03648D871FA445FA004D3078 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03977FC718C3F98A00DC499C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 03977FCE18C3F98A00DC499C;
+			remoteInfo = CloudyTabs;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		03225D4A18C5FED1000778DF /* CopyFiles */ = {
@@ -61,6 +74,12 @@
 		03225D5218C6AA5A000778DF /* DSFavIconOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSFavIconOperation.m; path = DSFavIconManager/Classes/DSFavIconOperation.m; sourceTree = "<group>"; };
 		03225D5318C6AA5A000778DF /* UINSImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UINSImage.h; path = DSFavIconManager/Classes/UINSImage.h; sourceTree = "<group>"; };
 		03225D5D18C6B18A000778DF /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		03648D7B1FA4434B004D3078 /* NSURL+DecodeURL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURL+DecodeURL.h"; sourceTree = "<group>"; };
+		03648D7C1FA4434B004D3078 /* NSURL+DecodeURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURL+DecodeURL.m"; sourceTree = "<group>"; };
+		03648D821FA445FA004D3078 /* CloudyTabsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CloudyTabsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		03648D841FA445FA004D3078 /* CloudyTabsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CloudyTabsTests.m; sourceTree = "<group>"; };
+		03648D861FA445FA004D3078 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03648D8C1FA44629004D3078 /* NSURL+DecodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+DecodeTests.m"; sourceTree = "<group>"; };
 		03702C211F792AF8009286E3 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = Carthage/Build/Mac/FMDB.framework; sourceTree = "<group>"; };
 		0375993E18C5F967000E8C33 /* JPAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPAppDelegate.h; sourceTree = "<group>"; };
 		0375993F18C5F967000E8C33 /* JPAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPAppDelegate.m; sourceTree = "<group>"; };
@@ -106,6 +125,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		03648D7F1FA445FA004D3078 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		03977FCC18C3F98A00DC499C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -148,14 +174,27 @@
 				039C6E8B1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.h */,
 				039C6E8C1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m */,
 				039C6E8E1F8CEE5E00C3B3E1 /* JPTabsContainer.h */,
+				03648D7B1FA4434B004D3078 /* NSURL+DecodeURL.h */,
+				03648D7C1FA4434B004D3078 /* NSURL+DecodeURL.m */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		03648D831FA445FA004D3078 /* CloudyTabsTests */ = {
+			isa = PBXGroup;
+			children = (
+				03648D8C1FA44629004D3078 /* NSURL+DecodeTests.m */,
+				03648D841FA445FA004D3078 /* CloudyTabsTests.m */,
+				03648D861FA445FA004D3078 /* Info.plist */,
+			);
+			path = CloudyTabsTests;
 			sourceTree = "<group>";
 		};
 		03977FC618C3F98A00DC499C = {
 			isa = PBXGroup;
 			children = (
 				03977FD818C3F98A00DC499C /* CloudyTabs */,
+				03648D831FA445FA004D3078 /* CloudyTabsTests */,
 				03977FD118C3F98A00DC499C /* Frameworks */,
 				03977FD018C3F98A00DC499C /* Products */,
 			);
@@ -165,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				03977FCF18C3F98A00DC499C /* CloudyTabs.app */,
+				03648D821FA445FA004D3078 /* CloudyTabsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,6 +289,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		03648D811FA445FA004D3078 /* CloudyTabsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03648D891FA445FA004D3078 /* Build configuration list for PBXNativeTarget "CloudyTabsTests" */;
+			buildPhases = (
+				03648D7E1FA445FA004D3078 /* Sources */,
+				03648D7F1FA445FA004D3078 /* Frameworks */,
+				03648D801FA445FA004D3078 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				03648D881FA445FA004D3078 /* PBXTargetDependency */,
+			);
+			name = CloudyTabsTests;
+			productName = CloudyTabsTests;
+			productReference = 03648D821FA445FA004D3078 /* CloudyTabsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		03977FCE18C3F98A00DC499C /* CloudyTabs */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0397800018C3F98A00DC499C /* Build configuration list for PBXNativeTarget "CloudyTabs" */;
@@ -278,6 +336,12 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Josh Parnham";
 				TargetAttributes = {
+					03648D811FA445FA004D3078 = {
+						CreatedOnToolsVersion = 9.0.1;
+						DevelopmentTeam = 3C7269R37R;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 03977FCE18C3F98A00DC499C;
+					};
 					03977FCE18C3F98A00DC499C = {
 						DevelopmentTeam = 3C7269R37R;
 						ProvisioningStyle = Automatic;
@@ -307,11 +371,19 @@
 			projectRoot = "";
 			targets = (
 				03977FCE18C3F98A00DC499C /* CloudyTabs */,
+				03648D811FA445FA004D3078 /* CloudyTabsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		03648D801FA445FA004D3078 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		03977FCD18C3F98A00DC499C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -344,6 +416,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		03648D7E1FA445FA004D3078 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03648D8D1FA44629004D3078 /* NSURL+DecodeTests.m in Sources */,
+				03648D851FA445FA004D3078 /* CloudyTabsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		03977FCB18C3F98A00DC499C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -354,6 +435,7 @@
 				03225D5518C6AA5A000778DF /* DSFavIconManager.m in Sources */,
 				0375994218C5F967000E8C33 /* JPAppDelegate.m in Sources */,
 				039C6E8D1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m in Sources */,
+				03648D7D1FA4434B004D3078 /* NSURL+DecodeURL.m in Sources */,
 				03977FDF18C3F98A00DC499C /* main.m in Sources */,
 				03225D5418C6AA5A000778DF /* DSFavIconCache.m in Sources */,
 				03225D5618C6AA5A000778DF /* DSFavIconOperation.m in Sources */,
@@ -361,6 +443,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		03648D881FA445FA004D3078 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 03977FCE18C3F98A00DC499C /* CloudyTabs */;
+			targetProxy = 03648D871FA445FA004D3078 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0308ABD918D676ED00AB4C54 /* Localizable.strings */ = {
@@ -400,6 +490,60 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		03648D8A1FA445FA004D3078 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3C7269R37R;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = CloudyTabsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joshparnham.CloudyTabsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CloudyTabs.app/Contents/MacOS/CloudyTabs";
+			};
+			name = Debug;
+		};
+		03648D8B1FA445FA004D3078 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 3C7269R37R;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = CloudyTabsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joshparnham.CloudyTabsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CloudyTabs.app/Contents/MacOS/CloudyTabs";
+			};
+			name = Release;
+		};
 		03977FFE18C3F98A00DC499C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -540,6 +684,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		03648D891FA445FA004D3078 /* Build configuration list for PBXNativeTarget "CloudyTabsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03648D8A1FA445FA004D3078 /* Debug */,
+				03648D8B1FA445FA004D3078 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		03977FCA18C3F98A00DC499C /* Build configuration list for PBXProject "CloudyTabs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

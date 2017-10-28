@@ -19,6 +19,8 @@
 #import "JPSyncedPreferencesReader.h"
 #import "JPCloudTabsDBReader.h"
 
+#import "NSURL+DecodeURL.h"
+
 @interface JPAppDelegate ()
 
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
@@ -92,7 +94,7 @@
         NSArray *tabs = [self.tabContainer tabsForDeviceID:[(NSMenuItem *)sender representedObject]];
 
         for (NSDictionary *tabDictionary in tabs) {
-            NSURL *url = [NSURL URLWithString:[tabDictionary[@"URL"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            NSURL *url = [NSURL decodeURL:tabDictionary[@"URL"]];
 
             [[NSWorkspace sharedWorkspace] openURLs:@[url] withAppBundleIdentifier:nil options:launch additionalEventParamDescriptor:nil launchIdentifiers:nil];
             usleep(500000);
@@ -215,28 +217,10 @@
         for (NSDictionary *tabDictionary in deviceTabs) {
             NSMenuItem *tabMenuItem = [[NSMenuItem alloc] initWithTitle:tabDictionary[@"Title"] action:@selector(tabMenuItemClicked:) keyEquivalent:@""];
             
-            NSString *URL = tabDictionary[@"URL"];
-            NSURL *encodedURL = nil;
+            NSURL *URL = [NSURL decodeURL:tabDictionary[@"URL"]];
             
-            // See dot point 4 under "NSURL Deprecations" in "Foundation Release Notes for OS X v10.11"
-            
-            if ([NSURL respondsToSelector:@selector(URLWithDataRepresentation:relativeToURL:)]) {
-                // Modern NSURL API available
-                encodedURL = [NSURL URLWithDataRepresentation:[URL dataUsingEncoding:NSUTF8StringEncoding] relativeToURL:nil];
-            }
-            else {
-                // Modern NSURL API not available, fall back to CoreFoundation implementation
-                NSData *urlData = [URL dataUsingEncoding:NSUTF8StringEncoding];
-                CFURLRef urlRef = CFURLCreateWithBytes(kCFAllocatorSystemDefault, (const UInt8 *)urlData.bytes, urlData.length, kCFStringEncodingUTF8, NULL);
-                if (!urlRef) {
-                    // Fallback to using ISO Latin encoding
-                    urlRef = CFURLCreateWithBytes(kCFAllocatorSystemDefault, (const UInt8 *)urlData.bytes, urlData.length, kCFStringEncodingISOLatin1, NULL);
-                }
-                encodedURL = (__bridge NSURL *)urlRef;
-            }
-            
-            tabMenuItem.representedObject = encodedURL;
-            tabMenuItem.toolTip = encodedURL.relativeString;
+            tabMenuItem.representedObject = URL;
+            tabMenuItem.toolTip = URL.relativeString;
             
             __block NSImage *image = [[DSFavIconManager sharedInstance] iconForURL:tabMenuItem.representedObject downloadHandler:^(NSImage *icon) {
                 icon.size = NSMakeSize(19, 19);
