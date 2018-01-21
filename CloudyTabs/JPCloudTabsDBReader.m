@@ -81,7 +81,7 @@
         NSString *URL = [resultSet stringForColumn:@"url"];
         NSString *title = [resultSet stringForColumn:@"title"];
         
-        [tabs addObject:@{@"URL": URL, @"Title": title}];
+        [tabs addObject:@{@"URL": URL, @"Title": (title ? title : URL)}];
     }
     
     return [tabs copy];
