@@ -207,7 +207,9 @@
         [self.menu addItem:deviceMenuItem];
         
         // Add device to "Open All Tabs From" submenu
-        NSMenuItem *openAllTabsFromDeviceMenuItem = [[NSMenuItem alloc] initWithTitle:[self.tabContainer deviceNameForID:deviceID] action:@selector(deviceMenuItemClicked:) keyEquivalent:@""];
+        NSString *localisedTabCount = [NSNumberFormatter localizedStringFromNumber:[NSNumber numberWithInteger:deviceTabs.count] numberStyle:NSNumberFormatterNoStyle];
+        NSString *openAllTabsFromDeviceMenuItemTitle = [NSString stringWithFormat:@"%@ (%@)", [self.tabContainer deviceNameForID:deviceID], localisedTabCount];
+        NSMenuItem *openAllTabsFromDeviceMenuItem = [[NSMenuItem alloc] initWithTitle:openAllTabsFromDeviceMenuItemTitle action:@selector(deviceMenuItemClicked:) keyEquivalent:@""];
         openAllTabsFromDeviceMenuItem.representedObject = deviceID;
         if ([[self.tabContainer tabsForDeviceID:deviceID] count] < 1) {
             [openAllTabsFromDeviceMenuItem setEnabled:NO];
