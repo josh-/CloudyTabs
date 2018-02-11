@@ -39,7 +39,7 @@
 
 - (FMDatabase *)cloudTabsDatabase {
     if (!_cloudTabsDatabase) {
-        NSString *path = [[JPCloudTabsDBReader safariLibraryDirectory] stringByAppendingPathComponent:@"CloudTabs.db"];
+        NSString *path = [JPCloudTabsDBReader filePath];
         FMDatabase *db = [FMDatabase databaseWithPath:path];
         
         if ([db open]) {
