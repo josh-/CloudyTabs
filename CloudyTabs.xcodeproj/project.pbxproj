@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0308ABDB18D676ED00AB4C54 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0308ABD918D676ED00AB4C54 /* Localizable.strings */; };
+		03120E52202FE2F300BE3891 /* JPUserDefaultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03120E51202FE2F300BE3891 /* JPUserDefaultsController.m */; };
 		031EA6BB1F97004E00B8F2FD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 031EA6BA1F97004D00B8F2FD /* Sparkle.framework */; };
 		031EA6BD1F97009D00B8F2FD /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 031EA6BA1F97004D00B8F2FD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		03225D4C18C6A40D000778DF /* JPLaunchAtLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0375994118C5F967000E8C33 /* JPLaunchAtLoginManager.m */; };
@@ -62,6 +63,8 @@
 		0308ABDC18D67A1300AB4C54 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		030F11BB18E3958C00B2DFB0 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_BR; path = pt_BR.lproj/Localizable.strings; sourceTree = "<group>"; };
 		030F11BC18E3959100B2DFB0 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_BR; path = pt_BR.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		03120E50202FE2F300BE3891 /* JPUserDefaultsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPUserDefaultsController.h; sourceTree = "<group>"; };
+		03120E51202FE2F300BE3891 /* JPUserDefaultsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPUserDefaultsController.m; sourceTree = "<group>"; };
 		0319CFB118D67AF70007A9FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0319CFB218D67B080007A9FF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0319CFB318D67B110007A9FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -176,6 +179,8 @@
 				039C6E8E1F8CEE5E00C3B3E1 /* JPTabsContainer.h */,
 				03648D7B1FA4434B004D3078 /* NSURL+DecodeURL.h */,
 				03648D7C1FA4434B004D3078 /* NSURL+DecodeURL.m */,
+				03120E50202FE2F300BE3891 /* JPUserDefaultsController.h */,
+				03120E51202FE2F300BE3891 /* JPUserDefaultsController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -433,6 +438,7 @@
 				03225D4C18C6A40D000778DF /* JPLaunchAtLoginManager.m in Sources */,
 				039C6E8A1F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.m in Sources */,
 				03225D5518C6AA5A000778DF /* DSFavIconManager.m in Sources */,
+				03120E52202FE2F300BE3891 /* JPUserDefaultsController.m in Sources */,
 				0375994218C5F967000E8C33 /* JPAppDelegate.m in Sources */,
 				039C6E8D1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m in Sources */,
 				03648D7D1FA4434B004D3078 /* NSURL+DecodeURL.m in Sources */,

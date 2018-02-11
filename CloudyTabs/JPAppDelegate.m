@@ -13,6 +13,7 @@
 #import <Sparkle/Sparkle.h>
 
 #import "JPLaunchAtLoginManager.h"
+#import "JPUserDefaultsController.h"
 #import "DSFavIconManager.h"
 
 #import "JPTabsContainer.h"
@@ -47,6 +48,7 @@
     }
     
     [DSFavIconManager sharedInstance].placeholder = [NSImage imageNamed:@"BookmarksDragImage"];
+    [JPUserDefaultsController registerUserDefaults];
     
     [self createStatusItem];
     [self updateMenu];
@@ -187,13 +189,9 @@
             continue;
         }
         
-        // Hide tabs from Mac where CloudyTabs is currently running on
-        // TODO: Add localised menu preference for the following
-        BOOL hideTabsOfCurrentDevice = YES;
-        if (hideTabsOfCurrentDevice) {
-            if ([[NSHost currentHost].localizedName isEqualToString:[self.tabContainer deviceNameForID:deviceID]]) {
-                continue;
-            }
+        // Hide tabs from Mac where CloudyTabs is currently running on, unless the user has expliclty set the user default
+        if ([JPUserDefaultsController shouldListAllDevices] == false && [[NSHost currentHost].localizedName isEqualToString:[self.tabContainer deviceNameForID:deviceID]]) {
+            continue;
         }
         
         // Add a seperator if this device isn't the first in the list
