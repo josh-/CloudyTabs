@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0308ABDB18D676ED00AB4C54 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0308ABD918D676ED00AB4C54 /* Localizable.strings */; };
-		03225D4B18C5FEE2000778DF /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03225D4718C5FC1D000778DF /* Sparkle.framework */; };
+		03225D4B18C5FEE2000778DF /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03225D4718C5FC1D000778DF /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		03225D4C18C6A40D000778DF /* JPLaunchAtLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0375994118C5F967000E8C33 /* JPLaunchAtLoginManager.m */; };
 		03225D5418C6AA5A000778DF /* DSFavIconCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D4E18C6AA5A000778DF /* DSFavIconCache.m */; };
 		03225D5518C6AA5A000778DF /* DSFavIconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D5018C6AA5A000778DF /* DSFavIconManager.m */; };
@@ -213,7 +213,6 @@
 				03977FCC18C3F98A00DC499C /* Frameworks */,
 				03977FCD18C3F98A00DC499C /* Resources */,
 				03225D4A18C5FED1000778DF /* CopyFiles */,
-				035B7F9A18DF0B6F00D2D945 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -231,11 +230,11 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = JP;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Josh Parnham";
 				TargetAttributes = {
 					03977FCE18C3F98A00DC499C = {
-						DevelopmentTeam = 3C7269R37R;
+						DevelopmentTeam = H4N79GZ3RK;
 					};
 				};
 			};
@@ -281,22 +280,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		035B7F9A18DF0B6F00D2D945 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=\"Developer ID Application: Josh Parnham (3C7269R37R)\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$LOCATION/Sparkle.framework/Versions/A\"";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		03977FCB18C3F98A00DC499C /* Sources */ = {
@@ -369,6 +352,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -426,13 +410,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/CloudyTabs";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CloudyTabs/CloudyTabs-Prefix.pch";
 				INFOPLIST_FILE = "CloudyTabs/CloudyTabs-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rouge41.CloudyTabs;
 				PRODUCT_NAME = CloudyTabs;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -442,13 +429,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/CloudyTabs";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CloudyTabs/CloudyTabs-Prefix.pch";
 				INFOPLIST_FILE = "CloudyTabs/CloudyTabs-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rouge41.CloudyTabs;
 				PRODUCT_NAME = CloudyTabs;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
