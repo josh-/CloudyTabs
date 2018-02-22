@@ -18,8 +18,8 @@
 @interface JPAppDelegate ()
 
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
-
 @property (strong, nonatomic) NSDate *lastUpdateDate;
+@property NSSharingService *sharingService;
 
 @end
 
@@ -27,6 +27,9 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+	self.sharingService = [NSSharingService sharingServiceNamed:NSSharingServiceNameAddToSafariReadingList];
+	self.sharingService.delegate = self;
+
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [self.statusItem setHighlightMode:YES];
 //    [self.statusItem setTitle:@"☁︎"];
@@ -278,6 +281,13 @@
         
         NSMenuItem *readingListTitle = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Reading List", @"") action:nil keyEquivalent:@""];
         [self.menu addItem:readingListTitle];
+        NSMenuItem *addToReadingListMenu = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Add To Reading List", @""), [self appBundleName]] action:@selector(addToReadingList:) keyEquivalent:@"s"];
+        [addToReadingListMenu setKeyEquivalentModifierMask: NSShiftKeyMask | NSCommandKeyMask];
+        if (@available(macOS 10_13, *)) {
+            addToReadingListMenu.allowsKeyEquivalentWhenHidden = YES;
+        }
+        [self.menu addItem:addToReadingListMenu];
+
         
         for (NSDictionary *bookmarkDictionary in [self readingListBookmarks]) {
             [self.menu addItem:[self makeMenuItemWithTitle:bookmarkDictionary[@"URIDictionary"][@"title"] URL:bookmarkDictionary[@"URLString"]]];
@@ -288,9 +298,13 @@
         [self.menu addItem:[NSMenuItem separatorItem]];
     }
 
+    
     NSMenuItem *openAllTabsMenu = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open All Tabs From", @"") action:nil keyEquivalent:@""];
     [self.menu addItem:openAllTabsMenu];
     [openAllTabsMenu setSubmenu:devicesMenu];
+    if ([devicesMenu.itemArray count] < 1) {
+        [openAllTabsMenu setEnabled:NO];
+    }
 
     NSMenuItem *openAtLoginItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Launch %@ At Login", @""), [self appBundleName]] action:@selector(openAtLoginToggled:) keyEquivalent:@""];
     [self.menu addItem:openAtLoginItem];
@@ -344,6 +358,12 @@
 {
     [NSApp terminate:self];
 }
+    
+- (void)addToReadingList:(id)sender
+{
+    NSString* urlString = [self urlOfCurrentGoogleChromeURL];
+    [self.sharingService performWithItems:@[[[NSURL alloc] initWithString:urlString]]];
+}
 
 #pragma mark - Launch at login
 
@@ -385,4 +405,56 @@
     return _dateFormatter;
 }
 
+
+-(void)sharingService:(NSSharingService *)sharingService didShareItems:(NSArray *)items {
+	[self sendNotification:@"Added to Reading List" item:items.firstObject];
+}
+
+-(void)sharingService:(NSSharingService *)sharingService didFailToShareItems:(NSArray *)items error:(NSError *)error {
+    [self sendNotification:@"Unknown Error" item:items.firstObject];
+}
+    
+-(void)sendNotification:(NSString*)title item:(NSItemProvider*)itemProvider {
+    if ([itemProvider hasItemConformingToTypeIdentifier:@"public.url"]) {
+        [itemProvider loadItemForTypeIdentifier:@"public.url"
+                                        options:nil
+                              completionHandler:^(NSURL *url, NSError *error) {
+                                  NSUserNotification *notification = [[NSUserNotification alloc] init];
+                                  notification.title = title;
+                                  notification.informativeText = url.absoluteString;
+                                  notification.soundName = NSUserNotificationDefaultSoundName;
+                                  [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+                              }];
+    }
+}
+
+- (NSString*)urlOfCurrentGoogleChromeURL
+{
+	return [self execute:@"tell application \"Google Chrome\" to get URL of active tab of first window"];
+}
+
+// This method executes an AppleScript given the source-code, using the command-line tool called osascript
+// Note that this is a demo and doesn't do any error-checking yet such as for AppleScript syntax errors
+// and AppleScript runtime errors.
+- (NSString*)execute:(NSString*)source
+{
+	@try {
+		NSTask *task = [[NSTask alloc] init];
+		[task setLaunchPath:@"/usr/bin/osascript"];
+		NSString *arguments = [NSString stringWithFormat:@"-e %@", source];
+		[task setArguments:[NSArray arrayWithObjects:arguments, nil]];
+		NSPipe * outpipe = [NSPipe pipe];
+		[task setStandardOutput:outpipe];
+		[task launch];
+		[task waitUntilExit];
+		NSLog(@"osascript succeeded");
+		NSFileHandle * read = [outpipe fileHandleForReading];
+		NSData * dataRead = [read readDataToEndOfFile];
+		NSString * stringRead = [[NSString alloc] initWithData:dataRead encoding:NSUTF8StringEncoding];
+		NSLog(@"osascript output: '%@'", stringRead);
+		return [stringRead stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	} @catch (NSException *e) {
+		NSLog(@"osascript failed, reason: %@", [e reason]);
+	}
+}
 @end
