@@ -45,6 +45,11 @@
     [queue addPath:[self syncedPreferencesFile] notifyingAbout:VDKQueueNotifyDefault];
     [queue addPath:[self syncedBookmarksFile] notifyingAbout:VDKQueueNotifyDefault];
     [queue setDelegate:self];
+    
+    // Refresh when wake or activate
+	NSNotificationCenter *notificationCenter = [[NSWorkspace sharedWorkspace] notificationCenter];
+	[notificationCenter addObserver:self selector:@selector(updateUserInterface) name:NSWorkspaceDidActivateApplicationNotification object:nil];
+	[notificationCenter addObserver:self selector:@selector(updateUserInterface) name:NSWorkspaceDidWakeNotification object:nil];
 
     // Setup Sparkle
     SUUpdater *updater = [[SUUpdater class] sharedUpdater];
