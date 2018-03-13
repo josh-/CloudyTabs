@@ -34,6 +34,8 @@
 
 @implementation JPAppDelegate
 
+const NSSize ICON_SIZE = {19, 19};
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     if ([JPCloudTabsDBReader canReadFile]) {
@@ -221,14 +223,17 @@
             
             tabMenuItem.representedObject = URL;
             tabMenuItem.toolTip = URL.relativeString;
-            
-            __block NSImage *image = [[DSFavIconManager sharedInstance] iconForURL:tabMenuItem.representedObject downloadHandler:^(NSImage *icon) {
-                icon.size = NSMakeSize(19, 19);
-                [tabMenuItem setImage:icon];
-            }];
-            image.size = NSMakeSize(19, 19);
-            [tabMenuItem setImage:image];
-            
+
+            if (URL.host != nil) {
+                tabMenuItem.image = [[DSFavIconManager sharedInstance] iconForURL:tabMenuItem.representedObject downloadHandler:^(NSImage *image) {
+                    image.size = ICON_SIZE;
+                    tabMenuItem.image = image;
+                }];
+            } else {
+                tabMenuItem.image = [DSFavIconManager sharedInstance].placeholder;
+            }
+            tabMenuItem.image.size = ICON_SIZE;
+
             [self.menu addItem:tabMenuItem];
         }
     }
