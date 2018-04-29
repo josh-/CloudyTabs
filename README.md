@@ -16,7 +16,7 @@ To use CloudyTabs, open the app and select a tab from one of your devices. The t
 
 Typing the first few letters or a tab's title will jump to that particular tab.
 
-Hovering over the CloudyTabs menu bar icon displays a tooltip which lists the date that iCloud last updated the synced tabs `plist` (where CloudyTabs reads data from).
+Hovering over the CloudyTabs menu bar icon displays a tooltip which lists the date that iCloud last updated the synced tabs database or Bookmarks `plist` (where CloudyTabs reads data from).
 
 ## Requirements
 
