@@ -8,4 +8,5 @@
 "Open All Tabs From" = "Obrir totes les pestanyes de";
 "Launch %@ At Login" = "Obrir %@ a l'iniciar sessió";
 "Quit %@" = "Sortir de %@";
-"%@\nChanges Last Detected: %@" = "%@\Últims canvis detectats: %@";
+"%@\nChanges Last Detected: %@" = "%@\nÚltims canvis detectats: %@";
+"Reading List" = "Llista de Lectura";

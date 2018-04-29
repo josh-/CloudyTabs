@@ -8,4 +8,5 @@
 "Open All Tabs From" = "打開該設備上的所有標籤頁";
 "Launch %@ At Login" = "登錄時自動啟動%@";
 "Quit %@" = "退出%@";
-"%@\nChanges Last Detected: %@" = "%@\最近更改: %@";
+"%@\nChanges Last Detected: %@" = "%@\n最近更改: %@";
+"Reading List" = "閱讀列表";
