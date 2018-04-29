@@ -119,16 +119,20 @@ const NSSize ICON_SIZE = {19, 19};
             [(NSMenuItem *)item setState:[self startAtLogin]];
         }
     }
-        return YES;
+    return YES;
 }
 
 #pragma mark - Queue delegate
 
 -(void)VDKQueue:(VDKQueue *)queue receivedNotification:(NSString*)noteName forPath:(NSString*)fpath;
 {
-    // Check if the modification date of the syncedPreferences file is later than the date of the last menu update
+    // Only update menu if the data has been updated since last refresh
     NSDate *fileModificationDate = [self.tabContainer modificationDate];
-    if ([fileModificationDate laterDate:self.lastUpdateDate] == fileModificationDate) {
+    BOOL newTabContainerData = [fileModificationDate laterDate:self.lastUpdateDate] == fileModificationDate;
+
+    NSDate *readingListModificationDate = [self syncedBookmarksModificationDate];
+    BOOL newReadingListData = [readingListModificationDate laterDate:self.lastUpdateDate] == readingListModificationDate;
+    if (newTabContainerData || newReadingListData) {
         [self updateUserInterface];
     }
     return;
@@ -155,10 +159,61 @@ const NSSize ICON_SIZE = {19, 19};
 - (void)setupQueue
 {
     VDKQueue *queue = [[VDKQueue alloc] init];
-    
-    NSString *filePath = [[self.tabContainer class] filePath];
-    [queue addPath:filePath notifyingAbout:VDKQueueNotifyDefault];
+
+    [queue addPath:[[self.tabContainer class] filePath] notifyingAbout:VDKQueueNotifyDefault];
+    [queue addPath:[self syncedBookmarksFile] notifyingAbout:VDKQueueNotifyDefault];
+
     [queue setDelegate:self];
+}
+
+- (void)updateUserInterface
+{
+    [self updateMenu];
+    [self updateStatusItemToolTip];
+}
+
+- (NSDictionary *)syncedBookmarksDictionary
+{
+    return [[NSDictionary alloc] initWithContentsOfFile:[self syncedBookmarksFile]];
+}
+
+- (NSString *)syncedBookmarksFile
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *syncedPreferencesPath = [paths[0] stringByAppendingPathComponent:@"Safari"];
+    return [syncedPreferencesPath stringByAppendingPathComponent:@"Bookmarks.plist"];
+}
+
+- (NSDate *)syncedBookmarksModificationDate
+{
+    NSDate *modificationDate;
+    [[NSURL fileURLWithPath:[self syncedBookmarksFile]] getResourceValue:&modificationDate forKey:NSURLContentModificationDateKey error:nil];
+    return modificationDate;
+}
+
+- (NSArray *)readingListBookmarks
+{
+    NSArray *bookmarks = [self syncedBookmarksDictionary][@"Children"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"Title = 'com.apple.ReadingList'"];
+    NSDictionary* readingList = [[bookmarks filteredArrayUsingPredicate:predicate] firstObject];
+    return readingList[@"Children"];
+}
+
+- (NSDate *)latestModificationDate
+{
+    NSDate *tabSyncModificationDate = [self.tabContainer modificationDate];
+    NSDate *bookmarksSyncModificationDate = [self syncedBookmarksModificationDate];
+
+
+    if (tabSyncModificationDate != nil && bookmarksSyncModificationDate != nil) {
+        return [[@[tabSyncModificationDate, bookmarksSyncModificationDate] sortedArrayUsingSelector:@selector(compare:)] lastObject];
+    } else if (tabSyncModificationDate != nil) {
+        return tabSyncModificationDate;
+    } else if (bookmarksSyncModificationDate != nil) {
+        return bookmarksSyncModificationDate;
+    } else {
+        return nil;
+    }
 }
 
 - (void)createStatusItem
@@ -168,12 +223,6 @@ const NSSize ICON_SIZE = {19, 19};
     [self.statusItem setImage:[NSImage imageNamed:@"ToolbarCloudTabsTemplate"]];
     [self.statusItem setMenu:self.menu];
     [self.statusItem setEnabled:YES];
-}
-
-- (void)updateUserInterface
-{
-    [self updateMenu];
-    [self updateStatusItemToolTip];
 }
 
 - (void)updateMenu
@@ -197,7 +246,7 @@ const NSSize ICON_SIZE = {19, 19};
         }
         
         // Add a seperator if this device isn't the first in the list
-        if ([[self.tabContainer deviceIDs] indexOfObject:deviceID] > 0) {
+        if (self.menu.itemArray.count > 0) {
             NSMenuItem *seperatorItem = [NSMenuItem separatorItem];
             [self.menu addItem:seperatorItem];
         }
@@ -215,36 +264,34 @@ const NSSize ICON_SIZE = {19, 19};
             [openAllTabsFromDeviceMenuItem setEnabled:NO];
         }
         [devicesMenu addItem:openAllTabsFromDeviceMenuItem];
-        
-        for (NSDictionary *tabDictionary in deviceTabs) {
-            NSMenuItem *tabMenuItem = [[NSMenuItem alloc] initWithTitle:tabDictionary[@"Title"] action:@selector(tabMenuItemClicked:) keyEquivalent:@""];
-            
-            NSURL *URL = [NSURL decodeURL:tabDictionary[@"URL"]];
-            
-            tabMenuItem.representedObject = URL;
-            tabMenuItem.toolTip = URL.relativeString;
 
-            if (URL.host != nil) {
-                tabMenuItem.image = [[DSFavIconManager sharedInstance] iconForURL:tabMenuItem.representedObject downloadHandler:^(NSImage *image) {
-                    image.size = ICON_SIZE;
-                    tabMenuItem.image = image;
-                }];
-            } else {
-                tabMenuItem.image = [DSFavIconManager sharedInstance].placeholder;
-            }
-            tabMenuItem.image.size = ICON_SIZE;
-
-            [self.menu addItem:tabMenuItem];
+        for (NSDictionary *tabDictionary in [self.tabContainer tabsForDeviceID:deviceID]) {
+            [self.menu addItem:[self makeMenuItemWithTitle:tabDictionary[@"Title"] URL:tabDictionary[@"URL"]]];
         }
     }
-    
-    NSMenuItem *seperatorItem = [NSMenuItem separatorItem];
-    [self.menu addItem:seperatorItem];
-    
+
+    if ([self readingListBookmarks].count > 0) {
+        if (self.menu.itemArray.count > 0) {
+            [self.menu addItem:[NSMenuItem separatorItem]];
+        }
+
+        NSMenuItem *readingListTitle = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Reading List", @"") action:nil keyEquivalent:@""];
+        [self.menu addItem:readingListTitle];
+
+        for (NSDictionary *bookmarkDictionary in [self readingListBookmarks]) {
+            [self.menu addItem:[self makeMenuItemWithTitle:bookmarkDictionary[@"URIDictionary"][@"title"] URL:bookmarkDictionary[@"URLString"]]];
+        }
+    }
+
+    if (self.menu.itemArray.count > 0) {
+        [self.menu addItem:[NSMenuItem separatorItem]];
+    }
+
     if ([self.tabContainer deviceIDs].count > 1) {
         NSMenuItem *openAllTabsMenu = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open All Tabs From", @"") action:nil keyEquivalent:@""];
         [self.menu addItem:openAllTabsMenu];
         [openAllTabsMenu setSubmenu:devicesMenu];
+        [openAllTabsMenu setEnabled:([devicesMenu.itemArray count] > 1)];
     }
     
     NSMenuItem *openAtLoginItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Launch %@ At Login", @""), [self appBundleName]] action:@selector(openAtLoginToggled:) keyEquivalent:@""];
@@ -256,9 +303,28 @@ const NSSize ICON_SIZE = {19, 19};
     self.lastUpdateDate = [NSDate date];
 }
 
+- (NSMenuItem *)makeMenuItemWithTitle:(NSString *)tabTitle URL:(NSString *)tabURL {
+    NSMenuItem *tabMenuItem = [[NSMenuItem alloc] initWithTitle:tabTitle action:@selector(tabMenuItemClicked:) keyEquivalent:@""];
+
+    NSURL *URL = [NSURL decodeURL:tabURL];
+    tabMenuItem.representedObject = URL;
+    tabMenuItem.toolTip = URL.relativeString;
+    if (URL.host != nil) {
+        tabMenuItem.image = [[DSFavIconManager sharedInstance] iconForURL:tabMenuItem.representedObject downloadHandler:^(NSImage *image) {
+            image.size = ICON_SIZE;
+            tabMenuItem.image = image;
+        }];
+    } else {
+        tabMenuItem.image = [DSFavIconManager sharedInstance].placeholder;
+    }
+    tabMenuItem.image.size = ICON_SIZE;
+
+    return tabMenuItem;
+}
+
 - (void)updateStatusItemToolTip
 {
-    NSDate *fileModificationDate = [self.tabContainer modificationDate];
+    NSDate *fileModificationDate = [self latestModificationDate];
     if (fileModificationDate != nil) {
         NSString *toolTip = [NSString stringWithFormat:NSLocalizedString(@"%@ (%@)\niCloud Last Synced: %@", @""), [self appBundleName], [self appBundleVersion], [self.dateFormatter stringFromDate:fileModificationDate]];
         [self.statusItem setToolTip:toolTip];
