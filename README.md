@@ -1,6 +1,6 @@
 # CloudyTabs
 
-CloudyTabs is a simple menu bar application that lists your iCloud Tabs.
+CloudyTabs is a simple menu bar application that lists your iCloud Tabs and Reading List.
 
 ![CloudyTabs](http://joshparnham.com/projects/cloudytabs/CloudyTabs.png)
 
