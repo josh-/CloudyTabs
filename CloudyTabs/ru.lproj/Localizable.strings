@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  CloudyTabs
+
+  Contributed by Josh Parnham
+*/
+
+"Open All Tabs From" = "Открыть все вкладки, которые есть на";
+"Launch %@ At Login" = "Запускать %@ при входе в систему";
+"Quit %@" = "Завершить %@";
+"%@\nChanges Last Detected: %@" = "%@\nИзменений обнаружено по сравнению с: %@";
+"Reading List" = "Список для чтения";
