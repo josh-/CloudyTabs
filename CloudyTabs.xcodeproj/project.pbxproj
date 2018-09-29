@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0308ABDB18D676ED00AB4C54 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0308ABD918D676ED00AB4C54 /* Localizable.strings */; };
 		03120E52202FE2F300BE3891 /* JPUserDefaultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03120E51202FE2F300BE3891 /* JPUserDefaultsController.m */; };
+		0312E3F0215E04A900F03F02 /* BookmarkSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 0312E3EF215E044100F03F02 /* BookmarkSync.m */; };
 		031EA6BB1F97004E00B8F2FD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 031EA6BA1F97004D00B8F2FD /* Sparkle.framework */; };
 		031EA6BD1F97009D00B8F2FD /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 031EA6BA1F97004D00B8F2FD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		03225D4C18C6A40D000778DF /* JPLaunchAtLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0375994118C5F967000E8C33 /* JPLaunchAtLoginManager.m */; };
@@ -16,6 +17,8 @@
 		03225D5518C6AA5A000778DF /* DSFavIconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D5018C6AA5A000778DF /* DSFavIconManager.m */; };
 		03225D5618C6AA5A000778DF /* DSFavIconOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D5218C6AA5A000778DF /* DSFavIconOperation.m */; };
 		03225D5E18C6B18A000778DF /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 03225D5D18C6B18A000778DF /* dsa_pub.pem */; };
+		03601BC221166ED00019A5E5 /* SafariSupport.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 03601BC121166ED00019A5E5 /* SafariSupport.bundle */; settings = {ATTRIBUTES = (Weak, ); }; };
+		03601BC521168AD80019A5E5 /* JPSyncReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 03601BC421168AD80019A5E5 /* JPSyncReader.m */; };
 		03648D7D1FA4434B004D3078 /* NSURL+DecodeURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D7C1FA4434B004D3078 /* NSURL+DecodeURL.m */; };
 		03648D851FA445FA004D3078 /* CloudyTabsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D841FA445FA004D3078 /* CloudyTabsTests.m */; };
 		03648D8D1FA44629004D3078 /* NSURL+DecodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D8C1FA44629004D3078 /* NSURL+DecodeTests.m */; };
@@ -65,6 +68,7 @@
 		030F11BC18E3959100B2DFB0 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_BR; path = pt_BR.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		03120E50202FE2F300BE3891 /* JPUserDefaultsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPUserDefaultsController.h; sourceTree = "<group>"; };
 		03120E51202FE2F300BE3891 /* JPUserDefaultsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPUserDefaultsController.m; sourceTree = "<group>"; };
+		0312E3EF215E044100F03F02 /* BookmarkSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookmarkSync.m; sourceTree = "<group>"; };
 		0319CFB118D67AF70007A9FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0319CFB218D67B080007A9FF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0319CFB318D67B110007A9FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -77,6 +81,10 @@
 		03225D5218C6AA5A000778DF /* DSFavIconOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSFavIconOperation.m; path = DSFavIconManager/Classes/DSFavIconOperation.m; sourceTree = "<group>"; };
 		03225D5318C6AA5A000778DF /* UINSImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UINSImage.h; path = DSFavIconManager/Classes/UINSImage.h; sourceTree = "<group>"; };
 		03225D5D18C6B18A000778DF /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		03601BC0211669390019A5E5 /* BookmarkSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookmarkSync.h; sourceTree = "<group>"; };
+		03601BC121166ED00019A5E5 /* SafariSupport.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SafariSupport.bundle; path = ../../../../../../../System/Library/CoreServices/SafariSupport.bundle; sourceTree = "<group>"; };
+		03601BC321168AD80019A5E5 /* JPSyncReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPSyncReader.h; sourceTree = "<group>"; };
+		03601BC421168AD80019A5E5 /* JPSyncReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPSyncReader.m; sourceTree = "<group>"; };
 		03648D7B1FA4434B004D3078 /* NSURL+DecodeURL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURL+DecodeURL.h"; sourceTree = "<group>"; };
 		03648D7C1FA4434B004D3078 /* NSURL+DecodeURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURL+DecodeURL.m"; sourceTree = "<group>"; };
 		03648D821FA445FA004D3078 /* CloudyTabsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CloudyTabsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +153,7 @@
 				03977FD318C3F98A00DC499C /* Cocoa.framework in Frameworks */,
 				03702C221F792AF8009286E3 /* FMDB.framework in Frameworks */,
 				031EA6BB1F97004E00B8F2FD /* Sparkle.framework in Frameworks */,
+				03601BC221166ED00019A5E5 /* SafariSupport.bundle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,11 +187,15 @@
 				039C6E891F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.m */,
 				039C6E8B1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.h */,
 				039C6E8C1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m */,
+				03601BC321168AD80019A5E5 /* JPSyncReader.h */,
+				03601BC421168AD80019A5E5 /* JPSyncReader.m */,
 				039C6E8E1F8CEE5E00C3B3E1 /* JPTabsContainer.h */,
 				03648D7B1FA4434B004D3078 /* NSURL+DecodeURL.h */,
 				03648D7C1FA4434B004D3078 /* NSURL+DecodeURL.m */,
 				03120E50202FE2F300BE3891 /* JPUserDefaultsController.h */,
 				03120E51202FE2F300BE3891 /* JPUserDefaultsController.m */,
+				03601BC0211669390019A5E5 /* BookmarkSync.h */,
+				0312E3EF215E044100F03F02 /* BookmarkSync.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -219,6 +232,7 @@
 		03977FD118C3F98A00DC499C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				03601BC121166ED00019A5E5 /* SafariSupport.bundle */,
 				031EA6BA1F97004D00B8F2FD /* Sparkle.framework */,
 				03702C211F792AF8009286E3 /* FMDB.framework */,
 				03977FD218C3F98A00DC499C /* Cocoa.framework */,
@@ -439,8 +453,10 @@
 			files = (
 				039C6EAC1F935D2E00C3B3E1 /* VDKQueue.m in Sources */,
 				03225D4C18C6A40D000778DF /* JPLaunchAtLoginManager.m in Sources */,
+				0312E3F0215E04A900F03F02 /* BookmarkSync.m in Sources */,
 				039C6E8A1F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.m in Sources */,
 				03225D5518C6AA5A000778DF /* DSFavIconManager.m in Sources */,
+				03601BC521168AD80019A5E5 /* JPSyncReader.m in Sources */,
 				03120E52202FE2F300BE3891 /* JPUserDefaultsController.m in Sources */,
 				0375994218C5F967000E8C33 /* JPAppDelegate.m in Sources */,
 				039C6E8D1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m in Sources */,

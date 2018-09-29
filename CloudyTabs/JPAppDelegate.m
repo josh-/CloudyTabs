@@ -19,8 +19,11 @@
 #import "JPTabsContainer.h"
 #import "JPSyncedPreferencesReader.h"
 #import "JPCloudTabsDBReader.h"
+#import "JPSyncReader.h"
 
 #import "NSURL+DecodeURL.h"
+
+#import "BookmarkSync.h"
 
 @interface JPAppDelegate ()
 
@@ -38,12 +41,15 @@ const NSSize ICON_SIZE = {19, 19};
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    if ([JPCloudTabsDBReader canReadFile]) {
+    if ([JPSyncReader canReadFile]) {
+        self.tabContainer = [[JPSyncReader alloc] init];
+    } else if ([JPCloudTabsDBReader canReadFile]) {
         self.tabContainer = [[JPCloudTabsDBReader alloc] init];
     } else if ([JPSyncedPreferencesReader canReadFile]) {
         self.tabContainer = [[JPSyncedPreferencesReader alloc] init];
     } else {
         NSLog(@"Unable to open CloudyTabs");
+        NSLog(@"%@", [JPSyncReader debugDescription]);
         NSLog(@"%@", [JPCloudTabsDBReader debugDescription]);
         NSLog(@"%@", [JPSyncedPreferencesReader debugDescription]);
         [NSApp terminate:self];
