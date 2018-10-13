@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0308ABDB18D676ED00AB4C54 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0308ABD918D676ED00AB4C54 /* Localizable.strings */; };
+		030D99822172BBAB00A9DE75 /* JPLoadingMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 030D99802172BBAA00A9DE75 /* JPLoadingMenuItem.m */; };
+		030D99852172BBFD00A9DE75 /* JPReadingListReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 030D99832172BBFD00A9DE75 /* JPReadingListReader.m */; };
 		03120E52202FE2F300BE3891 /* JPUserDefaultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03120E51202FE2F300BE3891 /* JPUserDefaultsController.m */; };
 		0312E3F0215E04A900F03F02 /* BookmarkSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 0312E3EF215E044100F03F02 /* BookmarkSync.m */; };
 		031EA6BB1F97004E00B8F2FD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 031EA6BA1F97004D00B8F2FD /* Sparkle.framework */; };
@@ -32,8 +34,6 @@
 		0397800818C40A1200DC499C /* BookmarksDragImage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 0397800618C40A1200DC499C /* BookmarksDragImage.tiff */; };
 		0397800918C40A1200DC499C /* ToolbarCloudTabsTemplate.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0397800718C40A1200DC499C /* ToolbarCloudTabsTemplate.pdf */; };
 		0397802318C590F700DC499C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0397802218C590F700DC499C /* CoreServices.framework */; };
-		039C6E8A1F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 039C6E891F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.m */; };
-		039C6E8D1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 039C6E8C1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m */; };
 		039C6EAC1F935D2E00C3B3E1 /* VDKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 039C6EAB1F935CE900C3B3E1 /* VDKQueue.m */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +64,10 @@
 /* Begin PBXFileReference section */
 		0308ABDA18D676ED00AB4C54 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0308ABDC18D67A1300AB4C54 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		030D99802172BBAA00A9DE75 /* JPLoadingMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPLoadingMenuItem.m; sourceTree = "<group>"; };
+		030D99812172BBAA00A9DE75 /* JPLoadingMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPLoadingMenuItem.h; sourceTree = "<group>"; };
+		030D99832172BBFD00A9DE75 /* JPReadingListReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPReadingListReader.m; sourceTree = "<group>"; };
+		030D99842172BBFD00A9DE75 /* JPReadingListReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPReadingListReader.h; sourceTree = "<group>"; };
 		030F11BB18E3958C00B2DFB0 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_BR; path = pt_BR.lproj/Localizable.strings; sourceTree = "<group>"; };
 		030F11BC18E3959100B2DFB0 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_BR; path = pt_BR.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		03120E50202FE2F300BE3891 /* JPUserDefaultsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPUserDefaultsController.h; sourceTree = "<group>"; };
@@ -121,11 +125,6 @@
 		0397800618C40A1200DC499C /* BookmarksDragImage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = BookmarksDragImage.tiff; sourceTree = "<group>"; };
 		0397800718C40A1200DC499C /* ToolbarCloudTabsTemplate.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ToolbarCloudTabsTemplate.pdf; sourceTree = "<group>"; };
 		0397802218C590F700DC499C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
-		039C6E881F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPSyncedPreferencesReader.h; sourceTree = "<group>"; };
-		039C6E891F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPSyncedPreferencesReader.m; sourceTree = "<group>"; };
-		039C6E8B1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPCloudTabsDBReader.h; sourceTree = "<group>"; };
-		039C6E8C1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPCloudTabsDBReader.m; sourceTree = "<group>"; };
-		039C6E8E1F8CEE5E00C3B3E1 /* JPTabsContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPTabsContainer.h; sourceTree = "<group>"; };
 		039C6E9D1F935BF900C3B3E1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		039C6E9E1F935BF900C3B3E1 /* VDKQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VDKQueue.h; sourceTree = "<group>"; };
 		039C6E9F1F935BF900C3B3E1 /* VDKQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VDKQueue.m; sourceTree = "<group>"; };
@@ -183,17 +182,16 @@
 				0375993F18C5F967000E8C33 /* JPAppDelegate.m */,
 				0375994018C5F967000E8C33 /* JPLaunchAtLoginManager.h */,
 				0375994118C5F967000E8C33 /* JPLaunchAtLoginManager.m */,
-				039C6E881F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.h */,
-				039C6E891F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.m */,
-				039C6E8B1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.h */,
-				039C6E8C1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m */,
 				03601BC321168AD80019A5E5 /* JPSyncReader.h */,
 				03601BC421168AD80019A5E5 /* JPSyncReader.m */,
-				039C6E8E1F8CEE5E00C3B3E1 /* JPTabsContainer.h */,
-				03648D7B1FA4434B004D3078 /* NSURL+DecodeURL.h */,
-				03648D7C1FA4434B004D3078 /* NSURL+DecodeURL.m */,
+				030D99842172BBFD00A9DE75 /* JPReadingListReader.h */,
+				030D99832172BBFD00A9DE75 /* JPReadingListReader.m */,
+				030D99812172BBAA00A9DE75 /* JPLoadingMenuItem.h */,
+				030D99802172BBAA00A9DE75 /* JPLoadingMenuItem.m */,
 				03120E50202FE2F300BE3891 /* JPUserDefaultsController.h */,
 				03120E51202FE2F300BE3891 /* JPUserDefaultsController.m */,
+				03648D7B1FA4434B004D3078 /* NSURL+DecodeURL.h */,
+				03648D7C1FA4434B004D3078 /* NSURL+DecodeURL.m */,
 				03601BC0211669390019A5E5 /* BookmarkSync.h */,
 				0312E3EF215E044100F03F02 /* BookmarkSync.m */,
 			);
@@ -454,12 +452,12 @@
 				039C6EAC1F935D2E00C3B3E1 /* VDKQueue.m in Sources */,
 				03225D4C18C6A40D000778DF /* JPLaunchAtLoginManager.m in Sources */,
 				0312E3F0215E04A900F03F02 /* BookmarkSync.m in Sources */,
-				039C6E8A1F8B5B7500C3B3E1 /* JPSyncedPreferencesReader.m in Sources */,
+				030D99852172BBFD00A9DE75 /* JPReadingListReader.m in Sources */,
 				03225D5518C6AA5A000778DF /* DSFavIconManager.m in Sources */,
 				03601BC521168AD80019A5E5 /* JPSyncReader.m in Sources */,
 				03120E52202FE2F300BE3891 /* JPUserDefaultsController.m in Sources */,
+				030D99822172BBAB00A9DE75 /* JPLoadingMenuItem.m in Sources */,
 				0375994218C5F967000E8C33 /* JPAppDelegate.m in Sources */,
-				039C6E8D1F8B5B8B00C3B3E1 /* JPCloudTabsDBReader.m in Sources */,
 				03648D7D1FA4434B004D3078 /* NSURL+DecodeURL.m in Sources */,
 				03977FDF18C3F98A00DC499C /* main.m in Sources */,
 				03225D5418C6AA5A000778DF /* DSFavIconCache.m in Sources */,
