@@ -20,7 +20,7 @@ Hovering over the CloudyTabs menu bar icon displays a tooltip which lists the da
 
 ## Requirements
 
-* OS X 10.8.2 or later
+* macOS 10.13 or later
 * An active iCloud account
 
 ## License
