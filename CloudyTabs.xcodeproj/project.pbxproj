@@ -29,7 +29,6 @@
 		03977FDD18C3F98A00DC499C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03977FDB18C3F98A00DC499C /* InfoPlist.strings */; };
 		03977FDF18C3F98A00DC499C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03977FDE18C3F98A00DC499C /* main.m */; };
 		03977FEB18C3F98A00DC499C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03977FEA18C3F98A00DC499C /* Images.xcassets */; };
-		0397800818C40A1200DC499C /* BookmarksDragImage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 0397800618C40A1200DC499C /* BookmarksDragImage.tiff */; };
 		0397800918C40A1200DC499C /* ToolbarCloudTabsTemplate.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0397800718C40A1200DC499C /* ToolbarCloudTabsTemplate.pdf */; };
 		0397802318C590F700DC499C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0397802218C590F700DC499C /* CoreServices.framework */; };
 		039C6EAC1F935D2E00C3B3E1 /* VDKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 039C6EAB1F935CE900C3B3E1 /* VDKQueue.m */; };
@@ -118,7 +117,6 @@
 		03977FDE18C3F98A00DC499C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		03977FE018C3F98A00DC499C /* CloudyTabs-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CloudyTabs-Prefix.pch"; sourceTree = "<group>"; };
 		03977FEA18C3F98A00DC499C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0397800618C40A1200DC499C /* BookmarksDragImage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = BookmarksDragImage.tiff; sourceTree = "<group>"; };
 		0397800718C40A1200DC499C /* ToolbarCloudTabsTemplate.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ToolbarCloudTabsTemplate.pdf; sourceTree = "<group>"; };
 		0397802218C590F700DC499C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		039C6E9D1F935BF900C3B3E1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -265,7 +263,6 @@
 				03977FDE18C3F98A00DC499C /* main.m */,
 				03977FE018C3F98A00DC499C /* CloudyTabs-Prefix.pch */,
 				03225D5D18C6B18A000778DF /* dsa_pub.pem */,
-				0397800618C40A1200DC499C /* BookmarksDragImage.tiff */,
 				0397800718C40A1200DC499C /* ToolbarCloudTabsTemplate.pdf */,
 			);
 			name = "Supporting Files";
@@ -407,7 +404,6 @@
 				03977FDD18C3F98A00DC499C /* InfoPlist.strings in Resources */,
 				03977FEB18C3F98A00DC499C /* Images.xcassets in Resources */,
 				0397800918C40A1200DC499C /* ToolbarCloudTabsTemplate.pdf in Resources */,
-				0397800818C40A1200DC499C /* BookmarksDragImage.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

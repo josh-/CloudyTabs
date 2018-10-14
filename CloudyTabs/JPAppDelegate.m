@@ -70,7 +70,7 @@ const NSSize ICON_SIZE = {19, 19};
     self.syncReader = [[JPSyncReader alloc] init];
     self.readingListReader = [[JPReadingListReader alloc] init];
     
-    [DSFavIconManager sharedInstance].placeholder = [NSImage imageNamed:@"BookmarksDragImage"];
+    [DSFavIconManager sharedInstance].placeholder = [NSImage imageNamed:@"Globe"];
     [JPUserDefaultsController registerUserDefaults];
     
     [self createStatusItem];
