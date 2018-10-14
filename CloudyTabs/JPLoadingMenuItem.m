@@ -16,7 +16,7 @@
         NSProgressIndicator *progressIndicator = [[NSProgressIndicator alloc] initWithFrame:NSMakeRect(0, 0, 20, 20)];
         progressIndicator.bezeled = NO;
         progressIndicator.translatesAutoresizingMaskIntoConstraints = NO;
-        progressIndicator.controlSize = NSSmallControlSize;
+        progressIndicator.controlSize = NSControlSizeSmall;
         progressIndicator.style = NSProgressIndicatorSpinningStyle;
         [progressIndicator sizeToFit];
         self.view = progressIndicator;

@@ -86,17 +86,16 @@ const NSSize ICON_SIZE = {19, 19};
 {
     NSURL *URL = [(NSMenuItem *)sender representedObject];
     
-    if ([NSEvent modifierFlags] == NSCommandKeyMask) {
+    if ([NSEvent modifierFlags] == NSEventModifierFlagCommand) {
         [[NSWorkspace sharedWorkspace] openURLs:@[URL] withAppBundleIdentifier:nil options:NSWorkspaceLaunchWithoutActivation additionalEventParamDescriptor:nil launchIdentifiers:nil];
     }
-    else if ([NSEvent modifierFlags] == NSAlternateKeyMask) {
+    else if ([NSEvent modifierFlags] == NSEventModifierFlagOption) {
         NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
         [pasteboard clearContents];
         
         NSURL *URL = [[self.menu highlightedItem] representedObject];
         if (![pasteboard writeObjects:@[URL]]) {
-            NSAlert *alert = [NSAlert alertWithMessageText:@"Unable to copy URL" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"The URL was unable to be copied to the pasteboard."];
-            [alert runModal];
+            NSLog(@"Unable to copy URL to the pasteboard.");
         }
     }
     else {
@@ -107,7 +106,7 @@ const NSSize ICON_SIZE = {19, 19};
 - (void)deviceMenuItemClicked:(id)sender
 {
     NSUInteger launch;
-    if ([NSEvent modifierFlags] == NSCommandKeyMask) {
+    if ([NSEvent modifierFlags] == NSEventModifierFlagCommand) {
         launch = NSWorkspaceLaunchWithoutActivation;
     }
     else {
