@@ -24,8 +24,6 @@
 		03648D7D1FA4434B004D3078 /* NSURL+DecodeURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D7C1FA4434B004D3078 /* NSURL+DecodeURL.m */; };
 		03648D851FA445FA004D3078 /* CloudyTabsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D841FA445FA004D3078 /* CloudyTabsTests.m */; };
 		03648D8D1FA44629004D3078 /* NSURL+DecodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D8C1FA44629004D3078 /* NSURL+DecodeTests.m */; };
-		03702C221F792AF8009286E3 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03702C211F792AF8009286E3 /* FMDB.framework */; };
-		03702C231F792AF8009286E3 /* FMDB.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 03702C211F792AF8009286E3 /* FMDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0375994218C5F967000E8C33 /* JPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0375993F18C5F967000E8C33 /* JPAppDelegate.m */; };
 		03977FD318C3F98A00DC499C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03977FD218C3F98A00DC499C /* Cocoa.framework */; };
 		03977FDD18C3F98A00DC499C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03977FDB18C3F98A00DC499C /* InfoPlist.strings */; };
@@ -54,7 +52,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				03702C231F792AF8009286E3 /* FMDB.framework in CopyFiles */,
 				031EA6BD1F97009D00B8F2FD /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,7 +92,6 @@
 		03648D841FA445FA004D3078 /* CloudyTabsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CloudyTabsTests.m; sourceTree = "<group>"; };
 		03648D861FA445FA004D3078 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03648D8C1FA44629004D3078 /* NSURL+DecodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+DecodeTests.m"; sourceTree = "<group>"; };
-		03702C211F792AF8009286E3 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = Carthage/Build/Mac/FMDB.framework; sourceTree = "<group>"; };
 		0375993E18C5F967000E8C33 /* JPAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPAppDelegate.h; sourceTree = "<group>"; };
 		0375993F18C5F967000E8C33 /* JPAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPAppDelegate.m; sourceTree = "<group>"; };
 		0375994018C5F967000E8C33 /* JPLaunchAtLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPLaunchAtLoginManager.h; sourceTree = "<group>"; };
@@ -150,7 +146,6 @@
 			files = (
 				0397802318C590F700DC499C /* CoreServices.framework in Frameworks */,
 				03977FD318C3F98A00DC499C /* Cocoa.framework in Frameworks */,
-				03702C221F792AF8009286E3 /* FMDB.framework in Frameworks */,
 				031EA6BB1F97004E00B8F2FD /* Sparkle.framework in Frameworks */,
 				03601BC221166ED00019A5E5 /* SafariSupport.bundle in Frameworks */,
 			);
@@ -232,7 +227,6 @@
 			children = (
 				03601BC121166ED00019A5E5 /* SafariSupport.bundle */,
 				031EA6BA1F97004D00B8F2FD /* Sparkle.framework */,
-				03702C211F792AF8009286E3 /* FMDB.framework */,
 				03977FD218C3F98A00DC499C /* Cocoa.framework */,
 				0397802218C590F700DC499C /* CoreServices.framework */,
 				03977FD418C3F98A00DC499C /* Other Frameworks */,
