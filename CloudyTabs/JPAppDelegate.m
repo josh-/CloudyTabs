@@ -208,7 +208,7 @@ const NSSize ICON_SIZE = {19, 19};
 {
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [self.statusItem setHighlightMode:YES];
-    [self.statusItem setImage:[NSImage imageNamed:@"ToolbarCloudTabsTemplate"]];
+    [self.statusItem setImage:[NSImage imageNamed:@"StatusIcon"]];
     [self.statusItem setMenu:self.menu];
     [self.statusItem setEnabled:YES];
     
