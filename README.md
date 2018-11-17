@@ -23,6 +23,10 @@ Hovering over the CloudyTabs menu bar icon displays a tooltip which lists the da
 * macOS 10.13 or later
 * An active iCloud account
 
+## Notes
+
+- If you find that CloudyTabs fails to start on macOS 10.14 Mojave, try adding CloudyTabs to "Full Disk Access" under `Security & Privacy > Privacy` in your System Preferences (see [Issue #48](https://github.com/josh-/CloudyTabs/issues/48)).
+
 ## License
 
 The MIT License (MIT)
