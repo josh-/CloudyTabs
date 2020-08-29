@@ -340,7 +340,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = JP;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = "Josh Parnham";
 				TargetAttributes = {
 					03648D811FA445FA004D3078 = {
@@ -357,7 +357,7 @@
 			};
 			buildConfigurationList = 03977FCA18C3F98A00DC499C /* Build configuration list for PBXProject "CloudyTabs" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -659,6 +659,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3C7269R37R;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/CloudyTabs",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -681,6 +682,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3C7269R37R;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/CloudyTabs",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
