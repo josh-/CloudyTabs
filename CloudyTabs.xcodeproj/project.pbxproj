@@ -19,6 +19,11 @@
 		03225D5518C6AA5A000778DF /* DSFavIconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D5018C6AA5A000778DF /* DSFavIconManager.m */; };
 		03225D5618C6AA5A000778DF /* DSFavIconOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D5218C6AA5A000778DF /* DSFavIconOperation.m */; };
 		03225D5E18C6B18A000778DF /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 03225D5D18C6B18A000778DF /* dsa_pub.pem */; };
+		0350635A24FB233300E71269 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0350635924FB233300E71269 /* AppDelegate.m */; };
+		0350636224FB233500E71269 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0350636124FB233500E71269 /* main.m */; };
+		0350636824FB23BB00E71269 /* CloudyTabsHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0350635624FB233200E71269 /* CloudyTabsHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0350636B24FB245700E71269 /* NSBundle+ApplicationPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 0350636A24FB245700E71269 /* NSBundle+ApplicationPath.m */; };
+		0350636D24FB29BB00E71269 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0350636C24FB29BB00E71269 /* ServiceManagement.framework */; };
 		03601BC221166ED00019A5E5 /* SafariSupport.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 03601BC121166ED00019A5E5 /* SafariSupport.bundle */; settings = {ATTRIBUTES = (Weak, ); }; };
 		03601BC521168AD80019A5E5 /* JPSyncReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 03601BC421168AD80019A5E5 /* JPSyncReader.m */; };
 		03648D7D1FA4434B004D3078 /* NSURL+DecodeURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D7C1FA4434B004D3078 /* NSURL+DecodeURL.m */; };
@@ -54,6 +59,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0350636724FB239D00E71269 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				0350636824FB23BB00E71269 /* CloudyTabsHelper.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +95,15 @@
 		03225D5218C6AA5A000778DF /* DSFavIconOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSFavIconOperation.m; path = DSFavIconManager/Classes/DSFavIconOperation.m; sourceTree = "<group>"; };
 		03225D5318C6AA5A000778DF /* UINSImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UINSImage.h; path = DSFavIconManager/Classes/UINSImage.h; sourceTree = "<group>"; };
 		03225D5D18C6B18A000778DF /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		0350635624FB233200E71269 /* CloudyTabsHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudyTabsHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0350635824FB233200E71269 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0350635924FB233300E71269 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0350636024FB233500E71269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0350636124FB233500E71269 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0350636324FB233500E71269 /* CloudyTabsHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CloudyTabsHelper.entitlements; sourceTree = "<group>"; };
+		0350636924FB245700E71269 /* NSBundle+ApplicationPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSBundle+ApplicationPath.h"; sourceTree = "<group>"; };
+		0350636A24FB245700E71269 /* NSBundle+ApplicationPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+ApplicationPath.m"; sourceTree = "<group>"; };
+		0350636C24FB29BB00E71269 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		03601BC0211669390019A5E5 /* BookmarkSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookmarkSync.h; sourceTree = "<group>"; };
 		03601BC121166ED00019A5E5 /* SafariSupport.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SafariSupport.bundle; path = ../../../../../../../System/Library/CoreServices/SafariSupport.bundle; sourceTree = "<group>"; };
 		03601BC321168AD80019A5E5 /* JPSyncReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPSyncReader.h; sourceTree = "<group>"; };
@@ -129,6 +153,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0350635324FB233200E71269 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		03648D7F1FA445FA004D3078 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -142,6 +173,7 @@
 			files = (
 				0397802318C590F700DC499C /* CoreServices.framework in Frameworks */,
 				03977FD318C3F98A00DC499C /* Cocoa.framework in Frameworks */,
+				0350636D24FB29BB00E71269 /* ServiceManagement.framework in Frameworks */,
 				031EA6BB1F97004E00B8F2FD /* Sparkle.framework in Frameworks */,
 				03601BC221166ED00019A5E5 /* SafariSupport.bundle in Frameworks */,
 			);
@@ -189,6 +221,20 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		0350635724FB233200E71269 /* CloudyTabsHelper */ = {
+			isa = PBXGroup;
+			children = (
+				0350635824FB233200E71269 /* AppDelegate.h */,
+				0350635924FB233300E71269 /* AppDelegate.m */,
+				0350636924FB245700E71269 /* NSBundle+ApplicationPath.h */,
+				0350636A24FB245700E71269 /* NSBundle+ApplicationPath.m */,
+				0350636024FB233500E71269 /* Info.plist */,
+				0350636124FB233500E71269 /* main.m */,
+				0350636324FB233500E71269 /* CloudyTabsHelper.entitlements */,
+			);
+			path = CloudyTabsHelper;
+			sourceTree = "<group>";
+		};
 		03648D831FA445FA004D3078 /* CloudyTabsTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +250,7 @@
 			children = (
 				03977FD818C3F98A00DC499C /* CloudyTabs */,
 				03648D831FA445FA004D3078 /* CloudyTabsTests */,
+				0350635724FB233200E71269 /* CloudyTabsHelper */,
 				03977FD118C3F98A00DC499C /* Frameworks */,
 				03977FD018C3F98A00DC499C /* Products */,
 			);
@@ -214,6 +261,7 @@
 			children = (
 				03977FCF18C3F98A00DC499C /* CloudyTabs.app */,
 				03648D821FA445FA004D3078 /* CloudyTabsTests.xctest */,
+				0350635624FB233200E71269 /* CloudyTabsHelper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -221,6 +269,7 @@
 		03977FD118C3F98A00DC499C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0350636C24FB29BB00E71269 /* ServiceManagement.framework */,
 				03601BC121166ED00019A5E5 /* SafariSupport.bundle */,
 				031EA6BA1F97004D00B8F2FD /* Sparkle.framework */,
 				03977FD218C3F98A00DC499C /* Cocoa.framework */,
@@ -296,6 +345,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0350635524FB233200E71269 /* CloudyTabsHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0350636424FB233500E71269 /* Build configuration list for PBXNativeTarget "CloudyTabsHelper" */;
+			buildPhases = (
+				0350635224FB233200E71269 /* Sources */,
+				0350635324FB233200E71269 /* Frameworks */,
+				0350635424FB233200E71269 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CloudyTabsHelper;
+			productName = CloudyTabsHelper;
+			productReference = 0350635624FB233200E71269 /* CloudyTabsHelper.app */;
+			productType = "com.apple.product-type.application";
+		};
 		03648D811FA445FA004D3078 /* CloudyTabsTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 03648D891FA445FA004D3078 /* Build configuration list for PBXNativeTarget "CloudyTabsTests" */;
@@ -322,6 +388,7 @@
 				03977FCC18C3F98A00DC499C /* Frameworks */,
 				03977FCD18C3F98A00DC499C /* Resources */,
 				03225D4A18C5FED1000778DF /* CopyFiles */,
+				0350636724FB239D00E71269 /* CopyFiles */,
 				035B7F9A18DF0B6F00D2D945 /* ShellScript */,
 			);
 			buildRules = (
@@ -343,6 +410,11 @@
 				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = "Josh Parnham";
 				TargetAttributes = {
+					0350635524FB233200E71269 = {
+						CreatedOnToolsVersion = 11.6;
+						DevelopmentTeam = 3C7269R37R;
+						ProvisioningStyle = Automatic;
+					};
 					03648D811FA445FA004D3078 = {
 						CreatedOnToolsVersion = 9.0.1;
 						DevelopmentTeam = 3C7269R37R;
@@ -379,12 +451,20 @@
 			projectRoot = "";
 			targets = (
 				03977FCE18C3F98A00DC499C /* CloudyTabs */,
+				0350635524FB233200E71269 /* CloudyTabsHelper */,
 				03648D811FA445FA004D3078 /* CloudyTabsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0350635424FB233200E71269 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		03648D801FA445FA004D3078 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -417,11 +497,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=\"Developer ID Application: Josh Parnham (3C7269R37R)\"";
+			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=\"Developer ID Application: Josh Parnham (3C7269R37R)\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0350635224FB233200E71269 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0350636224FB233500E71269 /* main.m in Sources */,
+				0350635A24FB233300E71269 /* AppDelegate.m in Sources */,
+				0350636B24FB245700E71269 /* NSBundle+ApplicationPath.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		03648D7E1FA445FA004D3078 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -501,6 +591,68 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0350636524FB233500E71269 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = CloudyTabsHelper/CloudyTabsHelper.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.9.1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3C7269R37R;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = CloudyTabsHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13.0;
+				MARKETING_VERSION = 1.9.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joshparnham.CloudyTabsHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		0350636624FB233500E71269 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = CloudyTabsHelper/CloudyTabsHelper.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.9.1;
+				DEVELOPMENT_TEAM = 3C7269R37R;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = CloudyTabsHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13.0;
+				MARKETING_VERSION = 1.9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joshparnham.CloudyTabsHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		03648D8A1FA445FA004D3078 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -701,6 +853,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0350636424FB233500E71269 /* Build configuration list for PBXNativeTarget "CloudyTabsHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0350636524FB233500E71269 /* Debug */,
+				0350636624FB233500E71269 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		03648D891FA445FA004D3078 /* Build configuration list for PBXNativeTarget "CloudyTabsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

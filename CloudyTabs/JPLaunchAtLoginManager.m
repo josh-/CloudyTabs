@@ -2,72 +2,44 @@
 //  JPLaunchAtLoginManager.m
 //  CloudyTabs
 //
-//  Based on a modified version of this StackOverflow answer - http://stackoverflow.com/a/2318004/446039
+//  Created by Josh Parnham on 30/8/20.
+//  Copyright © 2020 Josh Parnham. All rights reserved.
 //
 
 #import "JPLaunchAtLoginManager.h"
 
+#import <ServiceManagement/ServiceManagement.h>
+
 @implementation JPLaunchAtLoginManager
 
-+ (BOOL)willStartAtLogin:(NSURL *)itemURL
++ (BOOL)willStartAtLogin:(NSString *)helperBundleId
 {
-    Boolean foundIt = false;
-    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-    if (loginItems) {
-        UInt32 seed = 0U;
-        NSArray *currentLoginItems = (__bridge NSArray *)(LSSharedFileListCopySnapshot(loginItems, &seed));
-        for (id itemObject in currentLoginItems) {
-            LSSharedFileListItemRef item = (__bridge LSSharedFileListItemRef)itemObject;
-            
-            UInt32 resolutionFlags = kLSSharedFileListNoUserInteraction | kLSSharedFileListDoNotMountVolumes;
-            CFURLRef URL = NULL;
-            OSStatus err = LSSharedFileListItemResolve(item, resolutionFlags, &URL, NULL);
-            if (err == noErr) {
-                foundIt = CFEqual(URL, (__bridge CFTypeRef)(itemURL));
-                CFRelease(URL);
-                
-                if (foundIt)
-                    break;
-            }
-        }
-        CFRelease(loginItems);
+    // Despite being deprecated, still the preffered API
+    // https://github.com/alexzielenski/StartAtLoginController/issues/12#issuecomment-307525807
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    CFArrayRef jobDictionariesRef = SMCopyAllJobDictionaries(kSMDomainUserLaunchd);
+    #pragma clang diagnostic pop
+    
+    NSArray *jobDictionaries = CFBridgingRelease(jobDictionariesRef);
+    
+    if (jobDictionaries == nil) {
+        return false;
     }
-    return (BOOL)foundIt;
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"Label = %@", helperBundleId];
+    NSArray *filterdArray = [jobDictionaries filteredArrayUsingPredicate:predicate];
+    if (filterdArray.count == 0) {
+        return false;
+    }
+    
+    NSDictionary *launchItem = filterdArray[0];
+    return [[launchItem objectForKey:@"OnDemand"] boolValue];
 }
 
-+ (void)setStartAtLogin:(NSURL *)itemURL enabled:(BOOL)enabled
++ (void)setStartAtLogin:(NSString *)helperBundleId enabled:(BOOL)enabled
 {
-    LSSharedFileListItemRef existingItem = NULL;
-    
-    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-    if (loginItems) {
-        UInt32 seed = 0U;
-        NSArray *currentLoginItems = (__bridge NSArray *)(LSSharedFileListCopySnapshot(loginItems, &seed));
-        for (id itemObject in currentLoginItems) {
-            LSSharedFileListItemRef item = (__bridge LSSharedFileListItemRef)itemObject;
-            
-            UInt32 resolutionFlags = kLSSharedFileListNoUserInteraction | kLSSharedFileListDoNotMountVolumes;
-            CFURLRef URL = NULL;
-            OSStatus err = LSSharedFileListItemResolve(item, resolutionFlags, &URL, NULL);
-            if (err == noErr) {
-                Boolean foundIt = CFEqual(URL, (__bridge CFTypeRef)(itemURL));
-                CFRelease(URL);
-                
-                if (foundIt) {
-                    existingItem = item;
-                    break;
-                }
-            }
-        }
-        
-        if (enabled && (existingItem == NULL)) {
-            LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemBeforeFirst, NULL, NULL, (__bridge CFURLRef)itemURL, NULL, NULL);
-            
-        } else if (!enabled && (existingItem != NULL))
-            LSSharedFileListItemRemove(loginItems, existingItem);
-        
-        CFRelease(loginItems);
-    }       
+    SMLoginItemSetEnabled((__bridge CFStringRef)(helperBundleId), enabled);
 }
 
 @end

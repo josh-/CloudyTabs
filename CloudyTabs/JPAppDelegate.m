@@ -29,6 +29,7 @@
 @implementation NSMenuItem (ItemCreation)
 
 const NSSize ICON_SIZE = {19, 19};
+NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
 
 + (NSMenuItem *)menuItemWithTitle:(NSString *)tabTitle URLPath:(NSString *)URLPath action:(SEL)action {
     NSMenuItem *tabMenuItem = [[NSMenuItem alloc] initWithTitle:tabTitle action:action keyEquivalent:@""];
@@ -131,17 +132,6 @@ const NSSize ICON_SIZE = {19, 19};
 - (void)openAtLoginToggled:(id)sender
 {
     [self setStartAtLogin:(![self startAtLogin])];
-}
-
-#pragma mark - Menu validation
-
-- (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)item {
-    if ([item action] == @selector(openAtLoginToggled:)) {
-        if ([(NSMenuItem *)item respondsToSelector:@selector(setState:)]) {
-            [(NSMenuItem *)item setState:[self startAtLogin]];
-        }
-    }
-    return YES;
 }
 
 #pragma mark - Queue delegate
@@ -291,6 +281,7 @@ const NSSize ICON_SIZE = {19, 19};
     }
     
     NSMenuItem *openAtLoginItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Launch %@ At Login", @""), [self appBundleName]] action:@selector(openAtLoginToggled:) keyEquivalent:@""];
+    openAtLoginItem.state = [self startAtLogin];
     [self.menu addItem:openAtLoginItem];
     
     NSMenuItem *quitMenuItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Quit %@", @""), [self appBundleName]] action:@selector(quit:) keyEquivalent:@"q"];
@@ -313,13 +304,13 @@ const NSSize ICON_SIZE = {19, 19};
 
 - (BOOL)startAtLogin
 {
-    return [JPLaunchAtLoginManager willStartAtLogin:[self appURL]];
+    return [JPLaunchAtLoginManager willStartAtLogin:HELPER_BUNDLE_ID];
 }
 
 - (void)setStartAtLogin:(BOOL)enabled
 {
     [self willChangeValueForKey:@"startAtLogin"];
-    [JPLaunchAtLoginManager setStartAtLogin:[self appURL] enabled:enabled];
+    [JPLaunchAtLoginManager setStartAtLogin:HELPER_BUNDLE_ID enabled:enabled];
     [self didChangeValueForKey:@"startAtLogin"];
 }
 
