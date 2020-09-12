@@ -10,3 +10,8 @@
 "Quit %@" = "Quit %@";
 "%@\nChanges Last Detected: %@" = "%@\nChanges Last Detected: %@";
 "Reading List" = "Reading List";
+"Requires Full Disk Access…" = "Requires Full Disk Access…";
+"Enable Full Disk Access" = "Enable Full Disk Access";
+"CloudyTabs requies Full Disk Access to access your Safari data. Click \"Enable\" to open System Prefences and then click the checkbox next to \"CloudyTabs\"." = "CloudyTabs requies Full Disk Access to access your Safari data. Click \"Enable\" to open System Prefences and then click the checkbox next to \"CloudyTabs\".";
+"Enable" = "Enable";
+"Cancel" = "Cancel";

@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0308ABDB18D676ED00AB4C54 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0308ABD918D676ED00AB4C54 /* Localizable.strings */; };
+		0308B3242504BFC80090D507 /* NSMenuItem+ItemCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0308B3232504BFC80090D507 /* NSMenuItem+ItemCreation.m */; };
+		0308B32F250D95590090D507 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0308B32C250D950B0090D507 /* FMDB.framework */; };
+		0308B330250D95590090D507 /* FMDB.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0308B32C250D950B0090D507 /* FMDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0308B331250D955C0090D507 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0308B32B250D950B0090D507 /* Sparkle.framework */; };
+		0308B332250D955C0090D507 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0308B32B250D950B0090D507 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		030D99822172BBAB00A9DE75 /* JPLoadingMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 030D99802172BBAA00A9DE75 /* JPLoadingMenuItem.m */; };
 		030D99852172BBFD00A9DE75 /* JPReadingListReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 030D99832172BBFD00A9DE75 /* JPReadingListReader.m */; };
 		03120E52202FE2F300BE3891 /* JPUserDefaultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03120E51202FE2F300BE3891 /* JPUserDefaultsController.m */; };
-		0312E3F0215E04A900F03F02 /* BookmarkSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 0312E3EF215E044100F03F02 /* BookmarkSync.m */; };
-		031EA6BB1F97004E00B8F2FD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 031EA6BA1F97004D00B8F2FD /* Sparkle.framework */; };
-		031EA6BD1F97009D00B8F2FD /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 031EA6BA1F97004D00B8F2FD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		03225D4C18C6A40D000778DF /* JPLaunchAtLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0375994118C5F967000E8C33 /* JPLaunchAtLoginManager.m */; };
 		03225D5418C6AA5A000778DF /* DSFavIconCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D4E18C6AA5A000778DF /* DSFavIconCache.m */; };
 		03225D5518C6AA5A000778DF /* DSFavIconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 03225D5018C6AA5A000778DF /* DSFavIconManager.m */; };
@@ -24,9 +26,8 @@
 		0350636824FB23BB00E71269 /* CloudyTabsHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0350635624FB233200E71269 /* CloudyTabsHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0350636B24FB245700E71269 /* NSBundle+ApplicationPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 0350636A24FB245700E71269 /* NSBundle+ApplicationPath.m */; };
 		0350636D24FB29BB00E71269 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0350636C24FB29BB00E71269 /* ServiceManagement.framework */; };
-		03601BC221166ED00019A5E5 /* SafariSupport.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 03601BC121166ED00019A5E5 /* SafariSupport.bundle */; settings = {ATTRIBUTES = (Weak, ); }; };
-		03601BC521168AD80019A5E5 /* JPSyncReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 03601BC421168AD80019A5E5 /* JPSyncReader.m */; };
-		03648D7D1FA4434B004D3078 /* NSURL+DecodeURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D7C1FA4434B004D3078 /* NSURL+DecodeURL.m */; };
+		0350637124FB398600E71269 /* JPCloudTabsDBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0350636F24FB360900E71269 /* JPCloudTabsDBReader.m */; };
+		03648D7D1FA4434B004D3078 /* NSURL+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D7C1FA4434B004D3078 /* NSURL+Extensions.m */; };
 		03648D851FA445FA004D3078 /* CloudyTabsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D841FA445FA004D3078 /* CloudyTabsTests.m */; };
 		03648D8D1FA44629004D3078 /* NSURL+DecodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D8C1FA44629004D3078 /* NSURL+DecodeTests.m */; };
 		0375994218C5F967000E8C33 /* JPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0375993F18C5F967000E8C33 /* JPAppDelegate.m */; };
@@ -55,7 +56,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				031EA6BD1F97009D00B8F2FD /* Sparkle.framework in CopyFiles */,
+				0308B330250D95590090D507 /* FMDB.framework in CopyFiles */,
+				0308B332250D955C0090D507 /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +76,10 @@
 /* Begin PBXFileReference section */
 		0308ABDA18D676ED00AB4C54 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0308ABDC18D67A1300AB4C54 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0308B3222504BFC80090D507 /* NSMenuItem+ItemCreation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMenuItem+ItemCreation.h"; sourceTree = "<group>"; };
+		0308B3232504BFC80090D507 /* NSMenuItem+ItemCreation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMenuItem+ItemCreation.m"; sourceTree = "<group>"; };
+		0308B32B250D950B0090D507 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
+		0308B32C250D950B0090D507 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = Carthage/Build/Mac/FMDB.framework; sourceTree = "<group>"; };
 		030D99802172BBAA00A9DE75 /* JPLoadingMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPLoadingMenuItem.m; sourceTree = "<group>"; };
 		030D99812172BBAA00A9DE75 /* JPLoadingMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPLoadingMenuItem.h; sourceTree = "<group>"; };
 		030D99832172BBFD00A9DE75 /* JPReadingListReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPReadingListReader.m; sourceTree = "<group>"; };
@@ -82,11 +88,9 @@
 		030F11BC18E3959100B2DFB0 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_BR; path = pt_BR.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		03120E50202FE2F300BE3891 /* JPUserDefaultsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPUserDefaultsController.h; sourceTree = "<group>"; };
 		03120E51202FE2F300BE3891 /* JPUserDefaultsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPUserDefaultsController.m; sourceTree = "<group>"; };
-		0312E3EF215E044100F03F02 /* BookmarkSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookmarkSync.m; sourceTree = "<group>"; };
 		0319CFB118D67AF70007A9FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0319CFB218D67B080007A9FF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0319CFB318D67B110007A9FF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		031EA6BA1F97004D00B8F2FD /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
 		03225D4D18C6AA5A000778DF /* DSFavIconCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSFavIconCache.h; path = DSFavIconManager/Classes/DSFavIconCache.h; sourceTree = "<group>"; };
 		03225D4E18C6AA5A000778DF /* DSFavIconCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSFavIconCache.m; path = DSFavIconManager/Classes/DSFavIconCache.m; sourceTree = "<group>"; };
 		03225D4F18C6AA5A000778DF /* DSFavIconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSFavIconManager.h; path = DSFavIconManager/Classes/DSFavIconManager.h; sourceTree = "<group>"; };
@@ -104,12 +108,10 @@
 		0350636924FB245700E71269 /* NSBundle+ApplicationPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSBundle+ApplicationPath.h"; sourceTree = "<group>"; };
 		0350636A24FB245700E71269 /* NSBundle+ApplicationPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+ApplicationPath.m"; sourceTree = "<group>"; };
 		0350636C24FB29BB00E71269 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
-		03601BC0211669390019A5E5 /* BookmarkSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookmarkSync.h; sourceTree = "<group>"; };
-		03601BC121166ED00019A5E5 /* SafariSupport.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SafariSupport.bundle; path = ../../../../../../../System/Library/CoreServices/SafariSupport.bundle; sourceTree = "<group>"; };
-		03601BC321168AD80019A5E5 /* JPSyncReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPSyncReader.h; sourceTree = "<group>"; };
-		03601BC421168AD80019A5E5 /* JPSyncReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPSyncReader.m; sourceTree = "<group>"; };
-		03648D7B1FA4434B004D3078 /* NSURL+DecodeURL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURL+DecodeURL.h"; sourceTree = "<group>"; };
-		03648D7C1FA4434B004D3078 /* NSURL+DecodeURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURL+DecodeURL.m"; sourceTree = "<group>"; };
+		0350636E24FB360100E71269 /* JPCloudTabsDBReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPCloudTabsDBReader.h; sourceTree = "<group>"; };
+		0350636F24FB360900E71269 /* JPCloudTabsDBReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPCloudTabsDBReader.m; sourceTree = "<group>"; };
+		03648D7B1FA4434B004D3078 /* NSURL+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURL+Extensions.h"; sourceTree = "<group>"; };
+		03648D7C1FA4434B004D3078 /* NSURL+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Extensions.m"; sourceTree = "<group>"; };
 		03648D821FA445FA004D3078 /* CloudyTabsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CloudyTabsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03648D841FA445FA004D3078 /* CloudyTabsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CloudyTabsTests.m; sourceTree = "<group>"; };
 		03648D861FA445FA004D3078 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -173,9 +175,9 @@
 			files = (
 				0397802318C590F700DC499C /* CoreServices.framework in Frameworks */,
 				03977FD318C3F98A00DC499C /* Cocoa.framework in Frameworks */,
+				0308B331250D955C0090D507 /* Sparkle.framework in Frameworks */,
 				0350636D24FB29BB00E71269 /* ServiceManagement.framework in Frameworks */,
-				031EA6BB1F97004E00B8F2FD /* Sparkle.framework in Frameworks */,
-				03601BC221166ED00019A5E5 /* SafariSupport.bundle in Frameworks */,
+				0308B32F250D95590090D507 /* FMDB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,18 +207,18 @@
 				0375993F18C5F967000E8C33 /* JPAppDelegate.m */,
 				0375994018C5F967000E8C33 /* JPLaunchAtLoginManager.h */,
 				0375994118C5F967000E8C33 /* JPLaunchAtLoginManager.m */,
-				03601BC321168AD80019A5E5 /* JPSyncReader.h */,
-				03601BC421168AD80019A5E5 /* JPSyncReader.m */,
 				030D99842172BBFD00A9DE75 /* JPReadingListReader.h */,
 				030D99832172BBFD00A9DE75 /* JPReadingListReader.m */,
+				0350636E24FB360100E71269 /* JPCloudTabsDBReader.h */,
+				0350636F24FB360900E71269 /* JPCloudTabsDBReader.m */,
 				030D99812172BBAA00A9DE75 /* JPLoadingMenuItem.h */,
 				030D99802172BBAA00A9DE75 /* JPLoadingMenuItem.m */,
 				03120E50202FE2F300BE3891 /* JPUserDefaultsController.h */,
 				03120E51202FE2F300BE3891 /* JPUserDefaultsController.m */,
-				03648D7B1FA4434B004D3078 /* NSURL+DecodeURL.h */,
-				03648D7C1FA4434B004D3078 /* NSURL+DecodeURL.m */,
-				03601BC0211669390019A5E5 /* BookmarkSync.h */,
-				0312E3EF215E044100F03F02 /* BookmarkSync.m */,
+				03648D7B1FA4434B004D3078 /* NSURL+Extensions.h */,
+				03648D7C1FA4434B004D3078 /* NSURL+Extensions.m */,
+				0308B3222504BFC80090D507 /* NSMenuItem+ItemCreation.h */,
+				0308B3232504BFC80090D507 /* NSMenuItem+ItemCreation.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -269,9 +271,9 @@
 		03977FD118C3F98A00DC499C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0308B32C250D950B0090D507 /* FMDB.framework */,
+				0308B32B250D950B0090D507 /* Sparkle.framework */,
 				0350636C24FB29BB00E71269 /* ServiceManagement.framework */,
-				03601BC121166ED00019A5E5 /* SafariSupport.bundle */,
-				031EA6BA1F97004D00B8F2FD /* Sparkle.framework */,
 				03977FD218C3F98A00DC499C /* Cocoa.framework */,
 				0397802218C590F700DC499C /* CoreServices.framework */,
 				03977FD418C3F98A00DC499C /* Other Frameworks */,
@@ -525,16 +527,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0350637124FB398600E71269 /* JPCloudTabsDBReader.m in Sources */,
 				039C6EAC1F935D2E00C3B3E1 /* VDKQueue.m in Sources */,
 				03225D4C18C6A40D000778DF /* JPLaunchAtLoginManager.m in Sources */,
-				0312E3F0215E04A900F03F02 /* BookmarkSync.m in Sources */,
 				030D99852172BBFD00A9DE75 /* JPReadingListReader.m in Sources */,
 				03225D5518C6AA5A000778DF /* DSFavIconManager.m in Sources */,
-				03601BC521168AD80019A5E5 /* JPSyncReader.m in Sources */,
+				0308B3242504BFC80090D507 /* NSMenuItem+ItemCreation.m in Sources */,
 				03120E52202FE2F300BE3891 /* JPUserDefaultsController.m in Sources */,
 				030D99822172BBAB00A9DE75 /* JPLoadingMenuItem.m in Sources */,
 				0375994218C5F967000E8C33 /* JPAppDelegate.m in Sources */,
-				03648D7D1FA4434B004D3078 /* NSURL+DecodeURL.m in Sources */,
+				03648D7D1FA4434B004D3078 /* NSURL+Extensions.m in Sources */,
 				03977FDF18C3F98A00DC499C /* main.m in Sources */,
 				03225D5418C6AA5A000778DF /* DSFavIconCache.m in Sources */,
 				03225D5618C6AA5A000778DF /* DSFavIconOperation.m in Sources */,

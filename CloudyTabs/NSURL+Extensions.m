@@ -1,14 +1,14 @@
 //
-//  NSURL+DecodeURL.m
+//  NSURL+Extensions.m
 //  CloudyTabs
 //
 //  Created by Josh Parnham on 28/10/17.
 //  Copyright © 2017 Josh Parnham. All rights reserved.
 //
 
-#import "NSURL+DecodeURL.h"
+#import "NSURL+Extensions.h"
 
-@implementation NSURL (Decode)
+@implementation NSURL (Extensions)
 
 + (NSURL *)decodeURL:(NSString *)urlString {
     // See dot point 4 under "NSURL Deprecations" in "Foundation Release Notes for OS X v10.11"
@@ -30,6 +30,10 @@
         urlRef = CFURLCreateWithBytes(kCFAllocatorSystemDefault, (const UInt8 *)urlData.bytes, urlData.length, kCFStringEncodingISOLatin1, NULL);
     }
     return (__bridge NSURL *)urlRef;
+}
+
++ (NSURL *)privacyAllFilesSystemPreferencesURL {
+    return [NSURL URLWithString:@"x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"];
 }
 
 @end

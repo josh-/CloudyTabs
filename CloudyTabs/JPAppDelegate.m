@@ -14,61 +14,32 @@
 #import "JPUserDefaultsController.h"
 #import "DSFavIconManager.h"
 
-#import "JPSyncReader.h"
+#import "JPCloudTabsDBReader.h"
 #import "JPReadingListReader.h"
 
 #import "JPLoadingMenuItem.h"
-#import "NSURL+DecodeURL.h"
-
-@interface NSMenuItem (ItemCreation)
-
-+ (NSMenuItem *)menuItemWithTitle:(NSString *)tabTitle URLPath:(NSString *)URLPath action:(SEL)action;
-
-@end
-
-@implementation NSMenuItem (ItemCreation)
-
-const NSSize ICON_SIZE = {19, 19};
-NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
-
-+ (NSMenuItem *)menuItemWithTitle:(NSString *)tabTitle URLPath:(NSString *)URLPath action:(SEL)action {
-    NSMenuItem *tabMenuItem = [[NSMenuItem alloc] initWithTitle:tabTitle action:action keyEquivalent:@""];
-    
-    NSURL *URL = [NSURL decodeURL:URLPath];
-    tabMenuItem.representedObject = URL;
-    tabMenuItem.toolTip = URL.relativeString;
-    if (URL.host != nil) {
-        tabMenuItem.image = [[DSFavIconManager sharedInstance] iconForURL:tabMenuItem.representedObject downloadHandler:^(NSImage *image) {
-            image.size = ICON_SIZE;
-            tabMenuItem.image = image;
-        }];
-    } else {
-        tabMenuItem.image = [DSFavIconManager sharedInstance].placeholder;
-    }
-    tabMenuItem.image.size = ICON_SIZE;
-    
-    return tabMenuItem;
-}
-
-@end
+#import "NSURL+Extensions.h"
+#import "NSMenuItem+ItemCreation.h"
 
 @interface JPAppDelegate ()
 
 @property (strong, nonatomic) NSDate *lastUpdateDate;
 
-@property (strong, nonatomic) JPSyncReader *syncReader;
+@property (strong, nonatomic) JPCloudTabsDBReader *cloudTabsDBReader;
 @property (strong, nonatomic) JPReadingListReader *readingListReader;
-@property (strong, nonatomic) NSArray *readingListItems;
 
 @property (strong, nonatomic) NSArray *tabData;
+@property (strong, nonatomic) NSArray *readingListItems;
 
 @end
+
+NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
 
 @implementation JPAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    self.syncReader = [[JPSyncReader alloc] init];
+    self.cloudTabsDBReader = [[JPCloudTabsDBReader alloc] init];
     self.readingListReader = [[JPReadingListReader alloc] init];
     
     [DSFavIconManager sharedInstance].placeholder = [NSImage imageNamed:@"Globe"];
@@ -134,17 +105,44 @@ NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
     [self setStartAtLogin:(![self startAtLogin])];
 }
 
+- (void)promptFullDiskAccess:(id)sender
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+    alert.messageText = NSLocalizedString(@"Enable Full Disk Access", @"");
+    alert.informativeText = NSLocalizedString(@"CloudyTabs requies Full Disk Access to access your Safari data. Click \"Enable\" to open System Prefences and then click the checkbox next to \"CloudyTabs\".", @"");
+    alert.alertStyle = NSAlertStyleInformational;
+    
+    [alert addButtonWithTitle:NSLocalizedString(@"Enable", @"")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+    
+    NSInteger alertResult = [alert runModal];
+    if (alertResult == NSAlertFirstButtonReturn) {
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL privacyAllFilesSystemPreferencesURL]];
+    }
+}
+
 #pragma mark - Queue delegate
 
--(void)VDKQueue:(VDKQueue *)queue receivedNotification:(NSString*)noteName forPath:(NSString*)fpath; {
+-(void)VDKQueue:(VDKQueue *)queue receivedNotification:(NSString*)noteName forPath:(NSString*)fpath
+{
     [self.readingListReader fetchReadingListModificationDate:^(NSDate *readingListModificationDate) {
         // Only update menu if the data has been updated since last refresh
         BOOL newReadingListData = [readingListModificationDate laterDate:self.lastUpdateDate] == readingListModificationDate;
-            if (newReadingListData) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self updateUserInterface];
-                });
-            }
+        if (newReadingListData) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self updateUserInterface];
+            });
+        }
+    }];
+     
+    [self.cloudTabsDBReader fetchDatabaseModificationDate:^(NSDate *cloudTabsModificationDate) {
+        // Only update menu if the data has been updated since last refresh
+        BOOL newCloudTabData = [cloudTabsModificationDate laterDate:self.lastUpdateDate] == cloudTabsModificationDate;
+        if (newCloudTabData) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self updateUserInterface];
+            });
+        }
     }];
 }
 
@@ -170,14 +168,15 @@ NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
 {
     VDKQueue *queue = [[VDKQueue alloc] init];
 
+    [queue addPath:[self.cloudTabsDBReader cloudTabsDBFile] notifyingAbout:VDKQueueNotifyDefault];
     [queue addPath:[self.readingListReader syncedBookmarksFile] notifyingAbout:VDKQueueNotifyDefault];
 
-    [queue setDelegate:self];
+    queue.delegate = self;
 }
 
 - (void)updateUserInterface
 {
-    [self.syncReader fetchTabData:^(NSArray *tabData) {
+    [self.cloudTabsDBReader fetchTabData:^(NSArray<NSDictionary *> *tabData) {
         self.tabData = tabData;
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -192,6 +191,11 @@ NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
             [self updateMenu];
         });
     }];
+}
+
+- (BOOL)requiresFullDiskAccess
+{
+    return ![self.cloudTabsDBReader permissionsToReadFile];
 }
 
 - (void)createStatusItem
@@ -276,8 +280,14 @@ NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
             [openAllTabsMenu setEnabled:(devicesMenu.itemArray.count >= 1)];
         }
     } else {
-        JPLoadingMenuItem *loadingMenuItem = [[JPLoadingMenuItem alloc] initWithTitle:@"Loading" action:nil keyEquivalent:@""];
-        [self.menu addItem:loadingMenuItem];
+        if ([self requiresFullDiskAccess]) {
+            NSMenuItem *fullDiskAccessItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Requires Full Disk Access…", @"") action:@selector(promptFullDiskAccess:) keyEquivalent:@""];
+            [self.menu addItem:fullDiskAccessItem];
+            [self.menu addItem:[NSMenuItem separatorItem]];
+        } else {
+            JPLoadingMenuItem *loadingMenuItem = [[JPLoadingMenuItem alloc] initWithTitle:@"Loading" action:nil keyEquivalent:@""];
+            [self.menu addItem:loadingMenuItem];
+        }
     }
     
     NSMenuItem *openAtLoginItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Launch %@ At Login", @""), [self appBundleName]] action:@selector(openAtLoginToggled:) keyEquivalent:@""];
@@ -316,7 +326,8 @@ NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
 
 #pragma mark - Menu delegate
 
-- (void)menuWillOpen:(NSMenu *)menu {
+- (void)menuWillOpen:(NSMenu *)menu
+{
     [self updateUserInterface];
 }
 

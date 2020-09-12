@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSURL (Decode)
+@interface NSURL (Extensions)
 
 + (NSURL *)decodeURL:(NSString *)urlString;
++ (NSURL *)privacyAllFilesSystemPreferencesURL;
 
 @end
