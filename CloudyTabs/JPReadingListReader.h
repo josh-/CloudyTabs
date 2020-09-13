@@ -8,9 +8,8 @@
 
 @interface JPReadingListReader : NSObject
 
-- (NSString *_Nonnull)syncedBookmarksFile;
-
-- (void)fetchReadingListItems:(void (^_Nonnull)(NSArray *_Nullable))completionHandler;
+- (NSString *_Nullable)syncedBookmarksFile;
+- (void)fetchReadingListItems:(void (^_Nonnull)(NSArray<NSDictionary *> *_Nullable))completionHandler;
 - (void)fetchReadingListModificationDate:(void (^_Nonnull)(NSDate *_Nullable))completionHandler;
 
 @end

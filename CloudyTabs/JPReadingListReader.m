@@ -10,7 +10,7 @@
 
 @implementation JPReadingListReader
 
-- (void)fetchReadingListItems:(void (^_Nonnull)(NSArray *_Nullable))completionHandler {
+- (void)fetchReadingListItems:(void (^_Nonnull)(NSArray<NSDictionary *> *_Nullable))completionHandler {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSArray *readingListItems = [self readingListBookmarks];
         completionHandler(readingListItems);
@@ -33,18 +33,21 @@
 
 # pragma mark - Private
 
-- (NSDictionary *)syncedBookmarksDictionary {
-    return [[NSDictionary alloc] initWithContentsOfFile:[self syncedBookmarksFile]];
-}
-
-- (NSArray *)readingListBookmarks {
-    // TOOD: Need to stop crashing (here ???) if we can't read them - return null etc
+- (NSArray<NSDictionary *> *_Nullable)readingListBookmarks {
+    NSDictionary *syncedBookmarksDictionary = [[NSDictionary alloc] initWithContentsOfFile:[self syncedBookmarksFile]];
     
+    if (syncedBookmarksDictionary == nil) {
+        return nil;
+    }
     
-    
-    NSArray *bookmarks = [self syncedBookmarksDictionary][@"Children"];
+    NSArray *bookmarks = syncedBookmarksDictionary[@"Children"];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"Title = 'com.apple.ReadingList'"];
     NSDictionary* readingList = [[bookmarks filteredArrayUsingPredicate:predicate] firstObject];
+    
+    if (readingList == nil) {
+        return nil;
+    }
+    
     return readingList[@"Children"];
 }
 
