@@ -1,2 +1,2 @@
 github "ccgus/fmdb" "2.7.7"
-github "sparkle-project/Sparkle" "1.18.1"
+github "sparkle-project/Sparkle" "v1.23.0"
