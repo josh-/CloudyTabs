@@ -10,6 +10,8 @@
 
 #import "JPCloudTabsDBReader.h"
 
+#import "NSData+ZlibInflate.h"
+
 @interface JPCloudTabsDBReader ()
 
 @property (strong, nonatomic) FMDatabase *cloudTabsDatabase;
@@ -101,16 +103,21 @@
 - (NSArray *)tabsForDeviceID:(NSString *)deviceID {
     NSMutableArray<NSDictionary *> *tabs = [NSMutableArray new];
     
-    NSString *query = @"SELECT title, url from cloud_tabs WHERE device_uuid = ?";
+    NSString *query = @"SELECT url, title, position from cloud_tabs WHERE device_uuid = ?";
     FMResultSet *resultSet = [self.cloudTabsDatabase executeQuery:query, deviceID];
     while ([resultSet next]) {
         NSString *URL = [resultSet stringForColumn:@"url"];
         NSString *title = [resultSet stringForColumn:@"title"];
+            
+        NSData *position = [resultSet dataForColumn:@"position"];
+        NSNumber *sortValue = [self sortValueForData:position] ?: [NSNumber numberWithInt:0];
         
-        if (URL) {
-            [tabs addObject:@{@"URL": URL, @"Title": (title ? title : URL)}];
+        if (URL != nil && title != nil) {
+            [tabs addObject:@{@"URL": URL, @"Title": (title ? title : URL), @"SortValue": sortValue}];
         }
     }
+    
+    [tabs sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"SortValue" ascending:YES]]];
     
     return [tabs copy];
 }
@@ -125,6 +132,29 @@
     else {
         return nil;
     }
+}
+
+- (NSNumber *)sortValueForData:(NSData *)data {
+    NSData *inflated = [data ZlibInflate];
+    
+    NSError *error;
+    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:inflated options:NSJSONReadingMutableContainers error:&error];
+    if (error != nil) {
+        return nil;
+    }
+    
+    NSArray *sortValues = jsonObject[@"sortValues"];
+    NSDictionary *sortValueDictionary = sortValues.lastObject;
+    if (sortValueDictionary == nil) {
+        return nil;
+    }
+    
+    NSNumber *sortValue = sortValueDictionary[@"sortValue"];
+    if ([sortValue isKindOfClass:[NSNumber class]]) {
+        return sortValueDictionary[@"sortValue"];
+    }
+    
+    return nil;
 }
 
 @end

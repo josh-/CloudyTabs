@@ -13,6 +13,8 @@
 		0308B330250D95590090D507 /* FMDB.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0308B32C250D950B0090D507 /* FMDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0308B331250D955C0090D507 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0308B32B250D950B0090D507 /* Sparkle.framework */; };
 		0308B332250D955C0090D507 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0308B32B250D950B0090D507 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0308B336250DDFD10090D507 /* NSData+ZlibInflate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0308B335250DDFD10090D507 /* NSData+ZlibInflate.m */; };
+		0308B338250DE0DC0090D507 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0308B337250DE0D30090D507 /* libz.tbd */; };
 		030D99822172BBAB00A9DE75 /* JPLoadingMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 030D99802172BBAA00A9DE75 /* JPLoadingMenuItem.m */; };
 		030D99852172BBFD00A9DE75 /* JPReadingListReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 030D99832172BBFD00A9DE75 /* JPReadingListReader.m */; };
 		03120E52202FE2F300BE3891 /* JPUserDefaultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03120E51202FE2F300BE3891 /* JPUserDefaultsController.m */; };
@@ -80,6 +82,9 @@
 		0308B3232504BFC80090D507 /* NSMenuItem+ItemCreation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMenuItem+ItemCreation.m"; sourceTree = "<group>"; };
 		0308B32B250D950B0090D507 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
 		0308B32C250D950B0090D507 /* FMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FMDB.framework; path = Carthage/Build/Mac/FMDB.framework; sourceTree = "<group>"; };
+		0308B334250DDFD10090D507 /* NSData+ZlibInflate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+ZlibInflate.h"; sourceTree = "<group>"; };
+		0308B335250DDFD10090D507 /* NSData+ZlibInflate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+ZlibInflate.m"; sourceTree = "<group>"; };
+		0308B337250DE0D30090D507 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		030D99802172BBAA00A9DE75 /* JPLoadingMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPLoadingMenuItem.m; sourceTree = "<group>"; };
 		030D99812172BBAA00A9DE75 /* JPLoadingMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPLoadingMenuItem.h; sourceTree = "<group>"; };
 		030D99832172BBFD00A9DE75 /* JPReadingListReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPReadingListReader.m; sourceTree = "<group>"; };
@@ -174,6 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0397802318C590F700DC499C /* CoreServices.framework in Frameworks */,
+				0308B338250DE0DC0090D507 /* libz.tbd in Frameworks */,
 				03977FD318C3F98A00DC499C /* Cocoa.framework in Frameworks */,
 				0308B331250D955C0090D507 /* Sparkle.framework in Frameworks */,
 				0350636D24FB29BB00E71269 /* ServiceManagement.framework in Frameworks */,
@@ -219,6 +225,8 @@
 				03648D7C1FA4434B004D3078 /* NSURL+Extensions.m */,
 				0308B3222504BFC80090D507 /* NSMenuItem+ItemCreation.h */,
 				0308B3232504BFC80090D507 /* NSMenuItem+ItemCreation.m */,
+				0308B334250DDFD10090D507 /* NSData+ZlibInflate.h */,
+				0308B335250DDFD10090D507 /* NSData+ZlibInflate.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -271,6 +279,7 @@
 		03977FD118C3F98A00DC499C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0308B337250DE0D30090D507 /* libz.tbd */,
 				0308B32C250D950B0090D507 /* FMDB.framework */,
 				0308B32B250D950B0090D507 /* Sparkle.framework */,
 				0350636C24FB29BB00E71269 /* ServiceManagement.framework */,
@@ -530,6 +539,7 @@
 				0350637124FB398600E71269 /* JPCloudTabsDBReader.m in Sources */,
 				039C6EAC1F935D2E00C3B3E1 /* VDKQueue.m in Sources */,
 				03225D4C18C6A40D000778DF /* JPLaunchAtLoginManager.m in Sources */,
+				0308B336250DDFD10090D507 /* NSData+ZlibInflate.m in Sources */,
 				030D99852172BBFD00A9DE75 /* JPReadingListReader.m in Sources */,
 				03225D5518C6AA5A000778DF /* DSFavIconManager.m in Sources */,
 				0308B3242504BFC80090D507 /* NSMenuItem+ItemCreation.m in Sources */,
