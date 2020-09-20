@@ -32,6 +32,8 @@
 	<string>Copyright © 2018 Josh Parnham. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSAllowsArbitraryLoads</key>
+	<true/>
 	<key>SUFeedURL</key>
 	<string>https://joshparnham.com/projects/cloudytabs/appcast.xml</string>
 	<key>SUPublicDSAKeyFile</key>
