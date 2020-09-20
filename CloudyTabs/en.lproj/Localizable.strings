@@ -6,6 +6,7 @@
 */
 
 "Open All Tabs From" = "Open All Tabs From";
+"Export All Tabs From" = "Export All Tabs From";
 "Launch %@ At Login" = "Launch %@ At Login";
 "Quit %@" = "Quit %@";
 "%@\nChanges Last Detected: %@" = "%@\nChanges Last Detected: %@";

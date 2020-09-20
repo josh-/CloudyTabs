@@ -4,3 +4,6 @@
 [submodule "CloudyTabs/VDKQueue"]
 	path = CloudyTabs/VDKQueue
 	url = https://github.com/beatjunky99/VDKQueue.git
+[submodule "CloudyTabs/CHCSVParser"]
+	path = CloudyTabs/CHCSVParser
+	url = https://github.com/davedelong/CHCSVParser.git

@@ -15,6 +15,8 @@
 		0308B332250D955C0090D507 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0308B32B250D950B0090D507 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0308B336250DDFD10090D507 /* NSData+ZlibInflate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0308B335250DDFD10090D507 /* NSData+ZlibInflate.m */; };
 		0308B338250DE0DC0090D507 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0308B337250DE0D30090D507 /* libz.tbd */; };
+		0308B348250E49240090D507 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0308B346250E49240090D507 /* CHCSVParser.m */; };
+		0308B34B250E49470090D507 /* JPTabCSVExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0308B34A250E49470090D507 /* JPTabCSVExporter.m */; };
 		030D99822172BBAB00A9DE75 /* JPLoadingMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 030D99802172BBAA00A9DE75 /* JPLoadingMenuItem.m */; };
 		030D99852172BBFD00A9DE75 /* JPReadingListReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 030D99832172BBFD00A9DE75 /* JPReadingListReader.m */; };
 		03120E52202FE2F300BE3891 /* JPUserDefaultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03120E51202FE2F300BE3891 /* JPUserDefaultsController.m */; };
@@ -85,6 +87,10 @@
 		0308B334250DDFD10090D507 /* NSData+ZlibInflate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+ZlibInflate.h"; sourceTree = "<group>"; };
 		0308B335250DDFD10090D507 /* NSData+ZlibInflate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+ZlibInflate.m"; sourceTree = "<group>"; };
 		0308B337250DE0D30090D507 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		0308B345250E49240090D507 /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
+		0308B346250E49240090D507 /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
+		0308B349250E49470090D507 /* JPTabCSVExporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPTabCSVExporter.h; sourceTree = "<group>"; };
+		0308B34A250E49470090D507 /* JPTabCSVExporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPTabCSVExporter.m; sourceTree = "<group>"; };
 		030D99802172BBAA00A9DE75 /* JPLoadingMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPLoadingMenuItem.m; sourceTree = "<group>"; };
 		030D99812172BBAA00A9DE75 /* JPLoadingMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPLoadingMenuItem.h; sourceTree = "<group>"; };
 		030D99832172BBFD00A9DE75 /* JPReadingListReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPReadingListReader.m; sourceTree = "<group>"; };
@@ -190,6 +196,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0308B343250E49240090D507 /* CHCSVParser */ = {
+			isa = PBXGroup;
+			children = (
+				0308B345250E49240090D507 /* CHCSVParser.h */,
+				0308B346250E49240090D507 /* CHCSVParser.m */,
+			);
+			name = CHCSVParser;
+			path = CHCSVParser/CHCSVParser/CHCSVParser;
+			sourceTree = "<group>";
+		};
 		03225D5718C6AA7A000778DF /* DSFavIconManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +224,7 @@
 		03225D5C18C6AB2A000778DF /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0308B343250E49240090D507 /* CHCSVParser */,
 				039C6EA01F935BFC00C3B3E1 /* VDKQueue */,
 				0375993E18C5F967000E8C33 /* JPAppDelegate.h */,
 				0375993F18C5F967000E8C33 /* JPAppDelegate.m */,
@@ -221,6 +238,8 @@
 				030D99802172BBAA00A9DE75 /* JPLoadingMenuItem.m */,
 				03120E50202FE2F300BE3891 /* JPUserDefaultsController.h */,
 				03120E51202FE2F300BE3891 /* JPUserDefaultsController.m */,
+				0308B349250E49470090D507 /* JPTabCSVExporter.h */,
+				0308B34A250E49470090D507 /* JPTabCSVExporter.m */,
 				03648D7B1FA4434B004D3078 /* NSURL+Extensions.h */,
 				03648D7C1FA4434B004D3078 /* NSURL+Extensions.m */,
 				0308B3222504BFC80090D507 /* NSMenuItem+ItemCreation.h */,
@@ -539,9 +558,11 @@
 				0350637124FB398600E71269 /* JPCloudTabsDBReader.m in Sources */,
 				039C6EAC1F935D2E00C3B3E1 /* VDKQueue.m in Sources */,
 				03225D4C18C6A40D000778DF /* JPLaunchAtLoginManager.m in Sources */,
+				0308B34B250E49470090D507 /* JPTabCSVExporter.m in Sources */,
 				0308B336250DDFD10090D507 /* NSData+ZlibInflate.m in Sources */,
 				030D99852172BBFD00A9DE75 /* JPReadingListReader.m in Sources */,
 				03225D5518C6AA5A000778DF /* DSFavIconManager.m in Sources */,
+				0308B348250E49240090D507 /* CHCSVParser.m in Sources */,
 				0308B3242504BFC80090D507 /* NSMenuItem+ItemCreation.m in Sources */,
 				03120E52202FE2F300BE3891 /* JPUserDefaultsController.m in Sources */,
 				030D99822172BBAB00A9DE75 /* JPLoadingMenuItem.m in Sources */,

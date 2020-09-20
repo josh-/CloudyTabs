@@ -18,6 +18,7 @@
 #import "JPReadingListReader.h"
 
 #import "JPLoadingMenuItem.h"
+#import "JPTabCSVExporter.h"
 #import "NSURL+Extensions.h"
 #import "NSMenuItem+ItemCreation.h"
 
@@ -75,7 +76,7 @@ NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
     }
 }
 
-- (void)deviceMenuItemClicked:(id)sender
+- (void)openAllFromClicked:(NSMenuItem *)sender
 {
     NSUInteger launch;
     if ([NSEvent modifierFlags] == NSEventModifierFlagCommand) {
@@ -86,10 +87,16 @@ NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
     }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *deviceID = [(NSMenuItem *)sender representedObject];
-        NSArray *tabs = self.tabData[[self.tabData indexOfObjectPassingTest:^BOOL(id  _Nonnull dictionary, NSUInteger index, BOOL * _Nonnull stop) {
+        NSString *deviceID = sender.representedObject;
+        NSDictionary *tabData = self.tabData[[self.tabData indexOfObjectPassingTest:^BOOL(id _Nonnull dictionary, NSUInteger index, BOOL * _Nonnull stop) {
             return [dictionary[@"DeviceName"] isEqualToString:deviceID];
         }]];
+        
+        if (!tabData) {
+            return;
+        }
+        
+        NSArray *tabs = tabData[@"Tabs"];
 
         for (NSDictionary *tabDictionary in tabs) {
             NSURL *url = [NSURL decodeURL:tabDictionary[@"URL"]];
@@ -98,6 +105,23 @@ NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
             usleep(500000);
         }
     });
+}
+
+- (void)exportAllFromClicked:(NSMenuItem *)sender
+{
+    NSString *deviceID = sender.representedObject;
+    NSDictionary *tabData = self.tabData[[self.tabData indexOfObjectPassingTest:^BOOL(id _Nonnull dictionary, NSUInteger index, BOOL * _Nonnull stop) {
+        return [dictionary[@"DeviceName"] isEqualToString:deviceID];
+    }]];
+    
+    if (!tabData) {
+        return;
+    }
+    
+    NSArray *tabs = tabData[@"Tabs"];
+    NSString *deviceName = tabData[@"DeviceName"];
+    
+    [JPTabCSVExporter exportTabs:tabs deviceName:deviceName];
 }
 
 - (void)openAtLoginToggled:(id)sender
@@ -215,8 +239,11 @@ NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
     [self.menu removeAllItems];
     
     if (self.tabData) {
-        NSMenu *devicesMenu = [[NSMenu alloc] initWithTitle:@"Devices"];
-        [devicesMenu setAutoenablesItems:NO];
+        NSMenu *openAllTabsSubMenu = [[NSMenu alloc] initWithTitle:@"Open All Tabs From"];
+        openAllTabsSubMenu.autoenablesItems = NO;
+        
+        NSMenu *exportTabsSubMenu = [[NSMenu alloc] initWithTitle:@"Export All Tabs From"];
+        exportTabsSubMenu.autoenablesItems = NO;
         
         for (NSDictionary *deviceTabs in self.tabData) {
             
@@ -224,6 +251,17 @@ NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
             if (((NSArray *)deviceTabs[@"Tabs"]).count <= 0) {
                 continue;
             }
+            
+            NSString *localisedTabCount = [NSNumberFormatter localizedStringFromNumber:[NSNumber numberWithInteger:((NSArray *)deviceTabs[@"Tabs"]).count] numberStyle:NSNumberFormatterNoStyle];
+            NSString *deviceMenuItemTitle = [NSString stringWithFormat:@"%@ (%@)", deviceTabs[@"DeviceName"], localisedTabCount];   
+            
+            // Add device to "Export All Tabs From" submenu
+            NSMenuItem *exportAllTabsFromDeviceMenuItem = [[NSMenuItem alloc] initWithTitle:deviceMenuItemTitle action:@selector(exportAllFromClicked:) keyEquivalent:@""];
+            exportAllTabsFromDeviceMenuItem.representedObject = deviceTabs[@"DeviceName"];
+            if ([deviceTabs[@"Tabs"] count] < 1) {
+                [exportAllTabsFromDeviceMenuItem setEnabled:NO];
+            }
+            [exportTabsSubMenu addItem:exportAllTabsFromDeviceMenuItem];
             
             // Hide tabs from Mac where CloudyTabs is currently running on, unless the user has expliclty set the user default
             if ([JPUserDefaultsController shouldListAllDevices] == false && [[NSHost currentHost].localizedName isEqualToString:deviceTabs[@"DeviceName"]]) {
@@ -241,15 +279,13 @@ NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
             [self.menu addItem:deviceMenuItem];
             
             // Add device to "Open All Tabs From" submenu
-            NSString *localisedTabCount = [NSNumberFormatter localizedStringFromNumber:[NSNumber numberWithInteger:((NSArray *)deviceTabs[@"Tabs"]).count] numberStyle:NSNumberFormatterNoStyle];
-            NSString *openAllTabsFromDeviceMenuItemTitle = [NSString stringWithFormat:@"%@ (%@)", deviceTabs[@"DeviceName"], localisedTabCount];
-            NSMenuItem *openAllTabsFromDeviceMenuItem = [[NSMenuItem alloc] initWithTitle:openAllTabsFromDeviceMenuItemTitle action:@selector(deviceMenuItemClicked:) keyEquivalent:@""];
+            NSMenuItem *openAllTabsFromDeviceMenuItem = [[NSMenuItem alloc] initWithTitle:deviceMenuItemTitle action:@selector(openAllFromClicked:) keyEquivalent:@""];
             openAllTabsFromDeviceMenuItem.representedObject = deviceTabs[@"DeviceName"];
             if ([deviceTabs[@"Tabs"] count] < 1) {
                 [openAllTabsFromDeviceMenuItem setEnabled:NO];
             }
-            [devicesMenu addItem:openAllTabsFromDeviceMenuItem];
-
+            [openAllTabsSubMenu addItem:openAllTabsFromDeviceMenuItem];
+            
             for (NSDictionary *tabDictionary in deviceTabs[@"Tabs"]) {
                 [self.menu addItem:[NSMenuItem menuItemWithTitle:tabDictionary[@"Title"] URLPath:tabDictionary[@"URL"] action:@selector(tabMenuItemClicked:)]];
             }
@@ -276,8 +312,13 @@ NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
         if (self.tabData.count >= 1) {
             NSMenuItem *openAllTabsMenu = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open All Tabs From", @"") action:nil keyEquivalent:@""];
             [self.menu addItem:openAllTabsMenu];
-            [openAllTabsMenu setSubmenu:devicesMenu];
-            [openAllTabsMenu setEnabled:(devicesMenu.itemArray.count >= 1)];
+            openAllTabsMenu.submenu = openAllTabsSubMenu;
+            openAllTabsMenu.enabled = openAllTabsSubMenu.itemArray.count >= 1;
+            
+            NSMenuItem *exportAllTabsMenu = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Export All Tabs From", @"") action:nil keyEquivalent:@""];
+            [self.menu addItem:exportAllTabsMenu];
+            exportAllTabsMenu.submenu = exportTabsSubMenu;
+            exportAllTabsMenu.enabled = exportTabsSubMenu.itemArray.count >= 1;
         }
     } else {
         if ([self requiresFullDiskAccess]) {
