@@ -48,8 +48,12 @@
     
             [items addObject:dictionary.copy];
         }
-    
-        completionHandler(items.copy);
+        
+        if (items.count > 0) {
+            completionHandler(items.copy);
+        } else {
+            completionHandler(nil);
+        }
     });
 }
 
@@ -81,6 +85,10 @@
 }
 
 - (NSArray *)deviceIDs {
+    if (self.cloudTabsDatabase == nil) {
+        return nil;
+    }
+    
     NSMutableArray *deviceIDs = [NSMutableArray new];
     
     FMResultSet *resultSet = [self.cloudTabsDatabase executeQuery:@"SELECT device_uuid from cloud_tab_devices GROUP BY device_uuid"];
@@ -92,6 +100,10 @@
 }
 
 - (NSString *)deviceNameForID:(NSString *)deviceID {
+    if (self.cloudTabsDatabase == nil) {
+        return nil;
+    }
+    
     FMResultSet *resultSet = [self.cloudTabsDatabase executeQuery:@"SELECT device_name from cloud_tab_devices WHERE device_uuid = ?", deviceID];
     while ([resultSet next]) {
         return [resultSet stringForColumn:@"device_name"];
@@ -101,6 +113,10 @@
 }
 
 - (NSArray *)tabsForDeviceID:(NSString *)deviceID {
+    if (self.cloudTabsDatabase == nil) {
+        return nil;
+    }
+    
     NSMutableArray<NSDictionary *> *tabs = [NSMutableArray new];
     
     NSString *query = @"SELECT url, title, position from cloud_tabs WHERE device_uuid = ?";
