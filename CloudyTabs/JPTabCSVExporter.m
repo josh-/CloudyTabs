@@ -39,6 +39,7 @@
             [fileManager copyItemAtURL:temporaryFileURL toURL:url error:nil];
         }
     }];
+    [savePanel orderFrontRegardless];
 }
 
 @end
