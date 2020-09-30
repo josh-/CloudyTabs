@@ -184,8 +184,14 @@ NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
 
 - (void)setupSparkle
 {
-    SUUpdater *updater = [[SUUpdater class] sharedUpdater];
+    SUUpdater *updater = [SUUpdater sharedUpdater];
     [updater checkForUpdatesInBackground];
+}
+
+- (void)checkForUpdates:(id)sender
+{
+    SUUpdater *updater = [SUUpdater sharedUpdater];
+    [updater checkForUpdates:self];
 }
 
 - (void)setupQueue
@@ -330,6 +336,9 @@ NSString *const HELPER_BUNDLE_ID = @"com.joshparnham.CloudyTabsHelper";
             [self.menu addItem:loadingMenuItem];
         }
     }
+    
+    NSMenuItem *checkForUpdatesItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Check For Updates…", @"") action:@selector(checkForUpdates:) keyEquivalent:@""];
+    [self.menu addItem:checkForUpdatesItem];
     
     NSMenuItem *openAtLoginItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Launch %@ At Login", @""), [self appBundleName]] action:@selector(openAtLoginToggled:) keyEquivalent:@""];
     openAtLoginItem.state = [self startAtLogin];
