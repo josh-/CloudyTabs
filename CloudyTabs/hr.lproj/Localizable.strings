@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  CloudyTabs
+
+  Contributed by Josh Parnham
+*/
+
+"Open All Tabs From" = "Otvori sve kartice od";
+"Export All Tabs From" = "Izvezi sve kartice od";
+"Launch %@ At Login" = "Pokreni %@ nakon prijave";
+"Quit %@" = "Zatvori %@";
+"%@\nChanges Last Detected: %@" = "%@\nChanges Last Detected: %@";
+"Reading List" = "Reading List";
+"Requires Full Disk Access…" = "Zahtijeva potpun pristup disku …";
+"Enable Full Disk Access" = "Aktiviraj potpun pristup disku";
+"CloudyTabs requies Full Disk Access to access your Safari data. Click \"Enable\" to open System Prefences and then click the checkbox next to \"CloudyTabs\"." = "CloudyTabs zahtijeva potpun pristup disku za pristup Safari podacima. Pritisni \"Aktiviraj\" za otvaranje postavki sustava, a zatim pritisni potvrdni okvir pored \"CloudyTabs\".";
+"Enable" = "Aktiviraj";
+"Cancel" = "Odustani";
+"Check For Updates…" = "Traži nove verzije …";
