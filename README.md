@@ -8,7 +8,7 @@ CloudyTabs is a simple menu bar application that lists your iCloud Tabs and Read
 
 * [Download CloudyTabs](https://github.com/josh-/CloudyTabs/releases/latest) and copy it to your Applications folder.
 
-> (Alternatively, CloudyTabs is installable from your shell through [Homebrew](http://brew.sh) – once you've [set up Homebrew-cask](https://github.com/phinze/homebrew-cask/blob/master/USAGE.md#getting-started)) you can simply type `brew cask install cloudytabs`)
+> (Alternatively, CloudyTabs is installable from your shell through [Homebrew](http://brew.sh) – once you've [set up Homebrew-cask](https://github.com/phinze/homebrew-cask/blob/master/USAGE.md#getting-started)) you can simply type `brew install --cask cloudytabs`)
 
 ## Usage
 
